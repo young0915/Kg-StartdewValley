@@ -17,13 +17,14 @@ HRESULT mainGame::init()
 
 	_maptool = new maptool;
 	
-
+	PLAYER->init();
 	return S_OK;
 }
 
 void mainGame::release()
 {
 	gameNode::release();
+	PLAYER->release();
 
 }
 
@@ -31,6 +32,7 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENEMANAGER->update();
+	PLAYER->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -39,7 +41,7 @@ void mainGame::render(/*HDC hdc*/)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//====================================================
 	SCENEMANAGER->render();
-
+	PLAYER->render(getMemDC());
 	TIMEMANAGER->render(getMemDC());
 	//=====================================================
 	//백버퍼의 내용을 HDC에 그린다.(지우지마!!)
