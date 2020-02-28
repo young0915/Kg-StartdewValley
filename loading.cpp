@@ -92,46 +92,46 @@ loading::~loading()
 }
 HRESULT loading::init()
 {
-	_background = IMAGEMANAGER->addImage("사나", "images/사나.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	//_background = IMAGEMANAGER->addImage("사나", "images/사나.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 
 	//로딩바 이미지
-	_loadingBar = new progressBar;
-	_loadingBar->init("images/progressBarFront.bmp", "images/progressBarBack.bmp", 100, WINSIZEY / 2 + 300, 600, 10);
-	_loadingBar->setGauge(0, 0);
-	_currentGauge = 0;
+	//_loadingBar = new progressBar;
+	//_loadingBar->init("images/progressBarFront.bmp", "images/progressBarBack.bmp", 100, WINSIZEY / 2 + 300, 600, 10);
+	//_loadingBar->setGauge(0, 0);
+	//_currentGauge = 0;
 	return S_OK;
 }
 
 void loading::release()
 {
-	SAFE_DELETE(_loadingBar);
+	//SAFE_DELETE(_loadingBar);
 }
 
 void loading::update()
 {
-	_loadingBar->update();
+	//_loadingBar->update();
 }
 
 void loading::render()
 {
-	_background->render(getMemDC());
-	_loadingBar->render();
+//_background->render(getMemDC());
+	//_loadingBar->render();
 }
 
 void loading::loadImage(string keyName, int width, int height)
 {
-	loadItem* item = new loadItem;
-	item->initForImage(keyName, width, height);
+	//loadItem* item = new loadItem;
+//	item->initForImage(keyName, width, height);
 
-	_vLoadItem.push_back(item);
+//	_vLoadItem.push_back(item);
 }
 
 void loading::loadImage(string keyName, const char * fileName, int width, int height, BOOL isTrans, COLORREF transColor)
 {
-	loadItem* item = new loadItem;
-	item->initForImage(keyName, fileName, width, height, isTrans, transColor);
+	//loadItem* item = new loadItem;
+	//item->initForImage(keyName, fileName, width, height, isTrans, transColor);
 
-	_vLoadItem.push_back(item);
+	//_vLoadItem.push_back(item);
 }
 
 void loading::loadImage(string keyName, const char * fileName, float x, float y, int width, int height, BOOL isTrans, COLORREF transColor)

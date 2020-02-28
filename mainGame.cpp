@@ -16,6 +16,7 @@ HRESULT mainGame::init()
 	gameNode::init(true);
 
 	_maptool = new maptool;
+	_maptool->init();
 	
 	PLAYER->init();
 	return S_OK;
@@ -33,6 +34,8 @@ void mainGame::update()
 	gameNode::update();
 	SCENEMANAGER->update();
 	PLAYER->update();
+
+	_maptool->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -43,6 +46,7 @@ void mainGame::render(/*HDC hdc*/)
 	SCENEMANAGER->render();
 	PLAYER->render(getMemDC());
 	TIMEMANAGER->render(getMemDC());
+	_maptool->render();
 	//=====================================================
 	//백버퍼의 내용을 HDC에 그린다.(지우지마!!)
 	this->getBackBuffer()->render(getHDC(), 0, 0);

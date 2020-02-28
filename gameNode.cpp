@@ -34,7 +34,7 @@ HRESULT gameNode::init(bool managerInit)
 		ANIMATIONMANAGER->init();
 		EFFECTMANAGER->init();
 		TXTDATA->init();
-		
+		CAMERA->init();
 	}
 
 	return S_OK;
@@ -61,6 +61,7 @@ void gameNode::release()
 		EFFECTMANAGER->releaseSingleton();
 		RND->releaseSingleton();
 		TXTDATA->releaseSingleton();
+		CAMERA->releaseSingleton();
 	
 
 		KEYMANAGER->release();
@@ -69,7 +70,7 @@ void gameNode::release()
 		SCENEMANAGER->release();
 		ANIMATIONMANAGER->release();
 		EFFECTMANAGER->release();
-
+		CAMERA->release();
 	}
 
 	ReleaseDC(m_hWnd, _hdc);
@@ -80,6 +81,7 @@ void gameNode::update()
 
 	//더블버퍼 이후 사용 하지 않는다.(true->false)
 	InvalidateRect(m_hWnd, NULL, false);
+	CAMERA->update();
 }
 
 void gameNode::render(/*HDC hdc*/)

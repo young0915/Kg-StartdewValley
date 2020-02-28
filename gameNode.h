@@ -1,6 +1,5 @@
 #pragma once
 #include"image.h"
-#include"globalTank.h"
 //백버퍼 이미지를 스태틱으로 변경
 
 static image* _backBuffer = IMAGEMANAGER->addImage("backbuffer", WINSIZEX, WINSIZEY);
@@ -47,9 +46,9 @@ public:
 	//추가 HDC얻기
 	HDC getHDC() { return _hdc; }
 
-
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
-
 };
+#define CAMERAX CAMERA->getCameraXY().x
+#define CAMERAY CAMERA->getCameraXY().y
 
