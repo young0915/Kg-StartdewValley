@@ -1,5 +1,6 @@
 #pragma once
-#include "singletonBase.h"
+#include"singletonBase.h"
+
 class cameraManager : public singletonBase<cameraManager>
 {
 private:
@@ -18,7 +19,7 @@ public:
 	void render(HDC hdc);
 	void render(image* img);
 
-	void setCameraDC(POINT point);
+	void setCameraCenter(POINT point);
 
 	HDC getCameraDC() { return _camera->getMemDC(); }
 

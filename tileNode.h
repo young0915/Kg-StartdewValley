@@ -1,11 +1,14 @@
 #pragma once
 
-// 타일 사이즈 
-#define TILESIZE 100
 
-// 크기
-#define TILEX 100
-#define TILEY 100
+
+//타일사이즈
+#define TILESIZE 50
+
+//크기
+#define TILEX 50
+#define TILEY 50
+
 
 //타일 총 사이즈 
 #define TILESIZEX TILESIZE * TILEX 
@@ -51,6 +54,7 @@ struct tagTile
 	int terrainFrameY;				//지형프레임y
 	int objFrameX;						//물체프레임x
 	int objFrameY;						//물체프레임y
+	int x, y;									//타일 중점좌표
 };
 
 //이미지 타일 구조체

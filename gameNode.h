@@ -1,18 +1,21 @@
 #pragma once
 #include"image.h"
+
 //백버퍼 이미지를 스태틱으로 변경
 
-static image* _backBuffer = IMAGEMANAGER->addImage("backbuffer", WINSIZEX, WINSIZEY);
+//static image* _backBuffer = IMAGEMANAGER->addImage("backbuffer", WINSIZEX, WINSIZEY);
+
 class gameNode
 {
 
 private:
-	//image * _backBuffer;		//백버퍼
+	static image * _backBuffer;		//백버퍼
 
-	//void setBackBuffer();		//백버퍼 셋팅
+									//void setBackBuffer();		//백버퍼 셋팅
 
 	HDC _hdc;
 	bool _managerInit;
+
 
 public:
 	gameNode();
@@ -23,19 +26,11 @@ public:
 	virtual HRESULT init(bool managerInit);
 	virtual void release();
 	virtual void update();
-	virtual void render(/*HDC hdc*/);
+	virtual void render(HDC hdc);
+	virtual void render();
 
 
-	//맵툴용
-	/*int _ctrSelect;
-	void setCtrSelect(int num) { _ctrSelect = num; }
-
-
-	*/
-	virtual void setMap();
-	virtual void save();
-	virtual void load();
-
+	static image* setBackBuffer();
 
 	//백버퍼 얻어오기
 	image* getBackBuffer() { return _backBuffer; }
@@ -48,7 +43,8 @@ public:
 
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
+
 };
+
 #define CAMERAX CAMERA->getCameraXY().x
 #define CAMERAY CAMERA->getCameraXY().y
-

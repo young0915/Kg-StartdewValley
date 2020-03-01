@@ -1,5 +1,7 @@
 #pragma once
 #include "singletonBase.h"
+#include "tileNode.h"
+//#include "closet.h"
 //#include "progressBar.h"											//플레이어 프로그래스바
 //플레이어 움직임
 enum PLAYERMOVE
@@ -39,15 +41,48 @@ enum PLAYERARMMOVE
 	PLAYER_ARM_PIS_RIGHT,
 	PLAYER_ARM_PIS_LEFT,
 	PLAYER_ARM_PIS_UP,
+	//플레이어 물뿌리개
+	PLAYER_ARM_WATCAN_DOWN,
+	PLAYER_ARM_WATCAN_RIGHT,
+	PLAYER_ARM_WATCAN_LEFT,
+	PLAYER_ARM_WATCAN_UP,
 	PLAYER_ARM_STOP												//멈추기 위한 것
+};
+//플레이어 바지 움직임
+enum PLAYERPANTS
+{
+	//플렐이어 기본 움직임
+	PLAYER_PANTS_DOWN,
+	PLAYER_PANTS_RIGHT,
+	PLAYER_PANTS_LEFT,
+	PLAYER_PANTS_UP,
+	//플레이어 곡괭이, 괭이, 도끼, 낫, 검 
+	PLAYER_PANTS_PWR_DOWN,
+	PLAYER_PANTS_PWR_RIGHT,
+	PLAYER_PANTS_PWR_LEFT,
+	PLAYER_PANTS_PWR_UP,
+	//플레이어 낚시
+	PLAYER_PANTS_PIS_DOWN,
+	PLAYER_PANTS_PIS_RIGHT,
+	PLAYER_PANTS_PIS_LEFT,
+	PLAYER_PANTS_PIS_UP,
+	//플레이어 물뿌리개
+	PLAYER_PANTS_WATERCAN_DOWN,
+	PLAYER_PANTS_WATERCAN_RIGHT,
+	PLAYER_PANTS_WATERCAN_LEFT,
+	PLAYER_PANTS_WATERCAN_UP,
+	PLAYER_PANT_STOP
 };
 // 플레이어 정보 
 struct tagplayer
 {
 	PLAYERMOVE _playermove;								//플레이어 움직임
 	PLAYERARMMOVE _playerarmmove;				//플레이어 팔 움직임 
+	PLAYERPANTS _playerpants;								//플레이어 바지 움직임
 	image* _playerimg;												//플레이어 이미지(몸:얼굴, 발)
 	image* _playerarmimg;										//플레이어 이미지(팔)
+	image* _playercloth;											//플레이어 옷
+	image* _pantsimg;													//플레이어 바지
 	RECT _playerect;													// 움직임 rect 
 	float x;																	//플레이어 x 
 	float y;																	//플레이어 y
@@ -73,7 +108,11 @@ public:
 
 	void playerkeycontrol();											//플레이어 키를 모아둔 곳													
 	void playermove();													//플레이어 움직임(body)
+	void clothmove();														//플레이어 바지
 
 	void playerimg();														//플레이어 이미지 모음 함수 
+
+	float getplayerX() { return _player.x; }
+	float getplayerY() { return _player.y; }
 };
 

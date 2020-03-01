@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
 
+
 Player::Player() {}
 Player::~Player() {}
 
@@ -9,6 +10,8 @@ HRESULT Player::init()
 	playerimg();																																																									//플레이어 이미지 모음
 	_player._playerimg = IMAGEMANAGER->findImage("플레이어몸통");																															//플레이어 몸통 이미지 불러오기 
 	_player._playerarmimg = IMAGEMANAGER->findImage("팔");
+	_player._playercloth = IMAGEMANAGER->findImage("후드티");
+	_player._pantsimg = IMAGEMANAGER->findImage("바지");																																			//플레이어 바지 
 	_player.x = WINSIZEX / 2;																																																			//플레이어 RECT에 넣을 float  x
 	_player.y = WINSIZEY / 2;																																																			//플레이어 RECT에 넣을 float  y
 	//렉트들
@@ -21,6 +24,7 @@ HRESULT Player::init()
 	//플레이어 움직임 초기값
 	_player._playermove = PLAYER_STOP;
 	_player._playerarmmove = PLAYER_ARM_STOP;
+	_player._playerpants = PLAYER_PANTS_DOWN;
 
 	return S_OK;
 }
@@ -38,39 +42,50 @@ void Player::update()
 void Player::playerkeycontrol()
 {
 	//멈추지 않은 상태
-		if (KEYMANAGER->isStayKeyDown('S'))
-		{
-			_player._playermove = PLAYER_DOWN;
-			_player._playerarmmove = PLAYER_ARM_DOWN;
-			_player.y += 2.f;
-		}
-		if (KEYMANAGER->isStayKeyDown('D'))
-		{
-			_player._playermove = PLAYER_RIGHT;
-			_player._playerarmmove = PLAYER_ARM_RIGHT;
-			_player.x +=2.f;
-		}
-		if (KEYMANAGER->isStayKeyDown('A'))
-		{
-			_player._playermove = PLAYER_LEFT;
-			_player._playerarmmove = PLAYER_ARM_LEFT;
-			_player.x -= 2.f;
-		}
-		if (KEYMANAGER->isStayKeyDown('W'))
-		{
-			_player._playermove = PLAYER_UP;
-			_player._playerarmmove = PLAYER_ARM_UP;
-			_player.y -= 2.f;
-		}
-		//멈춘 상태
-		if (KEYMANAGER->isOnceKeyUp('S') || KEYMANAGER->isOnceKeyUp('W') || KEYMANAGER->isOnceKeyUp('A') ||KEYMANAGER->isOnceKeyUp('D'))
-		{
-			_player._playermove = PLAYER_STOP;
-			_player._playerarmmove = PLAYER_ARM_STOP;
-			_player._plaindex = 0;
-			_player._placount = 0;
+	if (KEYMANAGER->isStayKeyDown('S') && CAMERA->getCameraCenter().y + WINSIZEY / 2 < TILESIZEY)
+	{
+		_player._playermove = PLAYER_DOWN;
+		_player._playerarmmove = PLAYER_ARM_DOWN;
+		_player._playerpants = PLAYER_PANTS_DOWN;
+		_player.y += 2.f;
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 2));
+	}
+	if (KEYMANAGER->isStayKeyDown('D') && CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX)
+	{
+		_player._playermove = PLAYER_RIGHT;
+		_player._playerarmmove = PLAYER_ARM_RIGHT;
+		_player._playerpants = PLAYER_PANTS_RIGHT;
+		_player.x += 2.f;
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 2, CAMERA->getCameraCenter().y));
 
-		}
+	}
+	if (KEYMANAGER->isStayKeyDown('A') && CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)
+	{
+		_player._playermove = PLAYER_LEFT;
+		_player._playerarmmove = PLAYER_ARM_LEFT;
+		_player._playerpants = PLAYER_PANTS_LEFT;
+		_player.x -= 2.f;
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 2, CAMERA->getCameraCenter().y));
+	}
+	if (KEYMANAGER->isStayKeyDown('W') && CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)
+	{
+		_player._playermove = PLAYER_UP;
+		_player._playerarmmove = PLAYER_ARM_UP;
+		_player._playerpants = PLAYER_PANTS_UP;
+		_player.y -= 2.f;
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 2));
+	}
+	//멈춘 상태
+	if (KEYMANAGER->isOnceKeyUp('S') || KEYMANAGER->isOnceKeyUp('W') || KEYMANAGER->isOnceKeyUp('A') || KEYMANAGER->isOnceKeyUp('D'))
+	{
+		_player._playermove = PLAYER_STOP;
+		_player._playerarmmove = PLAYER_ARM_STOP;
+		_player._playerpants = PLAYER_PANT_STOP;
+		_player._plaindex = 0;
+		_player._playerimg->setFrameX(_player._plaindex);										// 이렇게 해야지 캐릭터 움직일 때 딱 멈춤
+	}
+	//'E' 인벤토리 열기 창
+	//마우스 왼쪽은 사람한테 말걸기 오른쪽은 먹기 싸우기, 심기, 씬이동
 }
 
 //플레이어 움직임(body&arm)
@@ -83,26 +98,31 @@ void Player::playermove()
 		_player._placount++;
 		_player._playerimg->setFrameY(0);
 		if (_player._playerarmmove == PLAYER_ARM_DOWN)_player._playerarmimg->setFrameY(0);
+		if (_player._playerpants == PLAYER_PANTS_DOWN) _player._pantsimg->setFrameY(0);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
 			_player._plaindex++;
+		}
+		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+		{
 			if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 			{
-				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
 				{
 					_player._plaindex = 0;
 				}
 			}
-			
-			_player._playerarmimg->setFrameX(_player._plaindex);
-			_player._playerimg->setFrameX(_player._plaindex);
 		}
+		_player._playerarmimg->setFrameX(_player._plaindex);
+		_player._playerimg->setFrameX(_player._plaindex);
+		_player._pantsimg->setFrameX(_player._plaindex);
 		break;
 	case PLAYER_RIGHT:
 		_player._placount++;
 		_player._playerimg->setFrameY(1);
 		if (_player._playerarmmove == PLAYER_ARM_RIGHT)_player._playerarmimg->setFrameY(1);
+		if (_player._playerpants == PLAYER_PANTS_RIGHT) _player._pantsimg->setFrameY(1);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -111,17 +131,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_LEFT:
 		_player._placount++;
 		_player._playerimg->setFrameY(2);
 		if (_player._playerarmmove == PLAYER_ARM_LEFT)_player._playerarmimg->setFrameY(2);
+		if (_player._playerpants == PLAYER_PANTS_LEFT) _player._pantsimg->setFrameY(2);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -130,17 +155,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_UP:
 		_player._placount++;
 		_player._playerimg->setFrameY(3);
 		if (_player._playerarmmove == PLAYER_ARM_UP)_player._playerarmimg->setFrameY(3);
+		if (_player._playerpants == PLAYER_PANTS_UP) _player._pantsimg->setFrameY(3);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -149,11 +179,15 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 		//플레이어 곡괭이, 괭이, 도끼, 낫, 검 
@@ -161,6 +195,7 @@ void Player::playermove()
 		_player._placount++;
 		_player._playerimg->setFrameY(4);
 		if (_player._playerarmmove == PLAYER_ARM_PWR_DOWN)_player._playerarmimg->setFrameY(4);
+		if (_player._playerpants == PLAYER_PANTS_PWR_DOWN) _player._pantsimg->setFrameY(4);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -169,17 +204,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX())
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PWR_RIGHT:
 		_player._placount++;
 		_player._playerimg->setFrameY(5);
 		if (_player._playerarmmove == PLAYER_ARM_PWR_RIGHT)_player._playerarmimg->setFrameY(5);
+		if (_player._playerpants == PLAYER_PANTS_PWR_RIGHT) _player._pantsimg->setFrameY(5);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -188,17 +228,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX())
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PWR_LEFT:
 		_player._placount++;
 		_player._playerimg->setFrameY(6);
 		if (_player._playerarmmove == PLAYER_ARM_PWR_LEFT)_player._playerarmimg->setFrameY(6);
+		if (_player._playerpants == PLAYER_PANTS_PWR_LEFT) _player._pantsimg->setFrameY(6);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -207,17 +252,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX())
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PWR_UP:
 		_player._placount++;
 		_player._playerimg->setFrameY(7);
 		if (_player._playerarmmove == PLAYER_ARM_PWR_UP)_player._playerarmimg->setFrameY(7);
+		if (_player._playerpants == PLAYER_PANTS_PWR_UP) _player._pantsimg->setFrameY(7);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -226,11 +276,15 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX())
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 		//플레이어 낚시
@@ -238,6 +292,7 @@ void Player::playermove()
 		_player._placount++;
 		_player._playerimg->setFrameY(8);
 		if (_player._playerarmmove == PLAYER_ARM_PIS_DOWN)_player._playerarmimg->setFrameY(8);
+		if (_player._playerpants == PLAYER_PANTS_PIS_DOWN) _player._pantsimg->setFrameY(8);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -246,17 +301,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PIS_RIGHT:
 		_player._placount++;
 		_player._playerimg->setFrameY(9);
 		if (_player._playerarmmove == PLAYER_ARM_PIS_RIGHT)_player._playerarmimg->setFrameY(9);
+		if (_player._playerpants == PLAYER_PANTS_PIS_RIGHT) _player._pantsimg->setFrameY(9);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -265,17 +325,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PIS_LEFT:
 		_player._placount++;
 		_player._playerimg->setFrameY(10);
 		if (_player._playerarmmove == PLAYER_ARM_PIS_LEFT)_player._playerarmimg->setFrameY(10);
+		if (_player._playerpants == PLAYER_PANTS_PIS_LEFT) _player._pantsimg->setFrameY(10);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -284,17 +349,22 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
 		break;
 	case PLAYER_PIS_UP:
 		_player._placount++;
 		_player._playerimg->setFrameY(11);
 		if (_player._playerarmmove == PLAYER_ARM_PIS_UP)_player._playerarmimg->setFrameY(11);
+		if (_player._playerpants == PLAYER_PANTS_PIS_UP) _player._pantsimg->setFrameY(11);
 		if (_player._placount % 7 == 0)
 		{
 			_player._placount = 0;
@@ -303,20 +373,103 @@ void Player::playermove()
 			{
 				if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
 				{
-					_player._plaindex = 0;
+					if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+					{
+						_player._plaindex = 0;
+					}
 				}
 			}
 			_player._playerarmimg->setFrameX(_player._plaindex);
 			_player._playerimg->setFrameX(_player._plaindex);
+			_player._pantsimg->setFrameX(_player._plaindex);
 		}
+		break;
+	}
+	clothmove();
+}
+
+void Player::clothmove()
+{
+	switch (_player._playerpants)
+	{
+	case PLAYER_PANTS_WATERCAN_DOWN:
+		_player._placount++;
+		_player._pantsimg->setFrameY(12);
+		if (_player._playerarmmove == PLAYER_ARM_WATCAN_DOWN) _player._playerarmimg->setFrameY(12);
+		if (_player._placount % 7 == 0)
+		{
+			_player._placount = 0;
+		}
+		if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
+		{
+			if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+			{
+				_player._plaindex = 0;
+			}
+		}
+		_player._pantsimg->setFrameX(_player._plaindex);
+		_player._playerarmimg->setFrameX(_player._plaindex);
+		break;
+	case PLAYER_PANTS_WATERCAN_RIGHT:
+		_player._placount++;
+		_player._pantsimg->setFrameY(13);
+		if (_player._placount % 7 == 0)
+		{
+			_player._placount = 0;
+		}
+		if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
+		{
+			if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+			{
+				_player._plaindex = 0;
+			}
+		}
+		_player._pantsimg->setFrameX(_player._plaindex);
+		_player._playerarmimg->setFrameX(_player._plaindex);
+		break;
+	case PLAYER_PANTS_WATERCAN_LEFT:
+		_player._placount++;
+		_player._pantsimg->setFrameY(14);
+		if (_player._placount % 7 == 0)
+		{
+			_player._placount = 0;
+		}
+		if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
+		{
+			if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+			{
+				_player._plaindex = 0;
+			}
+		}
+		_player._pantsimg->setFrameX(_player._plaindex);
+		_player._playerarmimg->setFrameX(_player._plaindex);
+		break;
+	case PLAYER_PANTS_WATERCAN_UP:
+		_player._placount++;
+		_player._pantsimg->setFrameY(15);
+		if (_player._placount % 7 == 0)
+		{
+			_player._placount = 0;
+		}
+		if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
+		{
+			if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+			{
+				_player._plaindex = 0;
+			}
+		}
+		_player._pantsimg->setFrameX(_player._plaindex);
+		_player._playerarmimg->setFrameX(_player._plaindex);
 		break;
 	}
 }
 
 void Player::render(HDC hdc)
 {
+	_player._pantsimg->frameRender(hdc, _player.x, _player.y);						//캐릭터 바지 
 	_player._playerimg->frameRender(hdc, _player.x, _player.y);							//몸통 얼굴
 	_player._playerarmimg->frameRender(hdc, _player.x, _player.y);						//팔
-	
+	//_player._playercloth->frameRender(hdc, _player.x + 8, _player.y + 29);
+
 
 }

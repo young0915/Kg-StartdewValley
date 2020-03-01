@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tileNode.h"
 
+
 //¸ÊÅø ¹öÆ° 
 struct tagButton
 {
@@ -46,10 +47,15 @@ public:
 	~maptool();
 
 	HRESULT init();
-	void release();
+	void relaese();
 	void update();
 	void render();
 
+	void save();
+	void load();
 
+	void cameraMove();
+	void setUp();
+	void mapInit();
 };
 
