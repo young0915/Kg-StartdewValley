@@ -14,7 +14,7 @@ mainGame::~mainGame()
 HRESULT mainGame::init()
 {
 	gameNode::init(true);
-
+	maingameimg();																		//maingame+img 모든 이미지 모음 싱글턴에 사용하는 클래스  빼고 
 	_maptool = new maptool;
 	_maptool->init();
 

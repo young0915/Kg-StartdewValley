@@ -13,9 +13,10 @@ struct tagButton
 //맵툴 보드
 struct tagSampleBoard
 {
-	tagButton _button[5];																					// 버튼 렉트 
+	tagButton _button[8];																						// 버튼 렉트 
 	image* _boardimg;																							//맵툴 보드 이미지
 	RECT boardrc;																									//맵툴 보드 렉트
+	bool _isopen;																									//맵툴이 오픈
 	int x, y;
 };
 //맵툴 선택 
@@ -57,5 +58,8 @@ public:
 	void cameraMove();
 	void setUp();
 	void mapInit();
+	void setMaptoolBoard();																//맵툴보드 상태
+	void controlMaptoolBoard();														//맵툴보드 
+
 };
 

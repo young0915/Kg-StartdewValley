@@ -2,12 +2,22 @@
 #include "mainGame.h"
 
 /*
-ÀÌ¹ÌÁö ¶§·Á¹Ú´Â °÷
-
+ÀÌ¹ÌÁö ¸ðÀ½
 */
 
 void mainGame::maingameimg()
 {
+	//¸ÊÅø
+	IMAGEMANAGER->addImage("¸ÊÅø", "images/¸ÊÅø/maptool2.bmp", /*800, 500*/WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("µµ±¸", "images/¸ÊÅø/Ui_menuKinds.bmp", 18*3, 18*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¸ÊÅø¿À¸¥ÂÊ", "images/¸ÊÅø/Ui_maptool_beforeButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¸ÊÅø¿ÞÂÊ", "images/¸ÊÅø/Ui_maptool_nextButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("³ª°¡±â", "images/¸ÊÅø/Ui_cancelButton.bmp", 26 * 2, 12 * 2, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("Áö¿ì±â", "images/¸ÊÅø/Ui_maptool_erase.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("·Îµå", "images/¸ÊÅø/Ui_maptool_load.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("ÀúÀå", "images/¸ÊÅø/Ui_maptool_save.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("Å¸ÀÏ", "images/¸ÊÅø/Ui_maptool_tile.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¿ÀºêÁ§Æ®", "images/¸ÊÅø/Ui_maptool_object.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
 
 	//ÇÃ·¹ÀÌ¾î ¿Ê 
 	IMAGEMANAGER->addFrameImage("¸Ó¸®", "images/cloth/¸Ó¸®.bmp", 33 * 2, 128 * 2, 6, 16, true, RGB(255, 0, 255));
