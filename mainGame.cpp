@@ -33,6 +33,7 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENEMANAGER->update();
+	ANIMATIONMANAGER->update();
 	PLAYER->update();
 
 	_maptool->update();
