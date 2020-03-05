@@ -79,6 +79,9 @@
     <Filter Include="맵툴">
       <UniqueIdentifier>{1e5dcb35-9d55-46b3-a4b4-8bd3377a35e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="씬\intro">
+      <UniqueIdentifier>{894a3a6d-8aa4-4327-846c-c5f87ad25507}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -168,6 +171,9 @@
     <ClInclude Include="tileNode.h">
       <Filter>맵툴</Filter>
     </ClInclude>
+    <ClInclude Include="introscene.h">
+      <Filter>씬\intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -244,6 +250,9 @@
     </ClCompile>
     <ClCompile Include="cameraManager.cpp">
       <Filter>카메라</Filter>
+    </ClCompile>
+    <ClCompile Include="introscene.cpp">
+      <Filter>씬\intro</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

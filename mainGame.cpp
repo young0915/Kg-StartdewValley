@@ -15,18 +15,23 @@ HRESULT mainGame::init()
 {
 	gameNode::init(true);
 	maingameimg();																		//maingame+img 모든 이미지 모음 싱글턴에 사용하는 클래스  빼고 
-	_maptool = new maptool;
-	_maptool->init();
+	SCENEMANAGER->addScene("인트로", new introscene);
+	SCENEMANAGER->addScene("맵툴들", new maptool);
+	SCENEMANAGER->changeScene("인트로");
 
-	PLAYER->init();
+	//_maptool = new maptool;
+	//_maptool->init();
+
+	//PLAYER->init();
 	return S_OK;
 }
 
 void mainGame::release()
 {
 	gameNode::release();
-	PLAYER->release();
-	_maptool->release();
+	SCENEMANAGER->release();
+	//PLAYER->release();
+	//_maptool->release();
 }
 
 void mainGame::update()
@@ -34,9 +39,9 @@ void mainGame::update()
 	gameNode::update();
 	SCENEMANAGER->update();
 	ANIMATIONMANAGER->update();
-	PLAYER->update();
+	//PLAYER->update();
 
-	_maptool->update();
+//	_maptool->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -48,11 +53,11 @@ void mainGame::render(/*HDC hdc*/)
 
 	//====================================================
 	SCENEMANAGER->render();
-	PLAYER->render(getMemDC());
 
-	_maptool->render();
 
-	PLAYER->render(getMemDC());
+	//_maptool->render();
+
+	//PLAYER->render(getMemDC());
 	TIMEMANAGER->render(CAMERA->getCameraDC());
 	//=====================================================
 	//백버퍼의 내용을 HDC에 그린다.(지우지마!!)

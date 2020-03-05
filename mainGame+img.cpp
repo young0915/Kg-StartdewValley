@@ -27,6 +27,24 @@ void mainGame::maingameimg()
 	//플레이어 옷 
 	IMAGEMANAGER->addFrameImage("머리", "images/cloth/머리.bmp", 33 * 2, 128 * 2, 6, 16, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("후드티", "images/cloth/후드티.bmp", 24 * 2, 34 * 2, 3, 4, true, RGB(255, 0, 255));
+
+	//인트로 씬
+	IMAGEMANAGER->addImage("시작화면", "images/introscene/title_backGround.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름1", "images/introscene/title_cloud1.bmp", WINSIZEX * 3, WINSIZEY * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름2", "images/introscene/title_cloud2.bmp", WINSIZEX * 2, WINSIZEY * 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름3", "images/introscene/title_cloud3.bmp", WINSIZEX * 2, WINSIZEY * 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름4", "images/introscene/title_cloud4.bmp", WINSIZEX * 3, WINSIZEY * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름5", "images/introscene/title_cloud5.bmp", WINSIZEX*2 , WINSIZEY*2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름6", "images/introscene/title_cloud10.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름7", "images/introscene/title_cloud6.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("게임제목", "images/introscene/게임제목.bmp",600, 350, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("시작", "images/introscene/시작.bmp", 148*3, 58*3, 2, 1,true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("맵툴버튼", "images/introscene/map.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("나가기버튼", "images/introscene/나가기.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
+	//나뭇잎
+	
+	IMAGEMANAGER->addFrameImage("나뭇잎2", "images/introscene/나뭇잎2.bmp", 66,18, 3, 1, true, RGB(255, 0, 255));
+	ANIMATIONMANAGER->addAnimation("나뭇잎2흔들", "나뭇잎2", 0, 3, false, true);
 }
 
 
