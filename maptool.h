@@ -2,7 +2,6 @@
 #include "gameNode.h"
 #include "tileNode.h"
 
-
 //맵툴 버튼 
 struct tagButton
 {
@@ -13,7 +12,7 @@ struct tagButton
 //맵툴 보드
 struct tagSampleBoard
 {
-	tagButton _button[8];																						// 버튼 렉트 
+	tagButton _button[3];																						// 버튼 렉트 
 	image* _boardimg;																							//맵툴 보드 이미지
 	RECT boardrc;																									//맵툴 보드 렉트
 	bool _isopen;																									//맵툴이 오픈
@@ -28,38 +27,61 @@ enum SELECT
 };
 
 
-class maptool : public gameNode
+class maptool :public gameNode
 {
 private:
-	tagCurrentTile _currentTile;																// 현재 타일
-	tagTile _tile[TILEX*TILEY];																	//타일  붙이기 
-	tagTile _tmep[TILEX*TILEY];																//빈타일
-	tagSampleTile _sampleTile[SAMPLETILEX*SAMPLETILEY];			//샘플 타일
+	tagTile _tile[TILEX* TILEY];																						 //타일  
+	tagTile _temp[TILEX*TILEY];																					 //빈타일 
+	tagSampleTile _sampleTile[SAMPLETILEX * SAMPLETILEY];							 //샘플 타일
+	tagCurrentTile _currentTile;																					// 현재 타일
 
-	tagSampleBoard _sampleboard;														//샘플 보드
-	tagButton _samplebutton[2];															//샘플에 버튼
+	tagSampleBoard _sampleboard;																			//타일 보드 
+	tagButton _samplebutton[5];																				//샘플 버튼
 
-	RECT rc[25];																							//샘플 이미지 칸
-	RECT saveload[25];																				//샘플 이미지 
-	//image* saveload
+	RECT rc[36];
+	image* _springfloor[36];																						//페이지에 뿌려줄 이미지-> 봄 바닥
+	image* _mountainsimg[36];																					//산속 이미지
+	image* _mine[36];																									//동굴 이미지
+
+	int page;																														//페이지
+
+	SELECT _select;																											//선택
+	POINT _start;																												//스타트
+	POINT _end;																												//끝점
+
+	POINT _mousePoint;
+
+	//	bool first;
+	bool mouse;																											//마우스 닿았을 때  활성화 비활성화
 
 public:
 	maptool();
 	~maptool();
 
 	HRESULT init();
-	void relaese();
+	void release();
 	void update();
 	void render();
 
-	void save();
-	void load();
+	void save();																			//세이브
+	void load();																			//로드
 
-	void cameraMove();
-	void setUp();
-	void mapInit();
-	void setMaptoolBoard();																//맵툴보드 상태
-	void controlMaptoolBoard();														//맵툴보드 
+	void CameraMove();															//카메라 이동
+	void setUp();																			//타일 셋팅하는 함수
 
+	//샘플보드 설정
+	void mapinit();																		// 샘플북 초기화 설정
+	void setsampleTile();															//샘플 타일 설정
+	void setsampleboard();														//샘플보드
+	void sampleboardcontrol();												//샘플보드에서 버튼 조정하는 함수
+	void setboardbutton();														//샘플 보드 설정
+	void sampleRc();																	//랙트 뿌리기
+	void setpageSample();															//샘플 페이지에 넣을 이미지들
+	void setMap();																		//타일 들 설정
+	void setsampleMap();															//현재타일 찍기 함수
+	//void drag();
+
+	TERRAIN terrainSelect(int frameX, int frameY);
+	OBJECT objSelect(int frameX, int frameY);
 };
 

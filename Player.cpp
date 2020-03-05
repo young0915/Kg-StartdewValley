@@ -42,38 +42,37 @@ void Player::update()
 void Player::playerkeycontrol()
 {
 	//¸ØÃßÁö ¾ÊÀº »óÅÂ
-	if (KEYMANAGER->isStayKeyDown('S') && CAMERA->getCameraCenter().y + WINSIZEY / 2 < TILESIZEY)
+	if (KEYMANAGER->isStayKeyDown('S') && _player.y < TILESIZEY - 100)
 	{
 		_player._playermove = PLAYER_DOWN;
 		_player._playerarmmove = PLAYER_ARM_DOWN;
 		_player._playerpants = PLAYER_PANTS_DOWN;
 		_player.y += 2.f;
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 2));
+		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 < TILESIZEY)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 2));
 	}
-	if (KEYMANAGER->isStayKeyDown('D') && CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX)
+	if (KEYMANAGER->isStayKeyDown('D') && _player.x < CAMERA->getCameraCenter().x + WINSIZEX + (TILESIZEX - 100))
 	{
 		_player._playermove = PLAYER_RIGHT;
 		_player._playerarmmove = PLAYER_ARM_RIGHT;
 		_player._playerpants = PLAYER_PANTS_RIGHT;
 		_player.x += 2.f;
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 2, CAMERA->getCameraCenter().y));
-
+		if (CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX) CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 2, CAMERA->getCameraCenter().y));
 	}
-	if (KEYMANAGER->isStayKeyDown('A') && CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)
+	if (KEYMANAGER->isStayKeyDown('A') && _player.x > 0)
 	{
 		_player._playermove = PLAYER_LEFT;
 		_player._playerarmmove = PLAYER_ARM_LEFT;
 		_player._playerpants = PLAYER_PANTS_LEFT;
 		_player.x -= 2.f;
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 2, CAMERA->getCameraCenter().y));
+		if (CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)	CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 2, CAMERA->getCameraCenter().y));
 	}
-	if (KEYMANAGER->isStayKeyDown('W') && CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)
+	if (KEYMANAGER->isStayKeyDown('W') && _player.y > 0)
 	{
 		_player._playermove = PLAYER_UP;
 		_player._playerarmmove = PLAYER_ARM_UP;
 		_player._playerpants = PLAYER_PANTS_UP;
 		_player.y -= 2.f;
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 2));
+		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 2));
 	}
 	//¸ØÃá »óÅÂ
 	if (KEYMANAGER->isOnceKeyUp('S') || KEYMANAGER->isOnceKeyUp('W') || KEYMANAGER->isOnceKeyUp('A') || KEYMANAGER->isOnceKeyUp('D'))

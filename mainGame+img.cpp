@@ -7,22 +7,26 @@
 
 void mainGame::maingameimg()
 {
-	//¸ÊÅø
-	IMAGEMANAGER->addImage("¸ÊÅø", "images/¸ÊÅø/maptool2.bmp", /*800, 500*/WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("µµ±¸", "images/¸ÊÅø/Ui_menuKinds.bmp", 18*3, 18*3, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("¸ÊÅø¿À¸¥ÂÊ", "images/¸ÊÅø/Ui_maptool_beforeButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("¸ÊÅø¿ŞÂÊ", "images/¸ÊÅø/Ui_maptool_nextButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("³ª°¡±â", "images/¸ÊÅø/Ui_cancelButton.bmp", 26 * 2, 12 * 2, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("Áö¿ì±â", "images/¸ÊÅø/Ui_maptool_erase.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("·Îµå", "images/¸ÊÅø/Ui_maptool_load.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("ÀúÀå", "images/¸ÊÅø/Ui_maptool_save.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("Å¸ÀÏ", "images/¸ÊÅø/Ui_maptool_tile.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("¿ÀºêÁ§Æ®", "images/¸ÊÅø/Ui_maptool_object.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	//¸ÊÅø UI
+	IMAGEMANAGER->addImage("¸ÊÅø", "images/¸ÊÅø/¸ÊÅøUI/maptool2.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("µµ±¸", "images/¸ÊÅø/¸ÊÅøUI/Ui_menuKinds.bmp", 18 * 3, 18 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¸ÊÅø¿À¸¥ÂÊ", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_beforeButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¸ÊÅø¿ŞÂÊ", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_nextButton.bmp", 64, 32, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("³ª°¡±â", "images/¸ÊÅø/¸ÊÅøUI/Ui_cancelButton.bmp", 26 * 2, 12 * 2, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("Áö¿ì±â", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_erase.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("·Îµå", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_load.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("ÀúÀå", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_save.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("Å¸ÀÏ", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_tile.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¿ÀºêÁ§Æ®", "images/¸ÊÅø/¸ÊÅøUI/Ui_maptool_object.bmp", 200, 80, 2, 1, true, RGB(255, 0, 255));
+
+
+	//¸ÊÅø ÀÌ¹ÌÁö
+	IMAGEMANAGER->addFrameImage("º½¹Ù´Ú", "images/¸ÊÅø/maptool_tile1_spring.bmp", 576, 576, SAMPLETILEX, SAMPLETILEY, true, RGB(255, 0, 255));
+
 
 	//ÇÃ·¹ÀÌ¾î ¿Ê 
 	IMAGEMANAGER->addFrameImage("¸Ó¸®", "images/cloth/¸Ó¸®.bmp", 33 * 2, 128 * 2, 6, 16, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("ÈÄµåÆ¼", "images/cloth/ÈÄµåÆ¼.bmp", 24 * 2, 34 * 2, 3, 4, true, RGB(255, 0, 255));
 }
-
 
 

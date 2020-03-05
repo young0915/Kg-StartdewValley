@@ -107,6 +107,7 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	case WM_MOUSEMOVE:
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
+	//	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON)) this>setMap();
 		break;
 	case WM_KEYDOWN:
 
@@ -120,6 +121,10 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		return 0;
+	case WM_LBUTTONDOWN:
+	//	this > setMap();
+		break;
+	
 	}
 	return (DefWindowProc(hWnd, iMessage, wParam, lParam));
 }
