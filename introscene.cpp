@@ -1,13 +1,9 @@
 #include "stdafx.h"
 #include "introscene.h"
 
-introscene::introscene()
-{
-}
+introscene::introscene(){}
 
-introscene::~introscene()
-{
-}
+introscene::~introscene(){}
 
 HRESULT introscene::init()
 {
@@ -49,8 +45,7 @@ void introscene::release()
 void introscene::update()
 {
 	introbtnn();
-
-	}
+}
 
 
 
@@ -84,7 +79,7 @@ void introscene::introbtnn()
 				//½ÃÀÛ
 				if (i == 0)
 				{
-
+					SCENEMANAGER->changeScene("³»¶¥");
 				}
 				else if (i == 1)
 				{

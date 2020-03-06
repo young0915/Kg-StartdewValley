@@ -16,18 +16,25 @@ HRESULT maptool::init()
 	page = 0;																//이미지 초기화
 	mouse = false;
 
+	mapKind = S;
+
 	//sampleRc()안에 넣을 이미지
 	for (int i = 0; i < 36; i++)
 	{
 		_springfloor[i] = new image;
-		_springfloor[i]->init("images/맵툴/maptool_tile1_spring.bmp", 576, 576, 12, 12, true, RGB(255, 0, 255));
-
-		_mountainsimg[i] = new image;
-		_mountainsimg[i]->init("images/맵툴/maptool_tile2_spring.bmp", 576, 576, 12, 12, true, RGB(255, 0, 255));
-
-		_mine[i] = new image;
-		_mine[i]->init("images/맵툴/mine.bmp", 800, 800, 16, 16, true, RGB(255, 0, 255));
+		_springfloor[i]->init("images/맵툴/maptool_tile1_spring.bmp", 600, 600, 12, 12, true, RGB(255, 0, 255));
 	}
+	for (int j = 0; j < 36; j++)
+	{
+		_mountainsimg[j] = new image;
+		_mountainsimg[j]->init("images/맵툴/maptool_tile2_spring.bmp", 600, 600, 12, 12, true, RGB(255, 0, 255));
+	}
+	for (int k = 0; k < 36; k++)
+	{
+		_mine[k] = new image;
+		_mine[k]->init("images/맵툴/mine.bmp", 800, 800, 16, 16, true, RGB(255, 0, 255));
+	}
+
 	m_ptMouse.x = CAMERA->getCameraXY().x + m_ptMouse.x;
 	m_ptMouse.y = CAMERA->getCameraXY().y + m_ptMouse.y;
 	return S_OK;
@@ -50,27 +57,36 @@ void maptool::update()
 
 	CameraMove();
 	sampleboardcontrol();
+	//버튼
+	if (PtInRect(&_samplebutton[0].rc, m_ptMouse)) _select = TRRAINDRAW;
+	if (PtInRect(&_samplebutton[2].rc, m_ptMouse)) _select = OBJDRAW;
+	if (PtInRect(&_samplebutton[1].rc, m_ptMouse)) _select = ERASER;
+	if (PtInRect(&_samplebutton[3].rc, m_ptMouse)) load();
+	if (PtInRect(&_samplebutton[4].rc, m_ptMouse)) save();
+
 }
 
 void maptool::render()
 {
-	//타일
+	//타일WWWS
 	for (int i = 0; i < TILEX * TILEY; i++)
 	{
 		if (CAMERAX - 100 < _tile[i].x && _tile[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _tile[i].y&& _tile[i].y < CAMERAY + WINSIZEY + 100)
 		{
 
 			if (_tile[i].terrain == TERAIN_NONE) Rectangle(getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].rc.right, _tile[i].rc.bottom);
-			else  IMAGEMANAGER->frameRender("봄바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
-			/*_springfloor[i]->frameRender(getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);*/
-
-
-			//else _springfloor[i]->frameRender("봄바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
-			if (_tile[i].obj == OBJ_NONE) continue;
-
+			else
+			{
+				if(_tile[i].terrain == TERAIN_GROUND)	IMAGEMANAGER->frameRender("봄바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
+				if (_tile[i].terrain == TERAIN_MOUNTAIN)	IMAGEMANAGER->frameRender("산", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
+				if (_tile[i].terrain == TERAIN_MINE)	IMAGEMANAGER->frameRender("봄바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
+			}
+		
+			if (_tile[i].obj == OBJ_NONE)continue;
 			IMAGEMANAGER->frameRender("봄바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].objFrameX, _tile[i].objFrameY);
 		}
 	}
+
 	for (int i = 0; i < TILEX * TILEY; i++)
 	{
 		if (CAMERAX - 100 < _tile[i].x && _tile[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _tile[i].y&& _tile[i].y < CAMERAY + WINSIZEY + 100)
@@ -87,7 +103,6 @@ void maptool::render()
 			}
 		}
 	}
-
 
 	//샘플 보드 아이콘 또는 샘플보드 출력
 	_sampleboard._boardimg->render(CAMERA->getCameraDC(), _sampleboard.x, _sampleboard.y);
@@ -126,31 +141,21 @@ void maptool::render()
 
 	}//_sampleboard._isopen true
 
-
 }
 
 //세이브
 void maptool::save()
 {
-	for (int i = 0; i < 36; i++)
+	HANDLE file; 
+	DWORD write;
+	
+	for (int i = 0; i < TILEX* TILEY; i++)
 	{
-		if (PtInRect(&_samplebutton[3].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-		{
-			HANDLE file;
-			DWORD write;
-			int arrNum;
-			arrNum = i;
-			char save[128];
-			wsprintf(save, "save/맵%d.map", arrNum + 1);
-
-			for (int i = 0; i < TILEX* TILEY; i++)
-			{
-				_temp[i] = _tile[i];
-			}
-
+		_temp[i] = _tile[i];
+	}
 			file = CreateFile
 			(																									//생성할 파일 또는 열 장치나 파일 이름
-				save,																						//파일이나 장치를 만들거나 열때 사용할 권한
+				"save/맵1.map",																	//파일이나 장치를 만들거나 열때 사용할 권한
 				GENERIC_WRITE,																	// 파일 공유모드 입력
 				0,																								//파일 또는 장치를 열때 보안 및 특성
 				NULL,																						//파일이나 장치를 열때 취할 행동
@@ -158,39 +163,50 @@ void maptool::save()
 				FILE_ATTRIBUTE_NORMAL,												//만들어질 파일이 갖게 될 특성 확장 특성에 대한 정보
 				NULL);
 
-			WriteFile(file, _temp, sizeof(tagTile)*TILEX*TILEY, &write, NULL);
+			WriteFile(file, _temp, sizeof(tagTile), &write, NULL);
 			CloseHandle(file);
-		}
-	}
 }
+
 //로드
 void maptool::load()
 {
-	for (int i = 0; i < 36; i++)
-	{
-		if (PtInRect(&_samplebutton[4].rc, m_ptMouse))
-		{
 			HANDLE file;
 			DWORD read;
-			int arrNum;
-			arrNum = i;
-			char save[128];
-			wsprintf(save, "save/맵%d.map", arrNum + 1);
-
 			file = CreateFile
-			(save,										//생성할 파일 또는 열 장치나 파일이름
-				GENERIC_READ,				//파일이나 장치를 만들거나 열때 사용할 권한
-				0,											//파일 공유 모드 입력
-				NULL,									// 파일 또는 장치를 열 때 보안 및 행동
-				OPEN_EXISTING,				//파일이나 장치를 열때 취할 행동
-				FILE_ATTRIBUTE_NORMAL,	//파일이나 장치를 열때 갖게 될 특성
-				NULL);											//만들어질  파일이 갖게 될 특성 확장 특성에 대한 정보 
+						("save/맵1.map",										//생성할 파일 또는 열 장치나 파일이름
+							GENERIC_READ,									//파일이나 장치를 만들거나 열때 사용할 권한
+							0,																//파일 공유 모드 입력
+							NULL,														// 파일 또는 장치를 열 때 보안 및 행동
+							OPEN_EXISTING,									//파일이나 장치를 열때 취할 행동
+							FILE_ATTRIBUTE_NORMAL,				//파일이나 장치를 열때 갖게 될 특성
+							NULL);														//만들어질  파일이 갖게 될 특성 확장 특성에 대한 정보 
 
-			ReadFile(file, _temp, sizeof(tagTile)*TILEX*TILEY, &read, NULL);
-			CloseHandle(file);
+		ReadFile(file, _temp, sizeof(tagTile)*TILEX*TILEY, &read, NULL);
+		CloseHandle(file);
+		for (int i = 0; i < TILEX*TILEY; i++)
+		{
+			_tile[i] = _temp[i];
 		}
-	}
+
+		//DWORD read;
+		////int arrNum;
+		////arrNum = i;
+		//char save[128];
+		////wsprintf(save, "save/맵%d.map", 128);
+
+		//file = CreateFile
+		//(save,										//생성할 파일 또는 열 장치나 파일이름
+		//	GENERIC_READ,				//파일이나 장치를 만들거나 열때 사용할 권한
+		//	0,											//파일 공유 모드 입력
+		//	NULL,									// 파일 또는 장치를 열 때 보안 및 행동
+		//	OPEN_EXISTING,				//파일이나 장치를 열때 취할 행동
+		//	FILE_ATTRIBUTE_NORMAL,	//파일이나 장치를 열때 갖게 될 특성
+		//	NULL);											//만들어질  파일이 갖게 될 특성 확장 특성에 대한 정보 
+
+		//ReadFile(file, _temp, sizeof(tagTile)*TILEX*TILEY, &read, NULL);
+		//CloseHandle(file);
 }
+
 //맵툴에 이용할 카메라 이동
 void maptool::CameraMove()
 {
@@ -240,7 +256,7 @@ void maptool::mapinit()
 	{
 		// 지형 초기설정
 		_tile[i].terrain = TERAIN_NONE;
-
+	
 		_tile[i].terrainFrameX = 0;
 		_tile[i].terrainFrameY = 0;
 
@@ -288,6 +304,7 @@ void maptool::sampleboardcontrol()
 		}
 		else
 		{
+
 			setMap();
 			_start.x = m_ptMouse.x;
 			_start.y = m_ptMouse.y;
@@ -312,6 +329,9 @@ void maptool::sampleboardcontrol()
 		if (PtInRect(&_sampleboard._button[2].rc, m_ptMouse))																	//페이지 이후로
 		{
 			if (page >= 0) page++;
+
+			if (page < 4) mapKind = S;																													// 페이지 조건
+			else if (page == 4) mapKind = M;																										// 페이지 조건
 		}
 		if (_sampleboard._isopen)
 		{
@@ -331,11 +351,15 @@ void maptool::sampleboardcontrol()
 	if (_sampleboard._isopen) setboardbutton();
 	if (!_sampleboard._isopen) page = 0;
 	//버튼 
-	if (PtInRect(&_samplebutton[0].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) _select = TRRAINDRAW;
-	if (PtInRect(&_samplebutton[1].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) _select = ERASER;
-	if (PtInRect(&_samplebutton[2].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) _select = OBJDRAW;
-	if (PtInRect(&_samplebutton[3].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) { load(); }
-	if (PtInRect(&_samplebutton[3].rc, m_ptMouse) && KEYMANAGER->isOnceKeyDown(VK_LBUTTON)) { save(); }
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (PtInRect(&_samplebutton[0].rc, m_ptMouse)) _select = TRRAINDRAW;
+		if (PtInRect(&_samplebutton[2].rc, m_ptMouse)) _select = OBJDRAW;
+		if (PtInRect(&_samplebutton[1].rc, m_ptMouse)) _select = ERASER;
+		if (PtInRect(&_samplebutton[3].rc, m_ptMouse)) load();
+		if (PtInRect(&_samplebutton[4].rc, m_ptMouse)) save();
+	}
+
 
 	_sampleboard.boardrc = RectMake(_sampleboard.x, _sampleboard.y, _sampleboard._boardimg->getWidth(), _sampleboard._boardimg->getHeight());
 }
@@ -393,6 +417,7 @@ void maptool::setboardbutton()
 			sampleRc();
 		}
 	}
+
 }
 //랙트 뿌리기
 //이거 수정
@@ -400,10 +425,10 @@ void maptool::sampleRc()
 {
 	for (int i = 0; i < 6; i++)
 	{
-		for (int j = 0; j < 36; j++)
+		for (int j = 0; j < 6; j++)
 		{
 			//나무풀 밭 
-			if (page >= 0 && page <= 3)
+			if (page >= 0 && page < 4)
 			{
 				rc[i] = RectMakeCenter(582 + i * 55, 120, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());						//타일 첫줄칸		
 				rc[i + 6] = RectMakeCenter(582 + i * 55, 175, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());				//타일 두번째 줄칸
@@ -702,14 +727,14 @@ void maptool::setMap()
 			{
 				if (_tile[i].obj != OBJ_NONE)
 				{
-					_tile[i].objFrameX = 0;
-					_tile[i].objFrameY = 0;
+					_tile[i].objFrameX = NULL;
+					_tile[i].objFrameY = NULL;
 					_tile[i].obj = OBJ_NONE;
 				}
 				else
 				{
-					_tile[i].terrainFrameX = 0;
-					_tile[i].terrainFrameY = 0;
+					_tile[i].terrainFrameX = NULL;
+					_tile[i].terrainFrameY = NULL;
 					_tile[i].terrain = TERAIN_NONE;
 				}
 			}
@@ -719,7 +744,6 @@ void maptool::setMap()
 	}
 }
 //현재타일 찍기 함수
-//이건 수정해야 할 듯?
 void maptool::setsampleMap()
 {
 	for (int i = 0; i < 36; i++)
@@ -752,12 +776,19 @@ TERRAIN maptool::terrainSelect(int frameX, int frameY)
 	{
 		for (int j = 0; j < 6; j++)
 		{
-			if (page >= 0 && page <= 1)
+		
+			if (frameX == i && frameY == j)
 			{
-				if (frameX == i && frameY == j)
+				if (mapKind == S)
+				{
 					return TERAIN_GROUND;
+				}
+				else if (mapKind == M)
+				{
+					return TERAIN_MOUNTAIN;
+				}
 			}
-			else if (page == 2)
+		/*	else if (page == 2)
 			{
 				if (i >= 2 && i <= 5 && j == 5)
 				{
@@ -778,22 +809,22 @@ TERRAIN maptool::terrainSelect(int frameX, int frameY)
 				{
 					return TERAIN_GROUND;
 				}
-			}
-			else if (page == 4)
-			{
-				if ((i >= 0 && i <= 1 && j == 0) || (i >= 0 && i <= 1 && i == 3 && j == 2) || (i >= 0 && i <= 1 && i == 3 && j == 4))
-				{
-					if ((frameX == i && frameY == j) || (frameX == 0 && frameY == 1) || (frameX == 4 && frameY == 1) || (frameX == 4 && frameY == 4) || (frameX == 4 && frameY == 5))
-					{
-						return TERAIN_GROUND;
-					}
-					else
-					{
-						return TERAIN_WALL;
-					}
-				}
-			}
-			else if (page == 5)
+			}*/
+			//else if (mapKind == M)
+			//{
+			//	if ((i >= 0 && i <= 1 && j == 0) || (i >= 0 && i <= 1 && i == 3 && j == 2) || (i >= 0 && i <= 1 && i == 3 && j == 4))
+			//	{
+			//		if ((frameX == i && frameY == j) || (frameX == 0 && frameY == 1) || (frameX == 4 && frameY == 1) || (frameX == 4 && frameY == 4) || (frameX == 4 && frameY == 5))
+			//		{
+			//			return TERAIN_MOUNTAIN;
+			//		}
+			//		else
+			//		{
+			//			return TERAIN_WALL;
+			//		}
+			//	}
+			//}
+			/*else if (page == 5)
 			{
 				if ((i >= 2 && i <= 5 && j == 0) || (i >= 1 && i <= 5 && j == 1) || (i >= 4 && i <= 5 && j == 2) || (i >= 4 && i <= 5 && j == 3) || (i >= 0 && i <= 1 && j == 4) || (i >= 4 && i <= 5 && j == 4) || (i >= 0 && i <= 4 && j == 5))
 				{
@@ -831,7 +862,7 @@ TERRAIN maptool::terrainSelect(int frameX, int frameY)
 						return TERAIN_GROUND;
 					}
 				}
-			}
+			}*/
 		}
 	}
 	return TERAIN_GROUND;
@@ -845,15 +876,22 @@ OBJECT maptool::objSelect(int frameX, int frameY)
 		{
 			if (page == 0)
 			{
-				if (frameX == 3 && frameY == 0 || frameX == 4 && frameY == 0 || frameX == 1 && frameY == 2 || frameX == 0 && frameY == 5 && frameX == 1 && frameY == 5)
+				if (frameX == 3 && frameY == 0 || frameX == 4 && frameY == 0 || frameX == 1 && frameY == 2 || frameX == 0 && frameY == 5 || frameX == 1 && frameY == 5 || frameX == 0 && frameY == 1)
 				{
-					return OBJ_FARM;
+					if (frameX == i && frameY == j)
+					{
+						return OBJ_FARM;
+					}
 				}
-				if (frameX == 5 && frameY == 0 || frameX == 0 && frameY == 1)
+				else if (frameX == 5 && frameY == 0)
 				{
-					return OBJ_TREE;
+						return OBJ_TREE;
 				}
-				if ((i >= 2 && i <= 5 && j == 3) && (i >= 2 && i <= 5 && j == 5))
+				else if (frameX == 0 && frameY == 1)
+				{
+						return OBJ_TREE;
+				}
+				else  if ((i >= 2 && i <= 5 && j == 3) && (i >= 2 && i <= 5 && j == 5))
 				{
 					if (frameX == i && frameY == j)
 					{
@@ -901,5 +939,5 @@ OBJECT maptool::objSelect(int frameX, int frameY)
 			}
 		}
 	}
-	return OBJ_NONE;
+	return OBJ_FARM;
 }

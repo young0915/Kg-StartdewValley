@@ -21,7 +21,9 @@ void mainGame::maingameimg()
 
 
 	//¸ÊÅø ÀÌ¹ÌÁö
-	IMAGEMANAGER->addFrameImage("º½¹Ù´Ú", "images/¸ÊÅø/maptool_tile1_spring.bmp", 576, 576, SAMPLETILEX, SAMPLETILEY, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("º½¹Ù´Ú", "images/¸ÊÅø/maptool_tile1_spring.bmp", 600, 600, 12, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("»ê", "images/¸ÊÅø/maptool_tile2_spring.bmp", 600, 600,12, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("µ¿±¼", "images/¸ÊÅø/mine.bmp", 256, 208, 12, 12, true, RGB(255, 0, 255));
 
 
 	//ÇÃ·¹ÀÌ¾î ¿Ê 
@@ -41,10 +43,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addFrameImage("½ÃÀÛ", "images/introscene/½ÃÀÛ.bmp", 148*3, 58*3, 2, 1,true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¸ÊÅø¹öÆ°", "images/introscene/map.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("³ª°¡±â¹öÆ°", "images/introscene/³ª°¡±â.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
-	//³ª¹µÀÙ
 	
-	IMAGEMANAGER->addFrameImage("³ª¹µÀÙ2", "images/introscene/³ª¹µÀÙ2.bmp", 66,18, 3, 1, true, RGB(255, 0, 255));
-	ANIMATIONMANAGER->addAnimation("³ª¹µÀÙ2Èçµé", "³ª¹µÀÙ2", 0, 3, false, true);
 }
 
 

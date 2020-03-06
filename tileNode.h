@@ -15,8 +15,8 @@
 #define TILESIZEY TILESIZE * TILEY
 
 //타일셋(샘플 타일) 화면 오른쪽 이미지 타일 갯수 
-#define SAMPLETILEX 7
-#define SAMPLETILEY 7
+#define SAMPLETILEX 6
+#define SAMPLETILEY 6
 
 //비트연산을 하기 위해 
 #define ATTR_UNMOVABLE 0x00000001
@@ -25,7 +25,8 @@
 //지형(Ex 밟을 때 사운드를 나게 하거나 이동할 수 없는 지역 등등)
 enum TERRAIN
 {	//아무것도 없는,          벽				땅
-	TERAIN_NONE, TERAIN_WALL, TERAIN_GROUND
+	TERAIN_NONE, TERAIN_WALL, TERAIN_GROUND, TERAIN_MOUNTAIN, TERAIN_MINE
+
 };
 
 //오브젝트(Ex 지형위쪽에 배치. 움직이거나 부서지거나 하는 녀석 등등 변화를 줄 수 있는 물체)

@@ -17,6 +17,7 @@ HRESULT mainGame::init()
 	maingameimg();																		//maingame+img 모든 이미지 모음 싱글턴에 사용하는 클래스  빼고 
 	SCENEMANAGER->addScene("인트로", new introscene);
 	SCENEMANAGER->addScene("맵툴들", new maptool);
+	SCENEMANAGER->addScene("내땅", new Myland);
 	SCENEMANAGER->changeScene("인트로");
 
 	//_maptool = new maptool;

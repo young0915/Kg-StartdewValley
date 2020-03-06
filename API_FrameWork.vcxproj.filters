@@ -82,6 +82,9 @@
     <Filter Include="씬\intro">
       <UniqueIdentifier>{894a3a6d-8aa4-4327-846c-c5f87ad25507}</UniqueIdentifier>
     </Filter>
+    <Filter Include="씬\내땅">
+      <UniqueIdentifier>{28ca7b8b-0561-437d-8807-202e269361a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -174,6 +177,9 @@
     <ClInclude Include="introscene.h">
       <Filter>씬\intro</Filter>
     </ClInclude>
+    <ClInclude Include="Myland.h">
+      <Filter>씬\내땅</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -253,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="introscene.cpp">
       <Filter>씬\intro</Filter>
+    </ClCompile>
+    <ClCompile Include="Myland.cpp">
+      <Filter>씬\내땅</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

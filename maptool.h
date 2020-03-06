@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tileNode.h"
+#include "sampleimage.h"
 
 //맵툴 버튼 
 struct tagButton
@@ -21,11 +22,15 @@ struct tagSampleBoard
 //맵툴 선택 
 enum SELECT
 {
-	TRRAINDRAW,																						//지형(Ex 밟을 때 사운드를 나게 하거나 이동할 수 없는 지역 등등)
+	TRRAINDRAW,	//지형(Ex 밟을 때 사운드를 나게 하거나 이동할 수 없는 지역 등등)
 	OBJDRAW,																								//오브젝트(Ex 지형위쪽에 배치. 움직이거나 부서지거나 하는 녀석 등등 변화를 줄 수 있는 물체)
 	ERASER																									//삭제
 };
 
+enum MAPKIND
+{
+	S, M
+};
 
 class maptool :public gameNode
 {
@@ -54,6 +59,10 @@ private:
 	//	bool first;
 	bool mouse;																											//마우스 닿았을 때  활성화 비활성화
 
+	//클래스
+	sampleimage* _sampleimg;
+
+	MAPKIND mapKind;
 public:
 	maptool();
 	~maptool();
