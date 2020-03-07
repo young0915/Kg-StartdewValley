@@ -20,10 +20,9 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("³»¶¥", new Myland);
 	SCENEMANAGER->changeScene("ÀÎÆ®·Î");
 
-	//_maptool = new maptool;
-	//_maptool->init();
-
+	
 	//PLAYER->init();
+
 	return S_OK;
 }
 
@@ -41,7 +40,6 @@ void mainGame::update()
 	SCENEMANAGER->update();
 	ANIMATIONMANAGER->update();
 	//PLAYER->update();
-
 //	_maptool->update();
 }
 
@@ -54,10 +52,7 @@ void mainGame::render(/*HDC hdc*/)
 
 	//====================================================
 	SCENEMANAGER->render();
-
-
 	//_maptool->render();
-
 	//PLAYER->render(getMemDC());
 	TIMEMANAGER->render(CAMERA->getCameraDC());
 	//=====================================================

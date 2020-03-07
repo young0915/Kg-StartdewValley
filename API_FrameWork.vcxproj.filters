@@ -85,6 +85,9 @@
     <Filter Include="씬\내땅">
       <UniqueIdentifier>{28ca7b8b-0561-437d-8807-202e269361a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="커서시스템">
+      <UniqueIdentifier>{1412093a-737e-491c-b001-eda129f93f57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -180,6 +183,9 @@
     <ClInclude Include="Myland.h">
       <Filter>씬\내땅</Filter>
     </ClInclude>
+    <ClInclude Include="cusor.h">
+      <Filter>커서시스템</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -262,6 +268,9 @@
     </ClCompile>
     <ClCompile Include="Myland.cpp">
       <Filter>씬\내땅</Filter>
+    </ClCompile>
+    <ClCompile Include="cusor.cpp">
+      <Filter>커서시스템</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

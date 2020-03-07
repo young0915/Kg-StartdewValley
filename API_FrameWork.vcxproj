@@ -152,6 +152,7 @@
     <ClInclude Include="API_FrameWork.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="cusor.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="gameNode.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="cameraManager.cpp" />
+    <ClCompile Include="cusor.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="gameNode.cpp" />

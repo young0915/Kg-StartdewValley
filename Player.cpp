@@ -25,18 +25,43 @@ HRESULT Player::init()
 	_player._playermove = PLAYER_STOP;
 	_player._playerarmmove = PLAYER_ARM_STOP;
 	_player._playerpants = PLAYER_PANTS_DOWN;
+	
+	//프로그래스바
+	// _hp._maxhp = 100;
+	//hp
+	_hp._maxhp = 100;
+	_hp.Hp = 0;
+	_hp._hpbar = new progressBar;
+	_hp._hpbar->init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_energy_bar.bmp",  850, 550, 30, 180);
+	_hp._hpbar->setGauge(_hp.Hp, _hp._maxhp);
+	//energy
+	_energy._maxenergy = 100;
+	_energy.energy = 0;
+	_energy._energy = new energybar;
+	_energy._energy-> init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_bar (1).bmp", 810, 550, 30, 180);
+	_energy._energy->setGauge(_energy.energy, _energy._maxenergy);
+
+	//다른 클래스 불러오기
+	_cursor = new cusor;
+	_cursor->init();
 
 	return S_OK;
 }
 
 void Player::release()
 {
+	_cursor->release();
+	_hp._hpbar->release();
+	_energy._energy->release();
 }
 
 void Player::update()
 {
+
 	playerkeycontrol();
 	playermove();
+	_cursor->update();
+	playerenergybar();																					//플레이어 hp 바
 }
 //플레이어 키를 모아둔 곳		
 void Player::playerkeycontrol()
@@ -463,12 +488,38 @@ void Player::clothmove()
 	}
 }
 
+void Player::playerenergybar()
+{
+	_hp._hpbar->setGauge(_hp.Hp, _hp._maxhp);
+	_energy._energy->setGauge(_energy.energy,_energy._maxenergy);
+}
+//hp데미지
+void Player::energydamage(float _energy)
+{
+	_hp.Hp += _energy;
+	/*
+	최대가 max 95까지 95일 경우 플레이어는 쓰러진다.
+	*/
+
+}
+//에너지 데미지
+void Player::hpdamage(float _hp)
+{
+	_energy.energy += _hp;
+	/*
+최대가 max 95까지 95일 경우 플레이어는 쓰러진다.
+*/
+
+}
+
 void Player::render(HDC hdc)
 {
 	_player._pantsimg->frameRender(hdc, _player.x, _player.y);						//캐릭터 바지 
 	_player._playerimg->frameRender(hdc, _player.x, _player.y);							//몸통 얼굴
 	_player._playerarmimg->frameRender(hdc, _player.x, _player.y);						//팔
 	//_player._playercloth->frameRender(hdc, _player.x + 8, _player.y + 29);
-
+	_cursor->render();																										//커서
+	_hp._hpbar->render();																								//에너지바
+	_energy._energy->render();																							//혈액
 
 }

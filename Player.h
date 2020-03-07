@@ -1,8 +1,9 @@
 #pragma once
 #include "singletonBase.h"
 #include "tileNode.h"
+#include "cusor.h"
+#include "progressBar.h"											//플레이어 프로그래스바
 //#include "closet.h"
-//#include "progressBar.h"											//플레이어 프로그래스바
 //플레이어 움직임
 enum PLAYERMOVE
 {
@@ -92,11 +93,27 @@ struct tagplayer
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
 {
+	progressBar* _hpbar;
+	int Hp;
+	int _maxhp;
+};
+
+struct  tagenergybar
+{
+	energybar* _energy;
+	int energy;
+	int _maxenergy;
 };
 class Player : public singletonBase<Player>
 {
 private:
 	tagplayer _player;												//플레이어 정보
+	tagplayerHpbar _hp;											//hp
+	tagenergybar _energy;									//플레이어 에너지
+
+	//커서
+	cusor* _cursor;
+
 public:
 	Player();
 	~Player();
@@ -109,8 +126,11 @@ public:
 	void playerkeycontrol();											//플레이어 키를 모아둔 곳													
 	void playermove();													//플레이어 움직임(body)
 	void clothmove();														//플레이어 바지
+	void playerenergybar();											//에너지바
 
 	void playerimg();														//플레이어 이미지 모음 함수 
+	void energydamage(float _energy);						//energy데미지
+	void hpdamage(float _hp);										//hp데미지
 
 	float getplayerX() { return _player.x; }
 	float getplayerY() { return _player.y; }

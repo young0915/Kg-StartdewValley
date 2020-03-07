@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include "cusor.h"
 
 enum INTROBUTTON
 {
@@ -25,6 +26,8 @@ private:
 	image* _cloud[7];																//구름 움직이기 
 	int loopX, loopY;																	//구름 랜더 초기화값
 	float speed;
+
+	cusor* _cursor;
 public:
 	introscene();
 	~introscene();
