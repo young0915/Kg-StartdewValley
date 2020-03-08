@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tileNode.h"
 #include "sampleimage.h"
+//#include "cusor.h"
 
 //맵툴 버튼 
 struct tagButton
@@ -26,11 +27,14 @@ enum SELECT
 	OBJDRAW,																								//오브젝트(Ex 지형위쪽에 배치. 움직이거나 부서지거나 하는 녀석 등등 변화를 줄 수 있는 물체)
 	ERASER																									//삭제
 };
-
-enum MAPKIND
-{
-	S, M
-};
+//
+//enum MAPKIND
+//{
+//	/*S, M*/
+//	SPRING_FLOOR,
+//	MOUNTAIN,
+//	MINE
+//};
 
 class maptool :public gameNode
 {
@@ -45,8 +49,7 @@ private:
 
 	RECT rc[36];
 	image* _springfloor[36];																						//페이지에 뿌려줄 이미지-> 봄 바닥
-	image* _mountainsimg[36];																					//산속 이미지
-	image* _mine[36];																									//동굴 이미지
+
 
 	int page;																														//페이지
 
@@ -62,7 +65,7 @@ private:
 	//클래스
 	sampleimage* _sampleimg;
 
-	MAPKIND mapKind;
+	//	MAPKIND mapKind;
 public:
 	maptool();
 	~maptool();
@@ -71,6 +74,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void drage();
 
 	void save();																			//세이브
 	void load();																			//로드
@@ -92,5 +97,8 @@ public:
 
 	TERRAIN terrainSelect(int frameX, int frameY);
 	OBJECT objSelect(int frameX, int frameY);
+
+private:
+	//cusor* _cursor;
 };
 

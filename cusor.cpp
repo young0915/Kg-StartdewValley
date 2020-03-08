@@ -29,7 +29,7 @@ void cusor::update()
 
 void cusor::render()
 {
-	_cursor.img->frameRender(CAMERA->getCameraDC(), _cursor.rc.left, _cursor.rc.top, 0,0);
+	_cursor.img->frameRender(getMemDC(), _cursor.rc.left, _cursor.rc.top, 0,0);
 }
 
 

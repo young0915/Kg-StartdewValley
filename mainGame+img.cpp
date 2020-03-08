@@ -21,9 +21,8 @@ void mainGame::maingameimg()
 
 
 	//맵툴 이미지
-	IMAGEMANAGER->addFrameImage("봄바닥", "images/맵툴/maptool_tile1_spring.bmp", 600, 600, 12, 12, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("산", "images/맵툴/maptool_tile2_spring.bmp", 600, 600,12, 12, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("동굴", "images/맵툴/mine.bmp", 256, 208, 12, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 1300, 12, 26, true, RGB(255, 0, 255));
+
 
 
 	//플레이어 옷 
@@ -36,14 +35,14 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("구름2", "images/introscene/title_cloud2.bmp", WINSIZEX * 2, WINSIZEY * 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("구름3", "images/introscene/title_cloud3.bmp", WINSIZEX * 2, WINSIZEY * 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("구름4", "images/introscene/title_cloud4.bmp", WINSIZEX * 3, WINSIZEY * 3, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("구름5", "images/introscene/title_cloud5.bmp", WINSIZEX*2 , WINSIZEY*2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("구름5", "images/introscene/title_cloud5.bmp", WINSIZEX * 2, WINSIZEY * 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("구름6", "images/introscene/title_cloud10.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("구름7", "images/introscene/title_cloud6.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("게임제목", "images/introscene/게임제목.bmp",600, 350, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("시작", "images/introscene/시작.bmp", 148*3, 58*3, 2, 1,true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("맵툴버튼", "images/introscene/map.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("나가기버튼", "images/introscene/나가기.bmp", 148*3, 58*3, 2, 1, true, RGB(255, 0, 255));
-	
+	IMAGEMANAGER->addImage("게임제목", "images/introscene/게임제목.bmp", 600, 350, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("시작", "images/introscene/시작.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("맵툴버튼", "images/introscene/map.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("나가기버튼", "images/introscene/나가기.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
+
 	//커서 
 	IMAGEMANAGER->addFrameImage("커서", "images/cursor/Ui_cursor.bmp", 128 * 2, 16 * 2, 8, 1, true, RGB(255, 0, 255));
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "tileNode.h"
-#include "cusor.h"
+//#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
 //#include "closet.h"
 //플레이어 움직임
@@ -112,7 +112,7 @@ private:
 	tagenergybar _energy;									//플레이어 에너지
 
 	//커서
-	cusor* _cursor;
+	//cusor* _cursor;
 
 public:
 	Player();

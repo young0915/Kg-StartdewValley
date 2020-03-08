@@ -42,15 +42,15 @@ HRESULT Player::init()
 	_energy._energy->setGauge(_energy.energy, _energy._maxenergy);
 
 	//다른 클래스 불러오기
-	_cursor = new cusor;
-	_cursor->init();
+	//_cursor = new cusor;
+	//_cursor->init();
 
 	return S_OK;
 }
 
 void Player::release()
 {
-	_cursor->release();
+	//_cursor->release();
 	_hp._hpbar->release();
 	_energy._energy->release();
 }
@@ -60,7 +60,7 @@ void Player::update()
 
 	playerkeycontrol();
 	playermove();
-	_cursor->update();
+//	_cursor->update();
 	playerenergybar();																					//플레이어 hp 바
 }
 //플레이어 키를 모아둔 곳		
@@ -518,7 +518,7 @@ void Player::render(HDC hdc)
 	_player._playerimg->frameRender(hdc, _player.x, _player.y);							//몸통 얼굴
 	_player._playerarmimg->frameRender(hdc, _player.x, _player.y);						//팔
 	//_player._playercloth->frameRender(hdc, _player.x + 8, _player.y + 29);
-	_cursor->render();																										//커서
+	//_cursor->render();																										//커서
 	_hp._hpbar->render();																								//에너지바
 	_energy._energy->render();																							//혈액
 
