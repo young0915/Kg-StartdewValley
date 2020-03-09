@@ -1,5 +1,6 @@
 #pragma once
 #include"image.h"
+#include "tileNode.h"
 //백버퍼 이미지를 스태틱으로 변경
 
 //static image* _backBuffer = IMAGEMANAGER->addImage("backbuffer", WINSIZEX, WINSIZEY);

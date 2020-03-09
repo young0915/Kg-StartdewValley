@@ -2,13 +2,13 @@
 #include"gameNode.h"
 #include "introscene.h"
 #include "Myland.h"
+#include "MineScene.h"
 #include "maptool.h"
 
 
 class mainGame :  public gameNode
 {
 private:
-	//maptool* _maptool;
 
 public:
 	mainGame();

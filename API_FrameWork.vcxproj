@@ -164,6 +164,7 @@
     <ClInclude Include="loading.h" />
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="maptool.h" />
+    <ClInclude Include="MineScene.h" />
     <ClInclude Include="Myland.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="progressBar.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="mainGame+img.cpp" />
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="maptool.cpp" />
+    <ClCompile Include="MineScene.cpp" />
     <ClCompile Include="Myland.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />

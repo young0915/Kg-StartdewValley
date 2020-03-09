@@ -21,7 +21,7 @@ void mainGame::maingameimg()
 
 
 	//¸ÊÅø ÀÌ¹ÌÁö
-	IMAGEMANAGER->addFrameImage("¸ÊÅø¹Ù´Ú", "images/¸ÊÅø/maptool_tile.bmp", 600, 1300, 12, 26, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¸ÊÅø¹Ù´Ú", "images/¸ÊÅø/maptool_tile.bmp", 600, 1550, 12, 31, true, RGB(255, 0, 255));
 
 
 

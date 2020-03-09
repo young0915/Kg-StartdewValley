@@ -22,7 +22,7 @@ HRESULT maptool::init()
 	for (int i = 0; i < 36; i++)
 	{
 		_springfloor[i] = new image;
-		_springfloor[i]->init("images/¸ÊÅø/maptool_tile.bmp", 600, 1300, 12, 26, true, RGB(255, 0, 255));
+		_springfloor[i]->init("images/¸ÊÅø/maptool_tile.bmp", 600, 1550, 12, 31, true, RGB(255, 0, 255));
 	}
 
 	_mousePoint.x = CAMERA->getCameraXY().x + m_ptMouse.x;
@@ -119,7 +119,7 @@ void maptool::render()
 		{
 			Rectangle(CAMERA->getCameraDC(), rc[i].left, rc[i].top, rc[i].right, rc[i].bottom);
 
-			if (page < 9)
+			if (page < 13)
 			{
 				_springfloor[i]->frameRender(CAMERA->getCameraDC(), rc[i].left, rc[i].top);										//»ùÇÃ ¹èÄ¡
 			}
@@ -210,7 +210,7 @@ void maptool::drage()
 //¼¼ÀÌºê
 void maptool::save()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (PtInRect(&_samplebutton[4].rc, _mousePoint))
 		{
@@ -246,7 +246,7 @@ void maptool::save()
 void maptool::load()
 {
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		if (PtInRect(&_samplebutton[3].rc, _mousePoint))
 		{
@@ -499,7 +499,7 @@ void maptool::sampleRc()
 		{
 			//³ª¹«Ç® ¹ç 
 		//	if (page >= 0 && page < 4)
-			if (page < 9)
+			if (page < 13)
 			{
 				rc[i] = RectMakeCenter(582 + i * 55, 120, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());						//Å¸ÀÏ Ã¹ÁÙÄ­		
 				rc[i + 6] = RectMakeCenter(582 + i * 55, 175, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());				//Å¸ÀÏ µÎ¹øÂ° ÁÙÄ­
@@ -658,27 +658,63 @@ void maptool::setpageSample()
 			}
 			else if (i >= 24 && i <= 35)
 			{
-_springfloor[i]->setFrameX(i - 24);
-_springfloor[i]->setFrameY(23);
+				_springfloor[i]->setFrameX(i - 24);
+				_springfloor[i]->setFrameY(23);
 			}
 		}
 		else if (page == 8)
 		{
-		if (i < 12)
-		{
-			_springfloor[i]->setFrameX(i);
-			_springfloor[i]->setFrameY(24);
+			if (i < 12)
+			{
+				_springfloor[i]->setFrameX(i);
+				_springfloor[i]->setFrameY(24);
+			}
+			else if (i >= 12 && i <= 23)
+			{
+				_springfloor[i]->setFrameX(i - 12);
+				_springfloor[i]->setFrameY(25);
+			}
+			else if (i >= 24 && i <= 35)
+			{
+				_springfloor[i]->setFrameX(i - 24);
+				_springfloor[i]->setFrameY(26);
+			}
 		}
-		else if (i >= 12 && i <= 23)
+		else if (page == 9)
 		{
-			_springfloor[i]->setFrameX(i - 12);
-			_springfloor[i]->setFrameY(25);
+			if (i < 12)
+			{
+				_springfloor[i]->setFrameX(i);
+				_springfloor[i]->setFrameY(27);
+			}
+			else if (i >= 12 && i <= 23)
+			{
+				_springfloor[i]->setFrameX(i - 12);
+				_springfloor[i]->setFrameY(28);
+			}
+			else if (i >= 24 && i <= 35)
+			{
+				_springfloor[i]->setFrameX(i - 24);
+				_springfloor[i]->setFrameY(29);
+			}
 		}
-		else if (i >= 24 && i <= 35)
+		else if (page == 10)
 		{
-			_springfloor[i]->setFrameX(i - 24);
-			_springfloor[i]->setFrameY(26);
-		}
+			if (i < 13)
+			{
+				_springfloor[i]->setFrameX(i);
+				_springfloor[i]->setFrameY(30);
+			}
+			else if (i >= 12 && i <= 23)
+			{
+				_springfloor[i]->setFrameX(i - 12);
+				_springfloor[i]->setFrameY(31);
+			}
+			else if (i >= 24 && i <= 35)
+			{
+				_springfloor[i]->setFrameX(i - 24);
+				_springfloor[i]->setFrameY(32);
+			}
 		}
 	}
 }
@@ -730,7 +766,7 @@ void maptool::setsampleMap()
 	{
 		if (PtInRect(&rc[i], _mousePoint))
 		{
-			if (page < 13)
+			if (page < 12)
 			{
 				_currentTile.x = _springfloor[i]->getFrameX();
 				_currentTile.y = _springfloor[i]->getFrameY();
@@ -770,6 +806,16 @@ OBJECT maptool::objSelect(int frameX, int frameY)
 		for (int j = 6; j < 23; j++)
 		{
 			if (frameX == i && frameY == j)return OBJ_WALL;
+		}
+	}
+	for (int i = 0; i < 12; i++)
+	{
+		for (int j = 23; j < 32; j++)
+		{
+			if (frameX == i && frameY == j)
+			{
+				return OBJ_WALL;
+			}
 		}
 	}
 	return OBJ_NONE;

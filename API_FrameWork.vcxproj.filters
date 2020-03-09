@@ -88,6 +88,9 @@
     <Filter Include="커서시스템">
       <UniqueIdentifier>{1412093a-737e-491c-b001-eda129f93f57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="씬\동굴">
+      <UniqueIdentifier>{c2b3b5a6-0423-4926-85d6-a63f14a11a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -186,6 +189,9 @@
     <ClInclude Include="cusor.h">
       <Filter>커서시스템</Filter>
     </ClInclude>
+    <ClInclude Include="MineScene.h">
+      <Filter>씬\동굴</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -271,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="cusor.cpp">
       <Filter>커서시스템</Filter>
+    </ClCompile>
+    <ClCompile Include="MineScene.cpp">
+      <Filter>씬\동굴</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

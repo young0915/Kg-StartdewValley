@@ -18,10 +18,8 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("인트로", new introscene);
 	SCENEMANAGER->addScene("맵툴들", new maptool);
 	SCENEMANAGER->addScene("내땅", new Myland);
+	SCENEMANAGER->addScene("동굴", new MineScene);
 	SCENEMANAGER->changeScene("인트로");
-
-	
-	//PLAYER->init();
 
 	return S_OK;
 }
@@ -30,8 +28,6 @@ void mainGame::release()
 {
 	gameNode::release();
 	SCENEMANAGER->release();
-	//PLAYER->release();
-	//_maptool->release();
 }
 
 void mainGame::update()
@@ -39,8 +35,6 @@ void mainGame::update()
 	gameNode::update();
 	SCENEMANAGER->update();
 	ANIMATIONMANAGER->update();
-	//PLAYER->update();
-//	_maptool->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -52,8 +46,7 @@ void mainGame::render(/*HDC hdc*/)
 
 	//====================================================
 	SCENEMANAGER->render();
-	//_maptool->render();
-	//PLAYER->render(getMemDC());
+
 	TIMEMANAGER->render(CAMERA->getCameraDC());
 	//=====================================================
 	//백버퍼의 내용을 HDC에 그린다.(지우지마!!)
