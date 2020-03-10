@@ -7,11 +7,11 @@
 void Player::playerimg()
 {
 	//플레이어 정보
-	IMAGEMANAGER->addFrameImage("플레이어몸통", "images/player/player_body.bmp", 96 * 2.5, 512 * 2.5, 6, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("팔", "images/player/player_arm.bmp", 96 * 2.5, 640 * 2.5, 6, 20, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("플레이어몸통", "images/player/player_body.bmp", 97 * 2.8, 509 * 2.8, 6, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("팔", "images/player/player_arm.bmp", 97 * 2.8, 640 * 2.8, 6, 20, true, RGB(255, 0, 255));
 
 	//플레이어 옷 
-	IMAGEMANAGER->addFrameImage("바지", "images/cloth/바지.bmp", 96 * 2.5, 510 * 2.5, 6, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("바지", "images/cloth/바지.bmp", 97 * 2.8, 510 * 2.8, 6, 16, true, RGB(255, 0, 255));
 
 
 	//플레이어 프로그래스바 

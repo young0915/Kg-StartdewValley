@@ -82,7 +82,7 @@ void tileManager::Mylandload(int x, int y)
 	for (int i = 0; i < TILEX*TILEY; i++)
 	{
 		_OBJattribute[i].strengh = 0;
-		if (_map[i].obj == OBJ_PLAYER && _map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
+		if ( _map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
 		{
 			_map[i].obj = OBJ_NONE;
 		}

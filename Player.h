@@ -40,6 +40,11 @@ enum PLAYERARMMOVE
 	PLAYER_ARM_RIGHT,
 	PLAYER_ARM_LEFT,
 	PLAYER_ARM_UP,
+	//플레이어 검
+	PlAYER_SWORD_DOWN,
+	PlAYER_SWORD_RIGHT,
+	PlAYER_SWORD_LEFT,
+	PlAYER_SWORD_UP,
 	//플레이어 (팔) 곡괭이, 괭이, 도끼, 낫, 검 
 	PLAYER_ARM_PWR_DOWN,
 	PLAYER_ARM_PWR_RIGHT,
@@ -92,8 +97,9 @@ struct tagplayer
 	image* _playerimg;												//플레이어 이미지(몸:얼굴, 발)
 	image* _playerarmimg;										//플레이어 이미지(팔)
 	image* _playercloth;											//플레이어 옷
-	image* _pantsimg;													//플레이어 바지
+	image* _pantsimg;												//플레이어 바지
 	RECT _playerect;													// 움직임 rect 
+	RECT rc;																	//콜리전 함수(발로 이용한 것)
 	float x;																	//플레이어 x 
 	float y;																	//플레이어 y
 	float speed;															//플레이어 스피드
