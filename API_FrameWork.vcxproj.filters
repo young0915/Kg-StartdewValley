@@ -192,6 +192,9 @@
     <ClInclude Include="MineScene.h">
       <Filter>씬\동굴</Filter>
     </ClInclude>
+    <ClInclude Include="tileManager.h">
+      <Filter>씬</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -280,6 +283,9 @@
     </ClCompile>
     <ClCompile Include="MineScene.cpp">
       <Filter>씬\동굴</Filter>
+    </ClCompile>
+    <ClCompile Include="tileManager.cpp">
+      <Filter>씬</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

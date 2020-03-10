@@ -27,14 +27,6 @@ enum SELECT
 	OBJDRAW,																								//오브젝트(Ex 지형위쪽에 배치. 움직이거나 부서지거나 하는 녀석 등등 변화를 줄 수 있는 물체)
 	ERASER																									//삭제
 };
-//
-//enum MAPKIND
-//{
-//	/*S, M*/
-//	SPRING_FLOOR,
-//	MOUNTAIN,
-//	MINE
-//};
 
 class maptool :public gameNode
 {
@@ -50,7 +42,6 @@ private:
 	RECT rc[36];
 	image* _springfloor[36];																						//페이지에 뿌려줄 이미지-> 봄 바닥
 
-
 	int page;																														//페이지
 
 	SELECT _select;																											//선택
@@ -65,7 +56,6 @@ private:
 	//클래스
 	sampleimage* _sampleimg;
 
-	//	MAPKIND mapKind;
 public:
 	maptool();
 	~maptool();

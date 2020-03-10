@@ -25,20 +25,20 @@ HRESULT Player::init()
 	_player._playermove = PLAYER_STOP;
 	_player._playerarmmove = PLAYER_ARM_STOP;
 	_player._playerpants = PLAYER_PANTS_DOWN;
-	
+
 	//프로그래스바
 	// _hp._maxhp = 100;
 	//hp
 	_hp._maxhp = 100;
 	_hp.Hp = 0;
 	_hp._hpbar = new progressBar;
-	_hp._hpbar->init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_energy_bar.bmp",  850, 550, 30, 180);
+	_hp._hpbar->init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_energy_bar.bmp", 850, 550, 30, 180);
 	_hp._hpbar->setGauge(_hp.Hp, _hp._maxhp);
 	//energy
 	_energy._maxenergy = 100;
 	_energy.energy = 0;
 	_energy._energy = new energybar;
-	_energy._energy-> init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_bar (1).bmp", 810, 550, 30, 180);
+	_energy._energy->init("images/UI/progressbar/Ui_hp_Hp_bar_front.bmp", "images/UI/progressbar/Ui_hp_bar (1).bmp", 810, 550, 30, 180);
 	_energy._energy->setGauge(_energy.energy, _energy._maxenergy);
 
 	//다른 클래스 불러오기
@@ -60,7 +60,7 @@ void Player::update()
 
 	playerkeycontrol();
 	playermove();
-//	_cursor->update();
+	//	_cursor->update();
 	playerenergybar();																					//플레이어 hp 바
 }
 //플레이어 키를 모아둔 곳		
@@ -73,7 +73,7 @@ void Player::playerkeycontrol()
 		_player._playerarmmove = PLAYER_ARM_DOWN;
 		_player._playerpants = PLAYER_PANTS_DOWN;
 		_player.y += 2.f;
-		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 < TILESIZEY)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 2));
+		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 < TILESIZEY)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 3));
 	}
 	if (KEYMANAGER->isStayKeyDown('D') && _player.x < CAMERA->getCameraCenter().x + WINSIZEX + (TILESIZEX - 100))
 	{
@@ -81,7 +81,7 @@ void Player::playerkeycontrol()
 		_player._playerarmmove = PLAYER_ARM_RIGHT;
 		_player._playerpants = PLAYER_PANTS_RIGHT;
 		_player.x += 2.f;
-		if (CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX) CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 2, CAMERA->getCameraCenter().y));
+		if (CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX) CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 3, CAMERA->getCameraCenter().y));
 	}
 	if (KEYMANAGER->isStayKeyDown('A') && _player.x > 0)
 	{
@@ -89,7 +89,7 @@ void Player::playerkeycontrol()
 		_player._playerarmmove = PLAYER_ARM_LEFT;
 		_player._playerpants = PLAYER_PANTS_LEFT;
 		_player.x -= 2.f;
-		if (CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)	CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 2, CAMERA->getCameraCenter().y));
+		if (CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)	CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 3, CAMERA->getCameraCenter().y));
 	}
 	if (KEYMANAGER->isStayKeyDown('W') && _player.y > 0)
 	{
@@ -97,7 +97,7 @@ void Player::playerkeycontrol()
 		_player._playerarmmove = PLAYER_ARM_UP;
 		_player._playerpants = PLAYER_PANTS_UP;
 		_player.y -= 2.f;
-		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 2));
+		if (CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 3));
 	}
 	//멈춘 상태
 	if (KEYMANAGER->isOnceKeyUp('S') || KEYMANAGER->isOnceKeyUp('W') || KEYMANAGER->isOnceKeyUp('A') || KEYMANAGER->isOnceKeyUp('D'))
@@ -110,6 +110,13 @@ void Player::playerkeycontrol()
 	}
 	//'E' 인벤토리 열기 창
 	//마우스 왼쪽은 사람한테 말걸기 오른쪽은 먹기 싸우기, 심기, 씬이동
+}
+
+void Player::setPlayerPosition(RECT rc)
+{
+	_player._playerect = rc;
+	_player.x = _player._playerect.left + (_player._playerect.right - _player._playerect.left) / 2;
+	_player.y = _player._playerect.top + (_player._playerect.bottom - _player._playerect.top) / 2;
 }
 
 //플레이어 움직임(body&arm)
@@ -491,7 +498,7 @@ void Player::clothmove()
 void Player::playerenergybar()
 {
 	_hp._hpbar->setGauge(_hp.Hp, _hp._maxhp);
-	_energy._energy->setGauge(_energy.energy,_energy._maxenergy);
+	_energy._energy->setGauge(_energy.energy, _energy._maxenergy);
 }
 //hp데미지
 void Player::energydamage(float _energy)
@@ -500,7 +507,6 @@ void Player::energydamage(float _energy)
 	/*
 	최대가 max 95까지 95일 경우 플레이어는 쓰러진다.
 	*/
-
 }
 //에너지 데미지
 void Player::hpdamage(float _hp)
@@ -517,6 +523,7 @@ void Player::render(HDC hdc)
 	_player._pantsimg->frameRender(hdc, _player.x, _player.y);						//캐릭터 바지 
 	_player._playerimg->frameRender(hdc, _player.x, _player.y);							//몸통 얼굴
 	_player._playerarmimg->frameRender(hdc, _player.x, _player.y);						//팔
+
 	//_player._playercloth->frameRender(hdc, _player.x + 8, _player.y + 29);
 	//_cursor->render();																										//커서
 	_hp._hpbar->render();																								//에너지바

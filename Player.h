@@ -1,9 +1,17 @@
 #pragma once
 #include "singletonBase.h"
-#include "tileNode.h"
+#include "tileManager.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
-//#include "closet.h"
+
+enum PLAYERDIRECTION
+{
+	PLAYER_D_DOWN,
+	PLAYER_D_RIGHT,
+	PLAYER_D_LEFT,
+	PLAYER_D_UP
+};
+
 //플레이어 움직임
 enum PLAYERMOVE
 {
@@ -77,6 +85,7 @@ enum PLAYERPANTS
 // 플레이어 정보 
 struct tagplayer
 {
+	PLAYERDIRECTION _playerdirection;				//플레이어 방향
 	PLAYERMOVE _playermove;								//플레이어 움직임
 	PLAYERARMMOVE _playerarmmove;				//플레이어 팔 움직임 
 	PLAYERPANTS _playerpants;								//플레이어 바지 움직임
@@ -87,8 +96,11 @@ struct tagplayer
 	RECT _playerect;													// 움직임 rect 
 	float x;																	//플레이어 x 
 	float y;																	//플레이어 y
+	float speed;															//플레이어 스피드
+	int _frameY;
 	int _placount;														//플레이어 이미지매니저에 사용할 카운트
 	int _plaindex;														//플레이어 이미지 매니저에 사용할 인덱스
+	int tileX, tileY;														//탱크를 밟고 있는 번호
 };
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
@@ -106,6 +118,9 @@ struct  tagenergybar
 };
 class Player : public singletonBase<Player>
 {
+private:
+	tileManager* _tilem;
+
 private:
 	tagplayer _player;												//플레이어 정보
 	tagplayerHpbar _hp;											//hp
@@ -125,7 +140,10 @@ public:
 
 	void playerkeycontrol();											//플레이어 키를 모아둔 곳													
 	void playermove();													//플레이어 움직임(body)
+	void playercollisionmove();									//플레이어 충돌 무브
+	void setPlayerPosition(RECT rc);							//플레이어 포지션 
 	void clothmove();														//플레이어 바지
+
 	void playerenergybar();											//에너지바
 
 	void playerimg();														//플레이어 이미지 모음 함수 
@@ -134,5 +152,6 @@ public:
 
 	float getplayerX() { return _player.x; }
 	float getplayerY() { return _player.y; }
-};
 
+	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }
+};
