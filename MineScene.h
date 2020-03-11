@@ -1,10 +1,10 @@
 #pragma once
 #include "gameNode.h"
+#include "tileManager.h"
 class MineScene :public gameNode
 {
 private:
-	tagTile _tile[TILEX* TILEY];
-	tagTile _temp[TILEX* TILEY];
+	tileManager* _tilm;
 public:
 	MineScene();
 	~MineScene();
@@ -13,8 +13,5 @@ public:
 	void release();
 	void update();
 	void render();
-
-	void mapinit();
-	void maprender();
 };
 

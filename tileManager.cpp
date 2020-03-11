@@ -40,6 +40,7 @@ void tileManager::render()
 		{
 			if (KEYMANAGER->isToggleKey(VK_TAB))
 			{
+				
 				SetBkMode(getMemDC(), TRANSPARENT);
 				//색상
 				SetTextColor(getMemDC(), RGB(255, 0, 0));
@@ -47,6 +48,8 @@ void tileManager::render()
 				char str[128];
 				sprintf_s(str, "%d", i);
 				TextOut(getMemDC(), _map[i].rc.left, _map[i].rc.top, str, strlen(str));
+				//Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);
+
 			}
 		}
 	}
@@ -118,18 +121,25 @@ void tileManager::Mineload()
 		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
 		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
 	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
-	ReadFile(file, _pos, sizeof(int) * 2, &read, NULL);
-	for (int i = 0; i < TILEX*TILEY; i++)
-	{
-		_OBJattribute[i].strengh = 0;
-		if (_map[i].obj == OBJ_PLAYER)
-		{
-			_map[i].obj = OBJ_NONE;
-		}
-	}
+	_pos[0] = 615;
+	_pos[1] = 40;
+/*
+
+	_pos[0] = 415;
+	_pos[1] = 30;
+*/
+	//for (int i = 0; i < TILEX*TILEY; i++)
+	//{
+	//	_OBJattribute[i].strengh = 0;
+	//	if (_map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
+	//	{
+	//		_map[i].obj = OBJ_NONE;
+	//	}
+
+	//}
 	//속성 정의
 	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
-	for (int i = 0; i < TILEX* TILESIZEY; i++)
+	for (int i = 0; i < TILEX*TILEY; i++)
 	{
 		if (_map[i].terrain == TERAIN_WALL)
 		{
@@ -140,13 +150,7 @@ void tileManager::Mineload()
 			_attribute[i] |= ATTR_UNMOVABLE;
 			_OBJattribute[i].strengh = 1;
 		}
-		if (_map[i].obj == OBJ_FARM)					//농장 
-		{
-			_attribute[i] |= ATTR_UNMOVABLE;
-			_OBJattribute[i].strengh = 3;
-		}
 	}
-
 }
 
 void tileManager::attackBlock(int tileN)

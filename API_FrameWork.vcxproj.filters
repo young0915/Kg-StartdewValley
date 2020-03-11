@@ -91,6 +91,9 @@
     <Filter Include="씬\동굴">
       <UniqueIdentifier>{c2b3b5a6-0423-4926-85d6-a63f14a11a4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="에이스타">
+      <UniqueIdentifier>{418a8004-707b-4037-9fd7-2362f7452d96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="tileManager.h">
       <Filter>씬</Filter>
     </ClInclude>
+    <ClInclude Include="astar.h">
+      <Filter>에이스타</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -286,6 +292,9 @@
     </ClCompile>
     <ClCompile Include="tileManager.cpp">
       <Filter>씬</Filter>
+    </ClCompile>
+    <ClCompile Include="astar.cpp">
+      <Filter>에이스타</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

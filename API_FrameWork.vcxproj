@@ -150,6 +150,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
+    <ClInclude Include="astar.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="cusor.h" />
@@ -185,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
+    <ClCompile Include="astar.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="cusor.cpp" />
     <ClCompile Include="effect.cpp" />

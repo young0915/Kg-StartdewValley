@@ -11,72 +11,52 @@ MineScene::~MineScene()
 
 HRESULT MineScene::init()
 {
-	
-	mapinit();
+	_tilm = new tileManager;
+	_tilm->Mineload();
+	//플레이어
+	PLAYER->init();
+	PLAYER->setMapMemoryAdress(_tilm);
+	PLAYER->setPlayerPosition(_tilm->getMap()[_tilm->getPosFirst()].rc);
 	return S_OK;
 }
 
 void MineScene::release()
 {
+	SAFE_DELETE(_tilm);
+	PLAYER->release();
 }
 
 void MineScene::update()
 {
-}
+	PLAYER->update();
+	_tilm->update();
 
-// 동굴 이미지 정보
-void MineScene::mapinit()
-{
-	for (int i = 0; i < TILEY; i++)
+	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)
 	{
-		for (int j = 0; j < TILEX; j++)
-		{
-			SetRect(&_tile[i * TILEX + j].rc, j * TILESIZE, i * TILESIZE, j* TILESIZE + TILESIZE, i * TILESIZE + TILESIZE);
-		}
-	}
-	for (int i = 0; i < TILEX*TILEY; i++)
-	{
-		_tile[i].x = _tile[i].rc.left + (_tile[i].rc.right - _tile[i].rc.left) / 2;
-		_tile[i].y = _tile[i].rc.top + (_tile[i].rc.bottom - _tile[i].rc.top) / 2;
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 50, CAMERA->getCameraCenter().y));
 	}
 
-	HANDLE file;
-	DWORD read;
-
-	file = CreateFile(
-		"save/동굴/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
-		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
-		0,																						//파일 공유 모드 입력
-		NULL,																				//파일 또는 장치를 열때 보안 및 특성
-		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
-		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
-		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
-	ReadFile(file, _temp, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
-	CloseHandle(file);
-	for (int i = 0; i < TILEX*TILEY; i++)
+	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX)
 	{
-		_tile[i] = _temp[i];
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 50, CAMERA->getCameraCenter().y));
 	}
-}
-//동굴 랜더
-void MineScene::maprender()
-{
-	for (int i = 0; i < TILEX*TILEY; i++)
-	{
-		if (CAMERAX - 100 < _tile[i].x && _tile[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _tile[i].y && _tile[i].y < CAMERAY + WINSIZEY + 100)
-		{
-			if (_tile[i].terrain == TERAIN_NONE) Rectangle(getMemDC(), _tile[i].rc.top, _tile[i].rc.left, _tile[i].rc.right, _tile[i].rc.bottom);
-			else IMAGEMANAGER->frameRender("맵툴바닥", getMemDC(), _tile[i].rc.top, _tile[i].rc.left, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
 
-			if (_tile[i].obj == OBJ_NONE) continue;
-			IMAGEMANAGER->frameRender("맵툴바닥", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].objFrameX, _tile[i].objFrameY);
-		}
+	if (KEYMANAGER->isStayKeyDown(VK_UP) && CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)
+	{
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 50));
 	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && CAMERA->getCameraCenter().y + WINSIZEY / 2 < TILESIZEY)
+	{
+		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 50));
+	}
+
 
 }
 
 
 void MineScene::render()
 {
-	maprender();
+	_tilm->render();
+	PLAYER->render(CAMERA->getCameraDC());
 }
