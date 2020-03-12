@@ -17,6 +17,7 @@ HRESULT MineScene::init()
 	PLAYER->init();
 	PLAYER->setMapMemoryAdress(_tilm);
 	PLAYER->setPlayerPosition(_tilm->getMap()[_tilm->getPosFirst()].rc);
+	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));
 	return S_OK;
 }
 
@@ -58,5 +59,5 @@ void MineScene::update()
 void MineScene::render()
 {
 	_tilm->render();
-	PLAYER->render(CAMERA->getCameraDC());
+	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
 }

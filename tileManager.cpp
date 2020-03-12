@@ -31,8 +31,8 @@ void tileManager::render()
 		if (_map[i].terrain == TERAIN_NONE) continue;
 		else  IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].terrainFrameX, _map[i].terrainFrameY);
 		//¿ÀºêÁ§Æ®
-		if (_map[i].obj == OBJ_NONE) continue;
-		IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].objFrameX, _map[i].objFrameY);
+		if (_map[i].obj == OBJ_NONE)continue;// Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);			//continue;
+		else IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].objFrameX, _map[i].objFrameY);
 	}
 	for (int i = 0; i < TILEX * TILEY; i++)
 	{
@@ -49,7 +49,6 @@ void tileManager::render()
 				sprintf_s(str, "%d", i);
 				TextOut(getMemDC(), _map[i].rc.left, _map[i].rc.top, str, strlen(str));
 				//Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);
-
 			}
 		}
 	}
@@ -123,20 +122,7 @@ void tileManager::Mineload()
 	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
 	_pos[0] = 615;
 	_pos[1] = 40;
-/*
 
-	_pos[0] = 415;
-	_pos[1] = 30;
-*/
-	//for (int i = 0; i < TILEX*TILEY; i++)
-	//{
-	//	_OBJattribute[i].strengh = 0;
-	//	if (_map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
-	//	{
-	//		_map[i].obj = OBJ_NONE;
-	//	}
-
-	//}
 	//¼Ó¼º Á¤ÀÇ
 	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
 	for (int i = 0; i < TILEX*TILEY; i++)

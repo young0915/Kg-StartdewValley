@@ -150,7 +150,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
-    <ClInclude Include="astar.h" />
+    <ClInclude Include="aStarScene.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="cusor.h" />
@@ -166,10 +166,12 @@
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="maptool.h" />
     <ClInclude Include="MineScene.h" />
+    <ClInclude Include="Monstermanager.h" />
     <ClInclude Include="Myland.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="rat.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="singletonBase.h" />
@@ -180,13 +182,14 @@
     <ClInclude Include="tileNode.h" />
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
+    <ClInclude Include="tool.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
-    <ClCompile Include="astar.cpp" />
+    <ClCompile Include="aStarScene.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="cusor.cpp" />
     <ClCompile Include="effect.cpp" />
@@ -202,15 +205,18 @@
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="maptool.cpp" />
     <ClCompile Include="MineScene.cpp" />
+    <ClCompile Include="Monstermanager.cpp" />
     <ClCompile Include="Myland.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="progressBar.cpp" />
+    <ClCompile Include="rat.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="tileManager.cpp" />
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
+    <ClCompile Include="tool.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />

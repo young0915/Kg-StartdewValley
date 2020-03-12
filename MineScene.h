@@ -5,6 +5,7 @@ class MineScene :public gameNode
 {
 private:
 	tileManager* _tilm;
+
 public:
 	MineScene();
 	~MineScene();

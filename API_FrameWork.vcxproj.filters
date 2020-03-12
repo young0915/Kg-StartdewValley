@@ -94,6 +94,12 @@
     <Filter Include="에이스타">
       <UniqueIdentifier>{418a8004-707b-4037-9fd7-2362f7452d96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mainGame\플레이어\기구">
+      <UniqueIdentifier>{7c2af62c-ddd1-4370-ad7f-f6050e3a474c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="몬스터">
+      <UniqueIdentifier>{ece483f6-ca4c-4ed5-aaa6-7ec3ea01041c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -198,8 +204,17 @@
     <ClInclude Include="tileManager.h">
       <Filter>씬</Filter>
     </ClInclude>
-    <ClInclude Include="astar.h">
+    <ClInclude Include="aStarScene.h">
       <Filter>에이스타</Filter>
+    </ClInclude>
+    <ClInclude Include="tool.h">
+      <Filter>mainGame\플레이어\기구</Filter>
+    </ClInclude>
+    <ClInclude Include="Monstermanager.h">
+      <Filter>몬스터</Filter>
+    </ClInclude>
+    <ClInclude Include="rat.h">
+      <Filter>몬스터</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,8 +308,17 @@
     <ClCompile Include="tileManager.cpp">
       <Filter>씬</Filter>
     </ClCompile>
-    <ClCompile Include="astar.cpp">
+    <ClCompile Include="aStarScene.cpp">
       <Filter>에이스타</Filter>
+    </ClCompile>
+    <ClCompile Include="tool.cpp">
+      <Filter>mainGame\플레이어\기구</Filter>
+    </ClCompile>
+    <ClCompile Include="Monstermanager.cpp">
+      <Filter>몬스터</Filter>
+    </ClCompile>
+    <ClCompile Include="rat.cpp">
+      <Filter>몬스터</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

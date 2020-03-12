@@ -74,8 +74,9 @@ void maptool::render()
 				IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
 
 			}
+			if (_tile[i].obj == OBJ_WALL)continue;
 
-			if (_tile[i].obj == OBJ_NONE)continue;
+		//	if (_tile[i].obj == OBJ_NONE)continue;
 			IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].objFrameX, _tile[i].objFrameY);
 		}
 	}
@@ -803,9 +804,12 @@ OBJECT maptool::objSelect(int frameX, int frameY)
 	}
 	for (int i = 0; i < 12; i++)
 	{
-		for (int j = 6; j < 23; j++)
+		for (int j = 7; j <23; j++)
 		{
-			if (frameX == i && frameY == j)return OBJ_WALL;
+			if (frameX == i && frameY == j)
+			{
+				return OBJ_WALL;
+			}
 		}
 	}
 	for (int i = 0; i < 12; i++)

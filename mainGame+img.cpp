@@ -43,6 +43,11 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addFrameImage("맵툴버튼", "images/introscene/map.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("나가기버튼", "images/introscene/나가기.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
 
+	//몬스터 
+	IMAGEMANAGER->addFrameImage("게", "images/몬스터/꽃게.bmp", 64, 144, 4, 6, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("박쥐", "images/몬스터/박쥐.bmp", 64, 80, 4, 5, true, RGB(255, 0, 255));
+
+
 	//커서 
 	IMAGEMANAGER->addFrameImage("커서", "images/cursor/Ui_cursor.bmp", 128 * 2, 16 * 2, 8, 1, true, RGB(255, 0, 255));
 }

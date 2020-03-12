@@ -3,6 +3,7 @@
 #include "tileManager.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
+#include "tool.h"
 
 enum PLAYERDIRECTION
 {
@@ -106,7 +107,10 @@ struct tagplayer
 	int _frameY;
 	int _placount;														//플레이어 이미지매니저에 사용할 카운트
 	int _plaindex;														//플레이어 이미지 매니저에 사용할 인덱스
-	int tileX, tileY;														//탱크를 밟고 있는 번호
+	int tileX, tileY;														//플레이어가 밟고 있는 번호
+
+	bool _istool;														//무기 사용 유무
+
 };
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
@@ -122,15 +126,20 @@ struct  tagenergybar
 	int energy;
 	int _maxenergy;
 };
+
 class Player : public singletonBase<Player>
 {
 private:
 	tileManager* _tilem;
+	tool* _axe;
 
 private:
 	tagplayer _player;												//플레이어 정보
 	tagplayerHpbar _hp;											//hp
-	tagenergybar _energy;									//플레이어 에너지
+	tagenergybar _energy;										//플레이어 에너지
+
+	RECT rcCollision;
+
 
 	//커서
 	//cusor* _cursor;
@@ -148,7 +157,10 @@ public:
 	void playermove();													//플레이어 움직임(body)
 	void playercollisionmove();									//플레이어 충돌 무브
 	void setPlayerPosition(RECT rc);							//플레이어 포지션 
-	void clothmove();														//플레이어 바지
+	//void axmove(TOOLDIR ax);										//도끼 움직임
+	//void clothmove();														//플레이어 바지
+	void attackmove();													//농기구,싸우는 거
+	void toolmove(TOOLDIR _dir);
 
 	void playerenergybar();											//에너지바
 
@@ -156,8 +168,11 @@ public:
 	void energydamage(float _energy);						//energy데미지
 	void hpdamage(float _hp);										//hp데미지
 
+
 	float getplayerX() { return _player.x; }
 	float getplayerY() { return _player.y; }
+
+	RECT getPlayerrect() { return _player.rc;}
 
 	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }
 };
