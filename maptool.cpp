@@ -67,16 +67,10 @@ void maptool::render()
 	{
 		if (CAMERAX - 100 < _tile[i].x && _tile[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _tile[i].y&& _tile[i].y < CAMERAY + WINSIZEY + 100)
 		{
+			if (_tile[i].terrain == TERAIN_NONE) continue;/*Rectangle(getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].rc.right, _tile[i].rc.bottom);*/
+			else	IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
 
-			if (_tile[i].terrain == TERAIN_NONE) Rectangle(getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].rc.right, _tile[i].rc.bottom);
-			else
-			{
-				IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].terrainFrameX, _tile[i].terrainFrameY);
-
-			}
-			if (_tile[i].obj == OBJ_WALL)continue;
-
-		//	if (_tile[i].obj == OBJ_NONE)continue;
+			if (_tile[i].obj == OBJ_NONE)continue;
 			IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _tile[i].rc.left, _tile[i].rc.top, _tile[i].objFrameX, _tile[i].objFrameY);
 		}
 	}
@@ -124,14 +118,7 @@ void maptool::render()
 			{
 				_springfloor[i]->frameRender(CAMERA->getCameraDC(), rc[i].left, rc[i].top);										//»ùÇÃ ¹èÄ¡
 			}
-			//if (page >= 4 && page <= 8)
-			//{
-			//	_springfloor[i]->frameRender(CAMERA->getCameraDC(), rc[i].left, rc[i].top);										//»ùÇÃ ¹èÄ¡
-			//}
-			//if (page >= 9 && page <= 12)
-			//{
-			//	_springfloor[i]->frameRender(CAMERA->getCameraDC(), rc[i].left, rc[i].top);
-			//}
+		
 		}
 
 	}//_sampleboard._isopen true

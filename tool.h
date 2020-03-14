@@ -47,6 +47,10 @@ public:
 	void render();
 	void update();
 
-	void toolmove(TOOLDIR _dir);
+	void axemove(int x, int y, TOOLDIR _dir);
+	void pickmove(int x, int y, TOOLDIR _dir);
+	void homiemove(int x, int y, TOOLDIR _dir);
+	void watercanmove(int x, int y, TOOLDIR _dir);
+
 };
 

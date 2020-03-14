@@ -4,7 +4,7 @@
 aStarScene::aStarScene() :_rat(new rat)
 {
 	//박쥐 위치 잡아주기
-	_rat->init(200,200);
+	_rat->init(WINSIZEX/2,WINSIZEY/2);
 }
 
 aStarScene::~aStarScene()
@@ -30,13 +30,12 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	m_endX = 0;
 	m_endY = 0;
 
-	//a star 타일 셋팅
-	for (int i = 0; i < TILEX; i++)
+	for (int i = 0; i < TILEY; i++)
 	{
-		for (int j = 0; j < TILEY; j++)
+		for(int j = 0; j<TILEX; j++) 
 		{
-			tile[j + (i - 1)*TILEX].rc = _tile[(i * 50) + (j + 4)].rc;
-			tile[j + (i - 1)*TILEX].obj = _tile[(i * 50) + (j + 4)].obj;
+			ZeroMemory(&tile[j + i * TILEX], sizeof(tagastarTile));
+			//tile[i]
 		}
 	}
 
@@ -81,6 +80,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 	}
 
 	playerTileSet(PLAYER->getPlayerrect());
+	
 	if (!isFind && !noPath && startAstar)
 	{
 		Astar();
@@ -205,13 +205,14 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 
 void aStarScene::render()
 {
-	for (int i = 0; i < astarTileSize; i++)
+	//장애물
+	/*for (int i = 0; i < astarTileSize; i++)
 	{
 		if (tile[i].block == true)
 		{
-			//BeginSolidColor(getMemDC(), &brush, RGB(0, 0, 255));
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 255, 255);
 		}
-	}
+	}*/
 
 	for (int i = 0; i < astarTileSize; i++)
 	{
@@ -227,34 +228,42 @@ void aStarScene::render()
 			}
 			else if (i == startTile)
 			{
-
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 0, 255, 0);
 			}
 			else if (i == endTile)
 			{
-
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 0, 0);
 			}
 			else if (tile[i].showState == STATE_OPEN)
 			{
-
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 128, 255, 255);
 			}
 			else if (tile[i].showState == STATE_CLOSE)
 			{
-
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 128, 255, 0);
 			}
 			else if (tile[i].showState == STATE_PATH)
 			{
-
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 128, 128);
 			}
 		}
 	}
 	_rat->render();
-
 	for (int i = 0; i < astarTileX*astarTileY; i++)
 	{
-		
-	}
-	RectangleMakeCenter(getMemDC(), tile[startTile].rc.left + 20, tile[startTile].rc.top + 20, 40, 40);
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+			{
+				SetBkMode(getMemDC(), TRANSPARENT);
+				//색상
+				SetTextColor(getMemDC(), RGB(255, 0, 0));
 
+				char str[128];
+				sprintf_s(str, "%d", i);
+				TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
+		}
+	}
+RectangleMakeCenter(getMemDC(), tile[startTile].rc.left + 20, tile[startTile].rc.top + 20, 40, 40);
+colorRectangle(getMemDC(), tile[endTile].rc.left + 20, tile[endTile].rc.top + 20, 40, 40,0, 0, 160);
 }
 
 void aStarScene::Astar()
@@ -424,7 +433,7 @@ void aStarScene::enemylistSet()
 	}
 }
 
-void aStarScene::playerTileSet(/*RECT _playeRect*/)
+void aStarScene::playerTileSet(RECT rc)
 {
 	if (startAstar)
 	{
@@ -472,7 +481,7 @@ void aStarScene::rectMoveDirect()
 		{
 			i -= directionCount;
 
-			//벡터의 크기가 0이 아닐때
+			// 벡터의 크기가 0이 아닐때			
 			if (i == 0)
 			{
 				isFind = false;
@@ -484,15 +493,104 @@ void aStarScene::rectMoveDirect()
 			}
 			if (i > 0)
 			{
-				if (pathList.at(i) - pathList.at(i - 1) == 13)
+				if (pathList.at(i) - pathList.at(i - 1) == 13) // 좌상단( x : -80 , y : -80)
 				{
 					enemyDirection = DIRECTION_LEFTUP;
+
 					moveX = tile[pathList.at(i - 1)].rc.left;
 					toGoX = tile[pathList.at(i)].rc.left;
 
 					moveY = tile[pathList.at(i - 1)].rc.bottom;
 					toGoY = tile[pathList.at(i)].rc.bottom;
-					
+
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == 12) // 중상단 (y : - 80)
+				{
+					enemyDirection = DIRECTION_UP;
+					moveY = tile[pathList.at(i - 1)].rc.top;
+					toGoY = tile[pathList.at(i)].rc.top;
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == 11) // 우상단 (x : 80 , y : -80)
+				{
+					enemyDirection = DIRECTION_RIGHTUP;
+					moveX = tile[pathList.at(i - 1)].rc.right;
+					toGoX = tile[pathList.at(i)].rc.right;
+
+					moveY = tile[pathList.at(i - 1)].rc.top;
+					toGoY = tile[pathList.at(i)].rc.top;
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == 1)  // 왼쪽 ( x: -80)
+				{
+					enemyDirection = DIRECTION_LEFT;
+					moveX = tile[pathList.at(i - 1)].rc.left;
+					toGoX = tile[pathList.at(i)].rc.left;
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == -1)  // 오른쪽 ( x: 80)
+				{
+					enemyDirection = DIRECTION_RIGHT;
+					moveX = tile[pathList.at(i - 1)].rc.right;
+					toGoX = tile[pathList.at(i)].rc.right;
+
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == -11) // 좌하단 (x: -80 , y: 80)
+				{
+					enemyDirection = DIRECTION_LEFTDOWN;
+					moveX = tile[pathList.at(i - 1)].rc.left;
+					toGoX = tile[pathList.at(i)].rc.left;
+
+					moveY = tile[pathList.at(i - 1)].rc.bottom;
+					toGoY = tile[pathList.at(i)].rc.bottom;
+
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == -12) // 중하단
+				{
+					enemyDirection = DIRECTION_DOWN;
+					moveY = tile[pathList.at(i - 1)].rc.bottom;
+					toGoY = tile[pathList.at(i)].rc.bottom;
+					enemyMoveOk = true;
+					directionCount += 1;
+					pastTime = 0;
+					break;
+				}
+
+				if (pathList.at(i) - pathList.at(i - 1) == -13) // 우하단 ( x: 80 , y : 80)
+				{
+					enemyDirection = DIRECTION_RIGHTDOWN;
+					moveX = tile[pathList.at(i - 1)].rc.right;
+					toGoX = tile[pathList.at(i)].rc.right;
+
+					moveY = tile[pathList.at(i - 1)].rc.bottom;
+					toGoY = tile[pathList.at(i)].rc.bottom;
 					enemyMoveOk = true;
 					directionCount += 1;
 					pastTime = 0;

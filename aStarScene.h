@@ -107,12 +107,12 @@ public :
 	HRESULT init(tagTile _tile[]);
 	//HRESULT mineinit();
 	void release();
-	void update(tagTile _tile[] /*,RECT _playerRect*/);
+	void update(tagTile _tile[]/* ,RECT _playerRect*/);
 	void  render();
 
 	void Astar();
 	void enemylistSet();
-	void playerTileSet(/*RECT _playeRect*/);
+	void playerTileSet(RECT rc);
 	void blockType();
 
 	void rectMoveDirect();

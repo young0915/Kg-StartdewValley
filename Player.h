@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include "tileManager.h"
+#include "inventory.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
 #include "tool.h"
@@ -131,6 +132,7 @@ class Player : public singletonBase<Player>
 {
 private:
 	tileManager* _tilem;
+	inventory* _inven;												//인벤
 	tool* _axe;
 
 private:
@@ -160,8 +162,6 @@ public:
 	//void axmove(TOOLDIR ax);										//도끼 움직임
 	//void clothmove();														//플레이어 바지
 	void attackmove();													//농기구,싸우는 거
-	void toolmove(TOOLDIR _dir);
-
 	void playerenergybar();											//에너지바
 
 	void playerimg();														//플레이어 이미지 모음 함수 

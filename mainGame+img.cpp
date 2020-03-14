@@ -50,6 +50,9 @@ void mainGame::maingameimg()
 
 	//커서 
 	IMAGEMANAGER->addFrameImage("커서", "images/cursor/Ui_cursor.bmp", 128 * 2, 16 * 2, 8, 1, true, RGB(255, 0, 255));
+	 
+	//인벤토리
+	IMAGEMANAGER->addImage("인벤토리", "images/인벤토리/Ui_mainInventory.bmp", 655, 90, true, RGB(255, 0, 255));
 }
 
 

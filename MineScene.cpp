@@ -18,6 +18,8 @@ HRESULT MineScene::init()
 	PLAYER->setMapMemoryAdress(_tilm);
 	PLAYER->setPlayerPosition(_tilm->getMap()[_tilm->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));
+	_astar = new aStarScene;
+	_astar->init(_tilm->getMap());
 	return S_OK;
 }
 
@@ -25,34 +27,14 @@ void MineScene::release()
 {
 	SAFE_DELETE(_tilm);
 	PLAYER->release();
+	//_astar->release();
 }
 
 void MineScene::update()
 {
 	PLAYER->update();
 	_tilm->update();
-
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && CAMERA->getCameraCenter().x - WINSIZEX / 2 > 0)
-	{
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x - 50, CAMERA->getCameraCenter().y));
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && CAMERA->getCameraCenter().x + WINSIZEX / 2 < TILESIZEX)
-	{
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x + 50, CAMERA->getCameraCenter().y));
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_UP) && CAMERA->getCameraCenter().y - WINSIZEY / 2 > 0)
-	{
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y - 50));
-	}
-
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && CAMERA->getCameraCenter().y + WINSIZEY / 2 < TILESIZEY)
-	{
-		CAMERA->setCameraCenter(PointMake(CAMERA->getCameraCenter().x, CAMERA->getCameraCenter().y + 50));
-	}
-
-
+//	_astar->update(_tilm->getMap());
 }
 
 
@@ -60,4 +42,5 @@ void MineScene::render()
 {
 	_tilm->render();
 	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
+	_astar->render();
 }

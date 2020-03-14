@@ -55,14 +55,8 @@
     <Filter Include="mainGame\플레이어\인벤토리">
       <UniqueIdentifier>{86e3dccb-359c-4502-b48e-02482a0a0e08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="광산">
-      <UniqueIdentifier>{79f5130a-aad6-45b7-be36-44d8bf4510c4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="씬">
       <UniqueIdentifier>{9ee32368-8c7e-43ab-bf9d-5442a4c8facf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="광산\몬스터">
-      <UniqueIdentifier>{4d2664bf-67d8-4f0d-bb7e-220f7a3d5ce8}</UniqueIdentifier>
     </Filter>
     <Filter Include="농장">
       <UniqueIdentifier>{d19420c9-20f8-49e9-ae66-4f9688405578}</UniqueIdentifier>

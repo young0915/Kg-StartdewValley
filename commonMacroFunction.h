@@ -50,3 +50,22 @@ inline void EllipseMakeCenter(HDC hdc, int x, int y, int width, int height)
 	Ellipse(hdc, x - (width / 2), y - (height / 2), x + (width / 2), y + (height / 2));
 
 }
+inline void colorRectangle(HDC hdc, int x, int y, int width, int height, int _r, int _g, int _b)
+{
+	HBRUSH brush;
+	RECT rc = { x,y,x + width,y + height };
+
+	brush = CreateSolidBrush(RGB(_r, _g, _b));
+	FillRect(hdc, &rc, brush);
+	DeleteObject(brush);
+}
+inline void AlphaRectangle(HDC hdc, int left, int top, int right, int bottom)
+{
+	HBRUSH myBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, myBrush);
+
+	Rectangle(hdc, left, top, right, bottom);
+
+	SelectObject(hdc, oldBrush);
+	DeleteObject(myBrush);
+}
