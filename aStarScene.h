@@ -5,7 +5,7 @@
 
 #define BIGNUM	5000	// 초기값(F)
 #define astarTileX 20
-#define astarTileY 600
+#define astarTileY 12
 #define astarTileSize astarTileX * astarTileY
 
 //선택
@@ -76,6 +76,7 @@ private:
 	int m_endY;
 	//=========몬스터 시작점 끝점========
 
+	bool firstPos = false;
 	bool isFind;
 	bool noPath;
 	bool startAstar;
@@ -105,9 +106,8 @@ public :
 	~aStarScene();
 
 	HRESULT init(tagTile _tile[]);
-	//HRESULT mineinit();
 	void release();
-	void update(tagTile _tile[]/* ,RECT _playerRect*/);
+	void update(tagTile _tile[]);
 	void  render();
 
 	void Astar();

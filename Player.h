@@ -173,6 +173,7 @@ public:
 	float getplayerY() { return _player.y; }
 
 	RECT getPlayerrect() { return _player.rc;}
+	
 
 	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }
 };

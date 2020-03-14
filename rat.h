@@ -36,7 +36,7 @@ public :
 	rat();
 	~rat();
 
-	HRESULT init(int x, int y);
+	HRESULT init();
 	void release();
 	void update();
 	void render();

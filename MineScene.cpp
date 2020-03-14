@@ -27,20 +27,20 @@ void MineScene::release()
 {
 	SAFE_DELETE(_tilm);
 	PLAYER->release();
-	//_astar->release();
+	_astar->release();
 }
 
 void MineScene::update()
 {
 	PLAYER->update();
 	_tilm->update();
-//	_astar->update(_tilm->getMap());
+	_astar->update(_tilm->getMap());
 }
 
 
 void MineScene::render()
 {
 	_tilm->render();
-	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
 	_astar->render();
+	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
 }

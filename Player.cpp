@@ -774,9 +774,6 @@ void Player::playercollisionmove()
 {
 	int tileIndex[2];//검사용 타일
 
-	//rcCollision = _player.rc;//가상의 렉트
-	//rcCollision = RectMakeCenter(_player.x, _player.y, 50, 50);
-	
 
 	//타임매니저를 이용한 방법
 	float elpasedTime = TIMEMANAGER->getElapsedTime();

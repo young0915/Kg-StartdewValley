@@ -4,7 +4,7 @@
 aStarScene::aStarScene() :_rat(new rat)
 {
 	//박쥐 위치 잡아주기
-	_rat->init(WINSIZEX/2,WINSIZEY/2);
+	_rat->init();
 }
 
 aStarScene::~aStarScene()
@@ -30,14 +30,24 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	m_endX = 0;
 	m_endY = 0;
 
-	for (int i = 0; i < TILEY; i++)
+	for (int i = 0; i < astarTileY; i++)
 	{
-		for(int j = 0; j<TILEX; j++) 
+		for (int j = 0; j < astarTileX; j++)
 		{
-			ZeroMemory(&tile[j + i * TILEX], sizeof(tagastarTile));
-			//tile[i]
+			//	ZeroMemory(&tile[j + i * astarTileX], sizeof(tagTile));
+			tile[j + i * astarTileX].rc = _tile[(i + 12) * 50 + (j + 4)].rc;
 		}
 	}
+
+	//for (int i = 0; i < 10000; i++)
+	//{
+	//	for (int j = 0; j < 10000; j++)
+	//	{	
+	//		_tile[i]
+	//	}
+	//}
+
+
 
 	startTile = endTile = -1;
 
@@ -48,31 +58,33 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	startAstar = false;
 
 
-	temp.left = _tile[47].rc.left;
-	temp.top = _tile[47].rc.top;
-	temp.right = _tile[47].rc.right;
-	temp.bottom = _tile[47].rc.bottom;
+	temp.left = tile[40].rc.left;
+	temp.top = tile[40].rc.top;
+	temp.right = tile[40].rc.right;
+	temp.bottom = tile[40].rc.bottom;
 
 	_rat->setrat(temp);
 	_enemyrect = _rat->getratInfo().rc;
 
 	blockType();
-	
+
 
 	return S_OK;
 }
 
 void aStarScene::release()
 {
+
 }
 
 void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 {
 	RECT temp1;
+	RECT playerRc = PLAYER->getPlayerrect();
 	deltaTime = TIMEMANAGER->getElapsedTime();
 	pastTime += deltaTime;
 
-	if (IntersectRect(&temp1, &PLAYER->getPlayerrect(),&_rat->_rat.collison1))
+	if (IntersectRect(&temp1, &playerRc, &_rat->_rat.collison1) &&!firstPos)
 	{
 		currentselect = SELECT_START;
 		startAstar = true;
@@ -80,8 +92,8 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 	}
 
 	playerTileSet(PLAYER->getPlayerrect());
-	
-	if (!isFind && !noPath && startAstar)
+
+	if (!isFind && startAstar)
 	{
 		Astar();
 	}
@@ -105,7 +117,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			}
 			else enemyMoveOk = false;
 			break;
-		case DIRECTION_RIGHT :
+		case DIRECTION_RIGHT:
 			if (moveX + 4 > toGoX)
 			{
 				toGoX = _enemyrect.right;
@@ -118,7 +130,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			else  enemyMoveOk = false;
 			break;
 
-		case DIRECTION_UP :
+		case DIRECTION_UP:
 			if (moveY + 4 < toGoY)
 			{
 				toGoY = _enemyrect.top;
@@ -142,7 +154,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			}
 			else enemyMoveOk = false;
 			break;
-		case DIRECTION_LEFTUP :
+		case DIRECTION_LEFTUP:
 			if (moveX + 4 < toGoX && moveY + 4 < toGoY)
 			{
 				toGoX = _enemyrect.left;
@@ -155,7 +167,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			}
 			else enemyMoveOk = false;
 			break;
-		case DIRECTION_RIGHTDOWN :
+		case DIRECTION_RIGHTDOWN:
 			if (moveX + 4 > toGoX && moveY + 4 > toGoY)
 			{
 				toGoX = _enemyrect.right;
@@ -181,7 +193,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			}
 			else enemyMoveOk = false;
 			break;
-		case DIRECTION_RIGHTUP :
+		case DIRECTION_RIGHTUP:
 			if (moveX + 4 > toGoX && moveY + 4 < toGoY)
 			{
 				toGoX = _enemyrect.left;
@@ -199,21 +211,11 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 			break;
 		}
 	}
-	
 
 }
 
 void aStarScene::render()
 {
-	//장애물
-	/*for (int i = 0; i < astarTileSize; i++)
-	{
-		if (tile[i].block == true)
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 255, 255);
-		}
-	}*/
-
 	for (int i = 0; i < astarTileSize; i++)
 	{
 		if (tile[i].block)
@@ -226,53 +228,58 @@ void aStarScene::render()
 			{
 				endTile = -1;
 			}
-			else if (i == startTile)
-			{
-				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 0, 255, 0);
-			}
-			else if (i == endTile)
-			{
-				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 0, 0);
-			}
-			else if (tile[i].showState == STATE_OPEN)
-			{
-				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 128, 255, 255);
-			}
-			else if (tile[i].showState == STATE_CLOSE)
-			{
-				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 128, 255, 0);
-			}
-			else if (tile[i].showState == STATE_PATH)
-			{
-				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 100, 100, 255, 128, 128);
-			}
+		}
+		else if (i == startTile)
+		{
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 0, 255, 0);
+		}
+		else if (i == endTile)
+		{
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 255, 0, 0);
+		}
+		else if (tile[i].showState == STATE_OPEN)
+		{
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 255);
+		}
+		else if (tile[i].showState == STATE_CLOSE)
+		{
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 0);
+		}
+		else if (tile[i].showState == STATE_PATH)
+		{
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 255, 128, 128);
+		}
+	//	RectangleMake(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50);
+	}
+
+	for (int i = 0; i < astarTileSize; i++)
+	{
+		if (KEYMANAGER->isToggleKey('0'))
+		{
+			SetBkMode(getMemDC(), TRANSPARENT);
+			//색상
+			SetTextColor(getMemDC(), RGB(255, 0, 0));
+
+			char str[128];
+			sprintf_s(str, "%d", i);
+			TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
 		}
 	}
 	_rat->render();
-	for (int i = 0; i < astarTileX*astarTileY; i++)
-	{
-			if (KEYMANAGER->isToggleKey(VK_TAB))
-			{
-				SetBkMode(getMemDC(), TRANSPARENT);
-				//색상
-				SetTextColor(getMemDC(), RGB(255, 0, 0));
+	colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
+	colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);
+	colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
 
-				char str[128];
-				sprintf_s(str, "%d", i);
-				TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
-		}
-	}
-RectangleMakeCenter(getMemDC(), tile[startTile].rc.left + 20, tile[startTile].rc.top + 20, 40, 40);
-colorRectangle(getMemDC(), tile[endTile].rc.left + 20, tile[endTile].rc.top + 20, 40, 40,0, 0, 160);
+
 }
 
 void aStarScene::Astar()
 {
-	int endX = endTile % astarTileX; 
-	int endY = endTile / astarTileX;
+	int endX = endTile % astarTileX;
+	int endY = endTile / astarTileY;
 
-	int currentX = currentTile % astarTileX;
-	int currentY = currentTile / astarTileX;
+    int currentX = currentTile % astarTileX;
+	int currentY = currentTile / astarTileY - 1;
 
 	// left , right , up , down , leftup , rightdown , leftdown , rightup
 	int dx[] = { -1, 1, 0,0,-1,1,-1,1 };
@@ -296,7 +303,7 @@ void aStarScene::Astar()
 				bool isClose = false;
 				for (int j = 0; j < closelist.size(); j++)
 				{
-					if (closelist[i] == y * astarTileX + x)
+					if (closelist[j] == y * astarTileX + x)
 					{
 						isClose = true;
 						break;
@@ -330,7 +337,7 @@ void aStarScene::Astar()
 				tile[y * astarTileX + x].f = tile[y * astarTileX + x].g + tile[y * astarTileX + x].h;
 				// 오픈리스트에 있으면 g 비용 비교 후 처리
 				isOpen = false;
-				for (int i = 0; i < openlist.size(); i++)
+				//for (int i = 0; i < openlist.size(); i++)
 					for (int i = 0; i < openlist.size(); i++)
 					{
 						if (openlist[i] == y * astarTileX + x)
@@ -345,21 +352,22 @@ void aStarScene::Astar()
 							}
 						}
 					}
-						// 없으면 그냥 넣고 부모 설정
-							//끝점이  다른 곳으로 가는 곳
-						if (!isOpen)
-						{
-							openlist.push_back(y * TILEX + x);
-							tile[y * TILEX + x].node = currentTile;
-						}
-						// find
-						if (y * TILEX + x == endTile)
-						{
-							isFind = true;
-						}
-					}
+				// 없으면 그냥 넣고 부모 설정
+					//끝점이  다른 곳으로 가는 곳
+				if (!isOpen)
+				{
+					openlist.push_back(y * astarTileX + x);
+					tile[y * astarTileX + x].node = currentTile;
+				}
+				// find
+				if (y * astarTileX + x == endTile)
+				{
+					isFind = true;
+				}
 			}
 		}
+	}
+
 	// 선택 지점 열린목록에서 빼기
 	for (iter = openlist.begin(); iter != openlist.end(); ++iter)
 	{
@@ -384,7 +392,7 @@ void aStarScene::Astar()
 		currentTile = *openlist.begin();
 		for (iter = openlist.begin(); iter != openlist.end(); ++iter)
 		{
-			if (min > tile[(*iter)].h)
+			if (min >= tile[(*iter)].h)
 			{
 				min = tile[(*iter)].h;
 				currentTile = *iter;
@@ -409,7 +417,7 @@ void aStarScene::Astar()
 		tempTile = tile[tempTile].node;
 		tile[tempTile].showState = STATE_PATH;
 		pathList.push_back(tile[tempTile].node);																			//계속 갱신하기 위해서
-
+		firstPos = true;
 	}
 
 
@@ -419,8 +427,8 @@ void aStarScene::enemylistSet()
 {
 	if (startAstar)
 	{
-		m_startX = (_rat->_rat.collison1.left / 80) - 2;
-		m_startY = abs(_rat->_rat.collison1.top / 80) - 1;
+		m_startX = (_enemyrect.left / 50) - 4;
+		m_startY = abs(_enemyrect.top / 50) - 12;
 
 		startTile = m_startY * astarTileX + m_startX;
 		currentTile = startTile;
@@ -429,16 +437,19 @@ void aStarScene::enemylistSet()
 		{
 			openlist.push_back(currentTile);
 			exTile = currentTile;
+			firstPos = true;
 		}
 	}
 }
 
 void aStarScene::playerTileSet(RECT rc)
 {
+	RECT playerRc = PLAYER->getPlayerrect();
+
 	if (startAstar)
 	{
-		m_endX = (PLAYER->getPlayerrect().left / 100) - 2;
-		m_endY = (PLAYER->getPlayerrect().left / 100) - 1;
+		m_endX = (playerRc.left / 50) - 4;
+		m_endY = ((playerRc.top + 25) / 50) - 11;
 
 		endTile = m_endY * astarTileX + m_endX;
 	}
@@ -450,10 +461,9 @@ void aStarScene::blockType()
 	{
 		if (tile[i].obj = OBJ_WALL)
 		{
-			tile[i].block = true;
+			tile[i].block = false;
 		}
 	}
-
 }
 
 void aStarScene::rectMoveDirect()
