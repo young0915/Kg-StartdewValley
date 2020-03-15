@@ -34,20 +34,9 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	{
 		for (int j = 0; j < astarTileX; j++)
 		{
-			//	ZeroMemory(&tile[j + i * astarTileX], sizeof(tagTile));
 			tile[j + i * astarTileX].rc = _tile[(i + 12) * 50 + (j + 4)].rc;
 		}
 	}
-
-	//for (int i = 0; i < 10000; i++)
-	//{
-	//	for (int j = 0; j < 10000; j++)
-	//	{	
-	//		_tile[i]
-	//	}
-	//}
-
-
 
 	startTile = endTile = -1;
 
@@ -58,10 +47,10 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	startAstar = false;
 
 
-	temp.left = tile[40].rc.left;
-	temp.top = tile[40].rc.top;
-	temp.right = tile[40].rc.right;
-	temp.bottom = tile[40].rc.bottom;
+	temp.left = tile[20].rc.left;
+	temp.top = tile[20].rc.top;
+	temp.right = tile[20].rc.right;
+	temp.bottom = tile[20].rc.bottom;
 
 	_rat->setrat(temp);
 	_enemyrect = _rat->getratInfo().rc;
@@ -241,15 +230,14 @@ void aStarScene::render()
 		{
 			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 255);
 		}
-		else if (tile[i].showState == STATE_CLOSE)
+		else if (tile[i].showState == STATE_CLOSE)		//초록줄
 		{
 			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 0);
 		}
-		else if (tile[i].showState == STATE_PATH)
+		else if (tile[i].showState == STATE_PATH)			//찾는줄
 		{
 			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 255, 128, 128);
 		}
-	//	RectangleMake(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50);
 	}
 
 	for (int i = 0; i < astarTileSize; i++)
@@ -269,8 +257,6 @@ void aStarScene::render()
 	colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
 	colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);
 	colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
-
-
 }
 
 void aStarScene::Astar()
@@ -411,14 +397,14 @@ void aStarScene::Astar()
 	}
 	// 길 찾기 성공시 각 타일에 길찾기 상태 저장
 	int tempTile = endTile;
-	while (tile[tempTile].node != startTile
-		&& isFind)
+	while (tile[tempTile].node != startTile&& isFind)
 	{
 		tempTile = tile[tempTile].node;
 		tile[tempTile].showState = STATE_PATH;
 		pathList.push_back(tile[tempTile].node);																			//계속 갱신하기 위해서
 		firstPos = true;
 	}
+
 
 
 }
@@ -435,7 +421,7 @@ void aStarScene::enemylistSet()
 
 		if (currentTile != exTile)
 		{
-			openlist.push_back(currentTile);
+			openlist.push_back(currentTile);	
 			exTile = currentTile;
 			firstPos = true;
 		}
@@ -471,7 +457,7 @@ void aStarScene::rectMoveDirect()
 	int max;
 	RECT temp = _rat->getratInfo().rc;
 
-	if (pathList.size() >= 1)
+	if (pathList.size() >= 1)																//시작점에서 끝점 길이
 		max = pathList.size() - 1;
 	else max = 0;
 
@@ -503,7 +489,7 @@ void aStarScene::rectMoveDirect()
 			}
 			if (i > 0)
 			{
-				if (pathList.at(i) - pathList.at(i - 1) == 13) // 좌상단( x : -80 , y : -80)
+				if (pathList.at(i) - pathList.at(i - 1) == 21) // 좌상단( x : -50 , y : -50)
 				{
 					enemyDirection = DIRECTION_LEFTUP;
 
@@ -519,7 +505,7 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == 12) // 중상단 (y : - 80)
+				if (pathList.at(i) - pathList.at(i - 1) == 20) // 중상단 (y : - 50)
 				{
 					enemyDirection = DIRECTION_UP;
 					moveY = tile[pathList.at(i - 1)].rc.top;
@@ -530,7 +516,7 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == 11) // 우상단 (x : 80 , y : -80)
+				if (pathList.at(i) - pathList.at(i - 1) == 19) // 우상단 (x : 50 , y : -50)
 				{
 					enemyDirection = DIRECTION_RIGHTUP;
 					moveX = tile[pathList.at(i - 1)].rc.right;
@@ -544,10 +530,10 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == 1)  // 왼쪽 ( x: -80)
+				if (pathList.at(i) - pathList.at(i - 1) == 1)  // 왼쪽 ( x: -50)
 				{
 					enemyDirection = DIRECTION_LEFT;
-					moveX = tile[pathList.at(i - 1)].rc.left;
+					moveX = tile[pathList.at(i-1)].rc.left;
 					toGoX = tile[pathList.at(i)].rc.left;
 					enemyMoveOk = true;
 					directionCount += 1;
@@ -555,19 +541,18 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == -1)  // 오른쪽 ( x: 80)
+				if (pathList.at(i) - pathList.at(i - 1) == -1)  // 오른쪽 ( x: 50)
 				{
 					enemyDirection = DIRECTION_RIGHT;
-					moveX = tile[pathList.at(i - 1)].rc.right;
+					moveX = tile[pathList.at(i-1)].rc.right;
 					toGoX = tile[pathList.at(i)].rc.right;
-
 					enemyMoveOk = true;
 					directionCount += 1;
 					pastTime = 0;
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == -11) // 좌하단 (x: -80 , y: 80)
+				if (pathList.at(i) - pathList.at(i - 1) == -19) // 좌하단 (x: -50 , y: 50)
 				{
 					enemyDirection = DIRECTION_LEFTDOWN;
 					moveX = tile[pathList.at(i - 1)].rc.left;
@@ -582,7 +567,7 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == -12) // 중하단
+				if (pathList.at(i) - pathList.at(i - 1) == -20) // 중하단
 				{
 					enemyDirection = DIRECTION_DOWN;
 					moveY = tile[pathList.at(i - 1)].rc.bottom;
@@ -593,7 +578,7 @@ void aStarScene::rectMoveDirect()
 					break;
 				}
 
-				if (pathList.at(i) - pathList.at(i - 1) == -13) // 우하단 ( x: 80 , y : 80)
+				if (pathList.at(i) - pathList.at(i - 1) == -21) // 우하단 ( x: 50 , y :50)
 				{
 					enemyDirection = DIRECTION_RIGHTDOWN;
 					moveX = tile[pathList.at(i - 1)].rc.right;
