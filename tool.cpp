@@ -11,11 +11,11 @@ tool::~tool()
 
 HRESULT tool::init()
 {
-	_ax._img = IMAGEMANAGER->findImage("µµ³¢");
-	_ax._tdir = T_STOP;
-	_ax.count = 0;
-	_ax.index = 0; 
-	_ax.rc = RectMakeCenter(PLAYER->getplayerX(), PLAYER->getplayerY(), _ax._img->getFrameWidth(), _ax._img->getFrameHeight());
+	//_ax._img = IMAGEMANAGER->findImage("µµ³¢");
+	//_ax._tdir = T_STOP;
+	//_ax.count = 0;
+	//_ax.index = 0; 
+  	//_ax.rc = RectMakeCenter(PLAYER->getplayerX(), PLAYER->getplayerY(), _ax._img->getFrameWidth(), _ax._img->getFrameHeight());
 	return S_OK;
 }
 
@@ -106,5 +106,5 @@ void tool::watercanmove(int x, int y, TOOLDIR _dir)
 
 void tool::render()
 {
-	_ax._img->frameRender(getMemDC(), PLAYER->getPlayerrect().left, PLAYER->getPlayerrect().top);
+//	_ax._img->frameRender(getMemDC(), PLAYER->getPlayerrect().left, PLAYER->getPlayerrect().top);
 }

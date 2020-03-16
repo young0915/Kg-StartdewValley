@@ -7,6 +7,9 @@ class MineScene :public gameNode
 private:
 	tileManager* _tilm;
 	aStarScene* _astar;
+
+	RECT myland;
+
 public:
 	MineScene();
 	~MineScene();

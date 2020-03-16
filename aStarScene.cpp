@@ -30,6 +30,7 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	m_endX = 0;
 	m_endY = 0;
 
+	//타일 셋팅
 	for (int i = 0; i < astarTileY; i++)
 	{
 		for (int j = 0; j < astarTileX; j++)
@@ -61,28 +62,25 @@ HRESULT aStarScene::init(tagTile  _tile[])
 	return S_OK;
 }
 
-void aStarScene::release()
-{
+void aStarScene::release() {}
 
-}
-
-void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
+void aStarScene::update(tagTile _tile[], RECT playerRc)
 {
 	RECT temp1;
-	RECT playerRc = PLAYER->getPlayerrect();
+	PLAYER->getPlayerrect() = playerRc;
 	deltaTime = TIMEMANAGER->getElapsedTime();
 	pastTime += deltaTime;
 
-	if (IntersectRect(&temp1, &playerRc, &_rat->_rat.collison1) &&!firstPos)
+	if (IntersectRect(&temp1, &playerRc, &_rat->_rat.collison1) && !firstPos && !startAstar)
 	{
 		currentselect = SELECT_START;
 		startAstar = true;
 		enemylistSet();
 	}
 
-	playerTileSet(PLAYER->getPlayerrect());
+	playerTileSet(playerRc);
 
-	if (!isFind && startAstar)
+	if (!isFind && startAstar && !noPath)
 	{
 		Astar();
 	}
@@ -201,6 +199,7 @@ void aStarScene::update(tagTile _tile[]/*, RECT _playerRect*/)
 		}
 	}
 
+
 }
 
 void aStarScene::render()
@@ -220,26 +219,25 @@ void aStarScene::render()
 		}
 		else if (i == startTile)
 		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 0, 255, 0);
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 0, 255, 0);
 		}
 		else if (i == endTile)
 		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 255, 0, 0);
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 0, 0);
 		}
 		else if (tile[i].showState == STATE_OPEN)
 		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 255);
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 255);
 		}
 		else if (tile[i].showState == STATE_CLOSE)		//초록줄
 		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 128, 255, 0);
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 0);
 		}
 		else if (tile[i].showState == STATE_PATH)			//찾는줄
 		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top , 50, 50, 255, 128, 128);
+			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 128, 128);
 		}
 	}
-
 	for (int i = 0; i < astarTileSize; i++)
 	{
 		if (KEYMANAGER->isToggleKey('0'))
@@ -255,17 +253,17 @@ void aStarScene::render()
 	}
 	_rat->render();
 	colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
-	colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);
+	colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);  // 플레이어
 	colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
 }
 
 void aStarScene::Astar()
 {
 	int endX = endTile % astarTileX;
-	int endY = endTile / astarTileY;
+	int endY = endTile / astarTileX;																	//  x로 구하기 때문에 astartTIleX로 나눔
 
-    int currentX = currentTile % astarTileX;
-	int currentY = currentTile / astarTileY - 1;
+	int currentX = currentTile % astarTileX;
+	int currentY = currentTile / astarTileX;
 
 	// left , right , up , down , leftup , rightdown , leftdown , rightup
 	int dx[] = { -1, 1, 0,0,-1,1,-1,1 };
@@ -323,21 +321,20 @@ void aStarScene::Astar()
 				tile[y * astarTileX + x].f = tile[y * astarTileX + x].g + tile[y * astarTileX + x].h;
 				// 오픈리스트에 있으면 g 비용 비교 후 처리
 				isOpen = false;
-				//for (int i = 0; i < openlist.size(); i++)
-					for (int i = 0; i < openlist.size(); i++)
+				for (int i = 0; i < openlist.size(); i++)
+				{
+					if (openlist[i] == y * astarTileX + x)
 					{
-						if (openlist[i] == y * astarTileX + x)
+						isOpen = true;
+						if (tile[openlist[i]].g > tile[y * astarTileX + x].g)
 						{
-							isOpen = true;
-							if (tile[openlist[i]].g > tile[y * astarTileX + x].g)
-							{
-								tile[openlist[i]].h = tile[y * astarTileX + x].h;
-								tile[openlist[i]].g = tile[y * astarTileX + x].g;
-								tile[openlist[i]].f = tile[y * astarTileX + x].f;
-								tile[openlist[i]].node = currentTile;
-							}
+							tile[openlist[i]].h = tile[y * astarTileX + x].h;
+							tile[openlist[i]].g = tile[y * astarTileX + x].g;
+							tile[openlist[i]].f = tile[y * astarTileX + x].f;
+							tile[openlist[i]].node = currentTile;
 						}
 					}
+				}
 				// 없으면 그냥 넣고 부모 설정
 					//끝점이  다른 곳으로 가는 곳
 				if (!isOpen)
@@ -391,22 +388,19 @@ void aStarScene::Astar()
 	{
 		tile[openlist[i]].showState = STATE_OPEN;
 	}
-	for (int i = 0; i < openlist.size(); i++)
+	for (int i = 0; i < closelist.size(); i++)
 	{
-		tile[openlist[i]].showState = STATE_CLOSE;
+		tile[closelist[i]].showState = STATE_CLOSE;
 	}
 	// 길 찾기 성공시 각 타일에 길찾기 상태 저장
 	int tempTile = endTile;
-	while (tile[tempTile].node != startTile&& isFind)
+	while (tile[tempTile].node != startTile && isFind)
 	{
 		tempTile = tile[tempTile].node;
 		tile[tempTile].showState = STATE_PATH;
-		pathList.push_back(tile[tempTile].node);																			//계속 갱신하기 위해서
+		pathList.push_back(tile[tempTile].node);																			//계속 갱신하기 위해서,길(데이터) 담으면 노드에 따라 길
 		firstPos = true;
 	}
-
-
-
 }
 
 void aStarScene::enemylistSet()
@@ -421,7 +415,7 @@ void aStarScene::enemylistSet()
 
 		if (currentTile != exTile)
 		{
-			openlist.push_back(currentTile);	
+			openlist.push_back(currentTile);
 			exTile = currentTile;
 			firstPos = true;
 		}
@@ -430,12 +424,11 @@ void aStarScene::enemylistSet()
 
 void aStarScene::playerTileSet(RECT rc)
 {
-	RECT playerRc = PLAYER->getPlayerrect();
-
-	if (startAstar)
+	PLAYER->getPlayerrect() = rc;
+	if (startAstar)  // path를 완료 하면 모든걸 초기화 시켜줘야함 
 	{
-		m_endX = (playerRc.left / 50) - 4;
-		m_endY = ((playerRc.top + 25) / 50) - 11;
+		m_endX = (rc.left / 50) - 4;
+		m_endY = ((rc.top + 25) / 50) - 11;
 
 		endTile = m_endY * astarTileX + m_endX;
 	}
@@ -451,7 +444,7 @@ void aStarScene::blockType()
 		}
 	}
 }
-
+// enemy 움직이는 곳
 void aStarScene::rectMoveDirect()
 {
 	int max;
@@ -464,10 +457,12 @@ void aStarScene::rectMoveDirect()
 	if (max == 0)
 	{
 		isFind = false;
+		noPath = false;
 		pathList.clear();
 		closelist.clear();
 		openlist.clear();
 		startAstar = false;
+		firstPos = false;
 		directionCount = 0;
 	}
 
@@ -485,6 +480,8 @@ void aStarScene::rectMoveDirect()
 				closelist.clear();
 				openlist.clear();
 				startAstar = false;
+				firstPos = false;
+				noPath = false;
 				directionCount = 0;
 			}
 			if (i > 0)
@@ -533,7 +530,7 @@ void aStarScene::rectMoveDirect()
 				if (pathList.at(i) - pathList.at(i - 1) == 1)  // 왼쪽 ( x: -50)
 				{
 					enemyDirection = DIRECTION_LEFT;
-					moveX = tile[pathList.at(i-1)].rc.left;
+					moveX = tile[pathList.at(i - 1)].rc.left;
 					toGoX = tile[pathList.at(i)].rc.left;
 					enemyMoveOk = true;
 					directionCount += 1;
@@ -544,7 +541,7 @@ void aStarScene::rectMoveDirect()
 				if (pathList.at(i) - pathList.at(i - 1) == -1)  // 오른쪽 ( x: 50)
 				{
 					enemyDirection = DIRECTION_RIGHT;
-					moveX = tile[pathList.at(i-1)].rc.right;
+					moveX = tile[pathList.at(i - 1)].rc.right;
 					toGoX = tile[pathList.at(i)].rc.right;
 					enemyMoveOk = true;
 					directionCount += 1;

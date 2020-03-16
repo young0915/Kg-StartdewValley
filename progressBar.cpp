@@ -36,16 +36,12 @@ void progressBar::release()
 
 void progressBar::update()
 {
-	//_rcProgress = RectMakeCenter(_x + _progressBarBack->getWidth() / 2,
-	//	_y + _progressBarBack->getHeight() / 2,
-	//	_progressBarBack->getWidth(), _progressBarBack->getHeight());
 }
 
 void progressBar::render()
 {
 	_progressBarBack->render(CAMERA->getCameraDC(), _rcProgress.left, _y, 0, 0, _progressBarBack->getWidth(), _progressBarBack->getHeight());
 	_progressBarFront->render(CAMERA->getCameraDC(), _rcProgress.left, _y + 32, 0, 0, _progressBarBack->getWidth(), _height- 32);
-//	Rectangle(CAMERA->getCameraDC(), _rcProgress.left, _rcProgress.top, _rcProgress.right, _rcProgress.bottom);
 }
 void progressBar::setGauge(float currentGauge, float maxGauge)
 {

@@ -20,6 +20,9 @@ HRESULT MineScene::init()
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));
 	_astar = new aStarScene;
 	_astar->init(_tilm->getMap());
+
+	//myland = RectMakeCenter()
+
 	return S_OK;
 }
 
@@ -34,7 +37,12 @@ void MineScene::update()
 {
 	PLAYER->update();
 	_tilm->update();
-	_astar->update(_tilm->getMap());
+	_astar->update(_tilm->getMap(), PLAYER->getPlayerrect());
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+	//	if(PtInRect())
+	}
+
 }
 
 

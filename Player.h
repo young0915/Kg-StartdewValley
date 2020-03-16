@@ -32,6 +32,11 @@ enum PLAYERMOVE
 	PLAYER_PIS_RIGHT,
 	PLAYER_PIS_LEFT,
 	PLAYER_PIS_UP,
+	//플레이어 아이이들
+	PLAYER_IDLE_DOWN,
+	PLAYER_IDLE_RIGHT,
+	PLAYER_IDLE_LEFT,
+	PLAYER_IDLE_UP,
 	PLAYER_STOP												//멈추기 위한 것
 };
 //플레이어 팔 움직임
@@ -62,6 +67,11 @@ enum PLAYERARMMOVE
 	PLAYER_ARM_WATCAN_RIGHT,
 	PLAYER_ARM_WATCAN_LEFT,
 	PLAYER_ARM_WATCAN_UP,
+	//멈추기
+	PLAYER_ARM_IDLE_DOWN,
+	PLAYER_ARM_IDLE_RIGHT,
+	PLAYER_ARM_IDLE_LEFT,
+	PLAYER_ARM_IDLE_UP,
 	PLAYER_ARM_STOP												//멈추기 위한 것
 };
 //플레이어 바지 움직임
@@ -87,7 +97,13 @@ enum PLAYERPANTS
 	PLAYER_PANTS_WATERCAN_RIGHT,
 	PLAYER_PANTS_WATERCAN_LEFT,
 	PLAYER_PANTS_WATERCAN_UP,
-	PLAYER_PANT_STOP
+	//플레이어 아이들
+	PLAYER_PANTS_IDLE_DOWN,
+	PLAYER_PANTS_IDLE_RIGHT,
+	PLAYER_PANTS_IDLE_LEFT,
+	PLAYER_PANTS_IDLE_UP,
+	PLAYER_PANT_STOP,
+	PLAYER_PANT_PWR_STOP
 };
 // 플레이어 정보 
 struct tagplayer
@@ -135,6 +151,10 @@ private:
 	inventory* _inven;												//인벤
 	tool* _axe;
 
+	//커서
+	//cusor* _cursor;
+
+
 private:
 	tagplayer _player;												//플레이어 정보
 	tagplayerHpbar _hp;											//hp
@@ -143,9 +163,8 @@ private:
 	RECT rcCollision;
 
 
-	//커서
-	//cusor* _cursor;
-
+	float time;																//TIMEMANAGER에 사용할 것 
+	bool ismove;															//농장중인가 아니면 움직이는 중인가
 public:
 	Player();
 	~Player();
@@ -168,11 +187,12 @@ public:
 	void energydamage(float _energy);						//energy데미지
 	void hpdamage(float _hp);										//hp데미지
 
-
 	float getplayerX() { return _player.x; }
 	float getplayerY() { return _player.y; }
 
 	RECT getPlayerrect() { return _player.rc;}
+
+	RECT getplayermoverect() { return _player._playerect; }
 	
 
 	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }

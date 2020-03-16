@@ -107,7 +107,7 @@ public :
 
 	HRESULT init(tagTile _tile[]);
 	void release();
-	void update(tagTile _tile[]);
+	void update(tagTile _tile[], RECT playerRc);
 	void  render();
 
 	void Astar();

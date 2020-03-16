@@ -83,8 +83,8 @@ void introscene::introbtnn()
 				//½ÃÀÛ
 				if (i == 0)
 				{
-					//SCENEMANAGER->changeScene("³»¶¥");
-					SCENEMANAGER->changeScene("µ¿±¼");
+					SCENEMANAGER->changeScene("³»¶¥");
+					//SCENEMANAGER->changeScene("µ¿±¼");
 				}
 				else if (i == 1)
 				{
