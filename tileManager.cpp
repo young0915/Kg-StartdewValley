@@ -78,8 +78,8 @@ void tileManager::Mylandload(int x, int y)
 		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
 	ReadFile(file, _map, sizeof(tagTile)* TILEX*TILEY, &read, NULL);
 
-	_pos[0] = 415;
-	_pos[1] = 30;
+	_pos[0] = 512;
+	_pos[1] = 40;
 
 	for (int i = 0; i < TILEX*TILEY; i++)
 	{
@@ -137,6 +137,35 @@ void tileManager::Mineload()
 			_OBJattribute[i].strengh = 1;
 		}
 	}
+}
+
+void tileManager::Myhouse()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/내방/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
+	_pos[0] = 215;
+	_pos[1] = 30;
+
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+	/*for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		if (_map[i].obj == OBJ_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+			_OBJattribute[i].strengh = 1;
+		}
+	}*/
 }
 
 void tileManager::attackBlock(int tileN)

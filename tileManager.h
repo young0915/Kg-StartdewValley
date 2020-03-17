@@ -22,7 +22,7 @@ public:
 
 	void Mylandload(int x, int y);
 	void Mineload();
-
+	void Myhouse();
 
 	DWORD* getAttribute() { return _attribute; }
 	tagTile* getMap() { return _map; }

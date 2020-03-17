@@ -167,6 +167,7 @@
     <ClInclude Include="maptool.h" />
     <ClInclude Include="MineScene.h" />
     <ClInclude Include="Monstermanager.h" />
+    <ClInclude Include="Myhouse.h" />
     <ClInclude Include="Myland.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="progressBar.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="maptool.cpp" />
     <ClCompile Include="MineScene.cpp" />
     <ClCompile Include="Monstermanager.cpp" />
+    <ClCompile Include="Myhouse.cpp" />
     <ClCompile Include="Myland.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />

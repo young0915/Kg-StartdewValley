@@ -4,6 +4,7 @@
 #include "Myland.h"
 #include "MineScene.h"
 #include "maptool.h"
+#include "Myhouse.h"
 
 
 class mainGame :  public gameNode

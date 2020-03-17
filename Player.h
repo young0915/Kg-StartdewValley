@@ -4,7 +4,6 @@
 #include "inventory.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
-#include "tool.h"
 
 enum PLAYERDIRECTION
 {
@@ -105,6 +104,16 @@ enum PLAYERPANTS
 	PLAYER_PANT_STOP,
 	PLAYER_PANT_PWR_STOP
 };
+
+//무기 방향
+enum TOOLDIR
+{
+	T_DOWN,
+	T_RIGHT,
+	T_LEFT,
+	T_UP,
+	T_NONE
+};
 // 플레이어 정보 
 struct tagplayer
 {
@@ -118,17 +127,30 @@ struct tagplayer
 	image* _pantsimg;												//플레이어 바지
 	RECT _playerect;													// 움직임 rect 
 	RECT rc;																	//콜리전 함수(발로 이용한 것)
-	float x;																	//플레이어 x 
-	float y;																	//플레이어 y
+	int x;																	//플레이어 x 
+	int y;																	//플레이어 y
 	float speed;															//플레이어 스피드
 	int _frameY;
 	int _placount;														//플레이어 이미지매니저에 사용할 카운트
 	int _plaindex;														//플레이어 이미지 매니저에 사용할 인덱스
+	
 	int tileX, tileY;														//플레이어가 밟고 있는 번호
 
 	bool _istool;														//무기 사용 유무
 
 };
+//무기 
+struct tagsword
+{
+	TOOLDIR _toorldir; 			//무기 방향
+	image* _toolimg;				//플레이어 이미지
+	RECT toolrc;						//RECT
+	float x, y;							//무기 x, y
+	int _toolcount;
+	int _toolindex;
+};
+
+
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
 {
@@ -149,8 +171,6 @@ class Player : public singletonBase<Player>
 private:
 	tileManager* _tilem;
 	inventory* _inven;												//인벤
-	tool* _axe;
-
 	//커서
 	//cusor* _cursor;
 
@@ -159,6 +179,7 @@ private:
 	tagplayer _player;												//플레이어 정보
 	tagplayerHpbar _hp;											//hp
 	tagenergybar _energy;										//플레이어 에너지
+	tagsword _sword;													//무기
 
 	RECT rcCollision;
 
@@ -178,11 +199,10 @@ public:
 	void playermove();													//플레이어 움직임(body)
 	void playercollisionmove();									//플레이어 충돌 무브
 	void setPlayerPosition(RECT rc);							//플레이어 포지션 
-	//void axmove(TOOLDIR ax);										//도끼 움직임
-	//void clothmove();														//플레이어 바지
+	void weapon();															//무기 사용한 곳
 	void attackmove();													//농기구,싸우는 거
 	void playerenergybar();											//에너지바
-
+	void inventorymove();												//인벤토리
 	void playerimg();														//플레이어 이미지 모음 함수 
 	void energydamage(float _energy);						//energy데미지
 	void hpdamage(float _hp);										//hp데미지

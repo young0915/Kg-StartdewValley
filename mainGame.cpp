@@ -18,7 +18,9 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("인트로", new introscene);
 	SCENEMANAGER->addScene("맵툴들", new maptool);
 	SCENEMANAGER->addScene("내땅", new Myland);
+	SCENEMANAGER->addScene("내집", new Myhouse);
 	SCENEMANAGER->addScene("동굴", new MineScene);
+
 	SCENEMANAGER->changeScene("인트로");
 
 	return S_OK;

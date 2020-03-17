@@ -6,6 +6,7 @@ class Myland : public gameNode
 private:
 	tileManager* _tilem;
 	RECT _minego;
+	RECT _myhouse;
 public:
 	Myland();
 	~Myland();

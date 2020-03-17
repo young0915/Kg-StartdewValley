@@ -21,7 +21,7 @@ void mainGame::maingameimg()
 
 
 	//맵툴 이미지
-	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 1550, 12, 31, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 2000, 12, 40, true, RGB(255, 0, 255));
 
 
 
@@ -53,6 +53,14 @@ void mainGame::maingameimg()
 	 
 	//인벤토리
 	IMAGEMANAGER->addImage("인벤토리", "images/인벤토리/Ui_mainInventory.bmp", 655, 90, true, RGB(255, 0, 255));
+
+
+	//건물
+	IMAGEMANAGER->addImage("내집", "images/맵툴/내집.bmp", 400, 400, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("지붕", "images/맵툴/지붕.bmp", 400, 140, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("우편", "images/맵툴/우편.bmp", 70, 146, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("침대", "images/맵툴/내방/housebed.bmp", 32, 49, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("침대2", "images/맵툴/내방/침대2.bmp", 32, 33, true, RGB(255, 0, 255));
 }
 
 
