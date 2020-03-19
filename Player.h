@@ -150,6 +150,15 @@ struct tagsword
 	int _toolindex;
 };
 
+struct  tagwatercan
+{
+	TOOLDIR _dir;
+	image* _img;
+	RECT _rc;
+	int _watercount;
+	int _waterindex;
+};
+
 
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
@@ -169,6 +178,7 @@ struct  tagenergybar
 class Player : public singletonBase<Player>
 {
 private:
+	//다른 클래스 모임
 	tileManager* _tilem;
 	inventory* _inven;												//인벤
 	//커서
@@ -180,9 +190,11 @@ private:
 	tagplayerHpbar _hp;											//hp
 	tagenergybar _energy;										//플레이어 에너지
 	tagsword _sword;													//무기
+	tagwatercan _can;												//물뿌리개
 
 	RECT rcCollision;
 
+	RECT _attackrc;														//공격 랙트 설정
 
 	float time;																//TIMEMANAGER에 사용할 것 
 	bool ismove;															//농장중인가 아니면 움직이는 중인가
@@ -201,6 +213,7 @@ public:
 	void setPlayerPosition(RECT rc);							//플레이어 포지션 
 	void weapon();															//무기 사용한 곳
 	void attackmove();													//농기구,싸우는 거
+	void wattecanmove();												//물뿌리개
 	void playerenergybar();											//에너지바
 	void inventorymove();												//인벤토리
 	void playerimg();														//플레이어 이미지 모음 함수 

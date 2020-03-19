@@ -40,11 +40,19 @@ HRESULT Player::init()
 	_energy._energy->setGauge(_energy.energy, _energy._maxenergy);
 
 	//농기구인가 아니면 그냥 이동인가
-	ismove = false;
+	//ismove = false;
 	_sword._toorldir = T_NONE;
 	_sword._toolimg = IMAGEMANAGER->findImage("칼");
 	_sword._toolcount = 0;
 	_sword._toolindex = 0;
+
+	//물뿌리개 
+	_can._dir = T_NONE;
+	_can._img = IMAGEMANAGER->findImage("물뿌리개");
+	_can._watercount = 0;
+	_can._waterindex = 0;
+
+	_attackrc = RectMakeCenter(_player.x, _player.y, 50, 50);
 
 	//다른 클래스 불러오기
 	//_cursor = new cusor;
@@ -52,6 +60,7 @@ HRESULT Player::init()
 
 	_inven = new inventory;
 	_inven->init();
+
 
 	return S_OK;
 }
@@ -67,6 +76,7 @@ void Player::update()
 	playermove();
 	attackmove();
 	weapon();
+	wattecanmove();
 	//	_cursor->update();
 	inventorymove();									//인벤토리
 
@@ -435,11 +445,11 @@ void Player::playermove()
 			_player._placount = 0;
 			_player._plaindex++;
 		}
-		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 3)
 		{
-			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 1)
+			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 3)
 			{
-				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
 				{
 					_player._plaindex = 0;
 				}
@@ -459,11 +469,11 @@ void Player::playermove()
 			_player._placount = 0;
 			_player._plaindex++;
 		}
-		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 3)
 		{
-			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 1)
+			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 3)
 			{
-				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
 				{
 					_player._plaindex = 0;
 				}
@@ -483,11 +493,11 @@ void Player::playermove()
 			_player._placount = 0;
 			_player._plaindex++;
 		}
-		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 3)
 		{
-			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 1)
+			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 3)
 			{
-				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
 				{
 					_player._plaindex = 0;
 				}
@@ -507,11 +517,11 @@ void Player::playermove()
 			_player._placount = 0;
 			_player._plaindex++;
 		}
-		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 1)
+		if (_player._plaindex >= _player._playerarmimg->getMaxFrameX() - 3)
 		{
-			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 1)
+			if (_player._plaindex >= _player._playerimg->getMaxFrameX() - 3)
 			{
-				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 1)
+				if (_player._plaindex >= _player._pantsimg->getMaxFrameX() - 3)
 				{
 					_player._plaindex = 0;
 				}
@@ -810,33 +820,42 @@ void Player::attackmove()
 		{
 			if (_player._playerdirection == PLAYER_D_RIGHT)
 			{
-				_player._playermove = PLAYER_PWR_RIGHT;
-				_player._playerarmmove = PLAYER_ARM_WATCAN_RIGHT;
-				_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
+				_can._dir = T_RIGHT;
+				_player._playermove = PLAYER_PIS_RIGHT;
+				_player._playerarmmove = PLAYER_ARM_PIS_RIGHT;
+				_player._playerpants = PLAYER_PANTS_PIS_RIGHT;
+				_attackrc = RectMakeCenter(_player.x + 50, _player.y + 25, 50, 50);
 			}
 			if (_player._playerdirection == PLAYER_D_LEFT)
 			{
-				_player._playermove = PLAYER_PWR_LEFT;
-				_player._playerarmmove = PLAYER_ARM_WATCAN_LEFT;
-				_player._playerpants = PLAYER_PANTS_PWR_LEFT;
+				_can._dir = T_LEFT;
+				_player._playermove = PLAYER_PIS_LEFT;
+				_player._playerarmmove = PLAYER_ARM_PIS_LEFT;
+				_player._playerpants = PLAYER_PANTS_PIS_LEFT;
+				_attackrc = RectMakeCenter(_player.x - 50, _player.y+25, 50, 50);
 			}
 			if (_player._playerdirection == PLAYER_D_DOWN)
 			{
-				_player._playermove = PLAYER_PWR_DOWN;
-				_player._playerarmmove = PLAYER_ARM_WATCAN_DOWN;
-				_player._playerpants = PLAYER_PANTS_PWR_DOWN;
+				_can._dir = T_DOWN;
+				_player._playermove = PLAYER_PIS_DOWN;
+				_player._playerarmmove = PLAYER_ARM_PIS_DOWN;
+				_player._playerpants = PLAYER_PANTS_PIS_DOWN;
+				_attackrc = RectMakeCenter(_player.x, _player.y - 50, 50, 50);
 			}
+			//PLAYER_ARM_PIS_UP
+			//PLAYER_PIS_UP
+			//PLAYER_PANTS_PIS_UP
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('1'))
 	{
+		_can._dir = T_NONE;
 		if (_player._playermove == PLAYER_PWR_RIGHT && _player._playerarmmove == PLAYER_ARM_WATCAN_RIGHT && _player._playerpants == PLAYER_PANTS_PWR_RIGHT)
 		{
 			_player._playerarmmove = PLAYER_ARM_IDLE_RIGHT;
 			_player._playermove == PLAYER_IDLE_RIGHT;
 			_player._playerpants == PLAYER_PANTS_IDLE_RIGHT;
 		}
-
 		else if (_player._playermove == PLAYER_PWR_LEFT && _player._playerarmmove == PLAYER_ARM_WATCAN_LEFT && _player._playerpants == PLAYER_PANTS_PWR_LEFT)
 		{
 			_player._playermove = PLAYER_IDLE_LEFT;
@@ -849,6 +868,7 @@ void Player::attackmove()
 			_player._playerarmmove = PLAYER_ARM_IDLE_DOWN;
 			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
 		}
+		_attackrc = RectMakeCenter(0, 0, 0, 0);
 	}
 
 	//낫
@@ -860,6 +880,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_RIGHT;
 			_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
 			_sword._toorldir = T_RIGHT;
+			_attackrc = RectMakeCenter(_player.x+50, _player.y + 25, 50, 50);
 		}
 		if (_player._playerdirection == PLAYER_D_LEFT)
 		{
@@ -867,6 +888,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_LEFT;
 			_player._playerpants = PLAYER_PANTS_PWR_LEFT;
 			_sword._toorldir = T_LEFT;
+			_attackrc = RectMakeCenter(_player.x - 50, _player.y+25, 50, 50);
 		}
 		if (_player._playerdirection == PLAYER_D_DOWN)
 		{
@@ -874,6 +896,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_DOWN;
 			_player._playerpants = PLAYER_PANTS_PWR_DOWN;
 			_sword._toorldir = T_DOWN;
+			_attackrc = RectMakeCenter(_player.x, _player.y-50, 50, 50);
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('2'))
@@ -899,9 +922,90 @@ void Player::attackmove()
 			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
 			
 		}
-	}
+		_attackrc = RectMakeCenter(0, 0, 0, 0);
+	} 
 
-}//함수의 끝
+	
+
+}
+//물뿌리개
+void Player::wattecanmove()
+{
+	switch (_can._dir)
+	{
+	case T_DOWN:
+		_can._watercount++;
+		_can._img->setFrameY(0);
+		if (_can._watercount % 5 == 0)
+		{
+			_can._watercount = 0;
+			_can._waterindex++;
+			if (_can._waterindex >= _can._img->getMaxFrameX())
+			{
+				_can._waterindex = 0;
+			}
+		}
+		_can._img->setFrameX(_can._waterindex);
+		break;
+	case T_RIGHT:
+		_can._watercount++;
+		_can._img->setFrameY(1);
+		if (_can._watercount % 5 == 0)
+		{
+			_can._watercount = 0;
+			_can._waterindex++;
+			if (_can._waterindex >= _can._img->getMaxFrameX())
+			{
+				_can._waterindex = 0;
+			}
+		}
+		_can._img->setFrameX(_can._waterindex);
+		break;
+	case T_LEFT:
+		_can._watercount++;
+		_can._img->setFrameY(2);
+		if (_can._watercount % 5 == 0)
+		{
+			_can._watercount = 0;
+			_can._waterindex++;
+			if (_can._waterindex >= _can._img->getMaxFrameX())
+			{
+				_can._waterindex = 0;
+			}
+		}
+		_can._img->setFrameX(_can._waterindex);
+		break;
+	case T_UP:
+		_can._watercount++;
+		_can._img->setFrameY(3);
+		if (_can._watercount % 5 == 0)
+		{
+			_can._watercount = 0;
+			_can._waterindex++;
+			if (_can._waterindex >= _can._img->getMaxFrameX())
+			{
+				_can._waterindex = 0;
+			}
+		}
+		_can._img->setFrameX(_can._waterindex);
+		break;
+	case T_NONE:
+		_can._watercount++;
+		_can._img->setFrameY(4);
+		if (_can._watercount % 5 == 0)
+		{
+			_can._watercount = 0;
+			_can._waterindex++;
+			if (_can._waterindex >= _can._img->getMaxFrameX())
+			{
+				_can._waterindex = 0;
+			}
+		}
+		_can._img->setFrameX(_can._waterindex);
+		break;
+	}
+}
+//함수의 끝
 
 
 void Player::playercollisionmove()
@@ -1021,14 +1125,16 @@ void Player::render(HDC hdc)
 	_player._pantsimg->frameRender(hdc, _player.rc.left, _player.rc.top);							//캐릭터 바지 
 	_player._playerimg->frameRender(hdc, _player.rc.left, _player.rc.top); 					//몸통 얼굴
 	_player._playerarmimg->frameRender(hdc, _player.rc.left, _player.rc.top);						//팔
-	_sword._toolimg->frameRender(hdc, _player.x-20, _player.y+20);
-	_hp._hpbar->render();																								//에너지바
+	_sword._toolimg->frameRender(hdc, _player.x-40, _player.y-20);								//칼
+	_can._img->frameRender(hdc, _player.rc.left-28, _player.rc.top);								//물뿌리개
+	_hp._hpbar->render();																										//에너지바
 	_energy._energy->render();																							//혈액
 
 	if (KEYMANAGER->isToggleKey('Q'))
 	{
 		Rectangle(hdc, _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 		Rectangle(hdc, rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
+		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
 	}
 	_inven->render();
 	//_cursor->render();																										//커서

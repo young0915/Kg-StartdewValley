@@ -97,6 +97,9 @@
     <Filter Include="씬\내땅\내집">
       <UniqueIdentifier>{5fd53391-66d8-4838-a164-2a67070fdeae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="아이템">
+      <UniqueIdentifier>{305beadf-05b5-4437-9656-6d344e9e38e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -216,6 +219,12 @@
     <ClInclude Include="Myhouse.h">
       <Filter>씬\내땅\내집</Filter>
     </ClInclude>
+    <ClInclude Include="item.h">
+      <Filter>아이템</Filter>
+    </ClInclude>
+    <ClInclude Include="itemManager.h">
+      <Filter>아이템</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -322,6 +331,12 @@
     </ClCompile>
     <ClCompile Include="Myhouse.cpp">
       <Filter>씬\내땅\내집</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>아이템</Filter>
+    </ClCompile>
+    <ClCompile Include="itemManager.cpp">
+      <Filter>아이템</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

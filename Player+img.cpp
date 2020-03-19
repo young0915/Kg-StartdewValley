@@ -22,5 +22,6 @@ void Player::playerimg()
 	IMAGEMANAGER->addImage("에너지", "images/UI/progressbar/Ui_hp_energy_bar_front.bmp", 20, 132, true, RGB(255, 0, 255));
 
 	//무기
-	IMAGEMANAGER->addFrameImage("칼", "images/기구/weapon_glaxysward.bmp", 96*3, 80*3, 6,5,true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("칼", "images/기구/weapon_glaxysward.bmp", 160 * 3, 160 * 3, 5, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("물뿌리개", "images/기구/tool_wateringcan.bmp", 96*3, 160*3, 3,5,true, RGB(255, 0, 255));
 }
