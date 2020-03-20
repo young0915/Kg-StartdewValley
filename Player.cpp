@@ -61,6 +61,8 @@ HRESULT Player::init()
 	_inven = new inventory;
 	_inven->init();
 
+	isinven = false;
+
 
 	return S_OK;
 }
@@ -896,7 +898,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_DOWN;
 			_player._playerpants = PLAYER_PANTS_PWR_DOWN;
 			_sword._toorldir = T_DOWN;
-			_attackrc = RectMakeCenter(_player.x, _player.y-50, 50, 50);
+			_attackrc = RectMakeCenter(_player.x, _player.y+50, 50, 50);
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('2'))
@@ -1007,7 +1009,6 @@ void Player::wattecanmove()
 }
 //함수의 끝
 
-
 void Player::playercollisionmove()
 {
 	int tileIndex[2];//검사용 타일
@@ -1097,10 +1098,20 @@ void Player::playerenergybar()
 
 void Player::inventorymove()
 {
-	_inven->update();
-	if (KEYMANAGER->isStayKeyDown('E'))
-	{
 
+	_inven->update();
+	if (KEYMANAGER->isOnceKeyDown('E'))
+	{
+		if (!isinven)
+		{
+			isinven = true;
+			_inven->setOpen(true);
+		}
+		else
+		{
+			isinven = false;
+			_inven->setOpen(false);
+		}
 	}
 }
 
@@ -1130,12 +1141,14 @@ void Player::render(HDC hdc)
 	_hp._hpbar->render();																										//에너지바
 	_energy._energy->render();																							//혈액
 
+
 	if (KEYMANAGER->isToggleKey('Q'))
 	{
 		Rectangle(hdc, _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 		Rectangle(hdc, rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
 	}
-	_inven->render();
+	if(!isinven)_inven->render(hdc);
+	else _inven->invenrender(hdc);
 	//_cursor->render();																										//커서
 }

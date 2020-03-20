@@ -1,6 +1,7 @@
 #pragma once
 #include "item.h"
 #include "singletonBase.h"
+
 class itemManager :public item , public singletonBase<itemManager>
 {
 private:

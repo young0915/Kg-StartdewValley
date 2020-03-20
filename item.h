@@ -11,53 +11,60 @@ struct itemInfo
 {
 	image* _img;							//ÀÌ¹ÌÁö
 	string itemName;						//ÀÌ¸§
-	itemType type;							//¾ÆÀÌÅÛÀÇ Á¾·ù
+	itemType _type;							//¾ÆÀÌÅÛÀÇ Á¾·ù
 	RECT rc;										//·¢Æ®
 
 	bool move;							//¹Ù´Ú¿¡ ¶³¾îÁø ¾ÆÀÌÅÛÀÎÁö ¾Æ´ÑÁö
-	int x, y;
+	int _x, _y;
 
-	int Price;									//¿ø°¡
-	int sharePrice;						//ÇÃ·¹ÀÌ¾î°¡ Á¤ÇÑ °¡°İ 
-	int energy;								//¿¡³ÊÁö
-	int hp;										//Ã¼·Â
+	int _Price;									//¿ø°¡
+	int _sharePrice;						//ÇÃ·¹ÀÌ¾î°¡ Á¤ÇÑ °¡°İ 
+	int _energy;								//¿¡³ÊÁö
+	int _hp;										//Ã¼·Â
 	
-	int cnt;									//°¹¼ö
-	int maxCnt;							//ÀÎº¥Åä¸® 1Ä­ ´ç ­CÀç¼ÒÁö °¹¼ö
+	int _cnt;									//°¹¼ö
+	int _maxCnt;							//ÀÎº¥Åä¸® 1Ä­ ´ç ­CÀç¼ÒÁö °¹¼ö
 };
-class item
+class item :public gameNode
 {
 private:
 	itemInfo _item;
 
-public :
+public:
 	item();
 	~item();
 
-	HRESULT init(const char* name, itemType type, int price, int sharePrice, int energy, int hp, int cnt,int maxCnt);
+	HRESULT init(const char* name, itemType type, int price, int shareprice, int hp,int energy, int maxCnt);							//¾ÆÀÌÅÛ ÃÊ±âÈ­
 	void release();
 	void update();
 	void render(HDC hdc);
 
-	void magenet(POINT playerPoint);
+	void magenet(POINT _playerPoint);																			//¾ÆÀÌÅÛ ÀÌ ÇÃ·¹ÀÌ¾î¿¡°Ô ²ø¾î´ç±âµµ·Ï ÇÏ±â
 	bool maxitem();
 
-	itemInfo getItemInfo() { return _item; }									//¾ÆÀÌÅÛ Á¤º¸¸¦ °¡Á®¿È
-	RECT getRect() { return _item.rc;  }											//¾ÆÀÌÅÛ ·ºÆ®¸¦ °¡Á®¿È
-				
-	void setItemCnt() { _item.cnt++;}												//°¹¼ö 1Áõ°¡ 
-	void setItemCnt(int num) { _item.cnt += num; }						//°¹¼ö¸¦ num¸¸Å­ Áõ°¡
-	void setItemCnt_equal(int num) { _item.cnt = num;  }			//°¹¼ö¸¦ numÀ¸·Î ¸¸µë
 
-	//·ºÆ®ÀÇ À§Ä¡¸¦ ¼³Á¤ 
-	void setRect(int x, int y) { _item.rc = RectMakeCenter(x, y, _item._img->getWidth(), _item._img->getHeight()); }
-	void setRect(RECT rc) { _item.rc = rc; }
+	itemInfo getItemInfo() { return _item; }																		//¾ÆÀÌÅÛ Á¤º¸¸¦ °¡Á®¿È
+	RECT getRect() { return  _item.rc; }																				//¾ÆÀÌÅÛ ·¢Æ® °¡Á®¿È
 
-	//¾ÆÀÌÅÛÀÇ »óÅÂ¸¦ ¹Ù²ãÁÜ(ÀÎº¥¿¡ ÀÖÀ»¶§ false, ¹Ù´Ú¿¡ ¶³¾îÁ®ÀÖÀ»¶§ true)
-	void setMove(bool move) { _item.move = move; }
+	void setItem() { _item._cnt++; }																						//°¹¼ö¸¦ num¸¸Å­ Áõ°¡
+	void setItemCnt(int num) { _item._cnt += num; }														//°¹¼ö¸¦ numÀ¸·Î ¸¸µë
+	void setItemCnt_equal(int num) { _item._cnt = num; }
 
-	//ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ °¢°ÜÀ» Á¤ÇÒ ¶§ ¾²´Â ÇÔ¼ö 
-	void setPlayerPrice(int price) { _item.sharePrice = price; }
+	//·¢Æ®ÀÇ À§Ä¡ ¼³Á¤
+	void setRect(int x, int y) { _item.rc = RectMakeCenter(_item._x, _item._y, _item._img->getWidth(), _item._img->getHeight()); }
+	void setRect(RECT _rc) { _item.rc = _rc; }
+
+	//¾ÆÀÌÅÛ »óÅÂ¸¦ ¹Ù²ÙÁÜÀÎº¥¿¡ ÀÖÀ» ¶§ false, ¹Ù´Ú¿¡ ¶³¾îÁ® ÀÖÀ» ¶§ true
+	void setMove(bool _move) { _item.move = _move; }
+
+
+	//ÇÃ·¹ÀÌ¾î°¡ ¾ÆÀÌÅÛ °¡°İÀ» Á¤ÇÒ ¶§ ¾²´Â ÇÔ¼ö 
+	void setPlayerPrice(int price) { _item._Price = price; }
+
+
+
+
+
 };
 
 /*

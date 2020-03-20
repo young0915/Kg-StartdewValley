@@ -5,6 +5,7 @@
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
 
+
 enum PLAYERDIRECTION
 {
 	PLAYER_D_DOWN,
@@ -197,7 +198,7 @@ private:
 	RECT _attackrc;														//공격 랙트 설정
 
 	float time;																//TIMEMANAGER에 사용할 것 
-	bool ismove;															//농장중인가 아니면 움직이는 중인가
+	bool isinven;															//메인인벤 또는 인벤토리에 들어갔냐
 public:
 	Player();
 	~Player();
@@ -222,6 +223,10 @@ public:
 
 	float getplayerX() { return _player.x; }
 	float getplayerY() { return _player.y; }
+
+
+	int getintplayerX() { return _player.x; }
+	int getintplayerY() { return _player.y; }
 
 	RECT getPlayerrect() { return _player.rc;}
 
