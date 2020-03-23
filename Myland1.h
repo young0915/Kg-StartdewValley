@@ -5,7 +5,7 @@ class Myland1:public gameNode
 {
 private:
 	tileManager* _tilem;
-	
+	RECT townrect;
 
 public :
 	Myland1();

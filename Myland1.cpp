@@ -26,7 +26,7 @@ HRESULT Myland1::init()
 	IMAGEMANAGER->findImage("내집");
 	IMAGEMANAGER->findImage("지붕");
 	IMAGEMANAGER->findImage("우편");
-
+	townrect = RectMakeCenter(1500, 500, 80, 80);
 	return S_OK;
 }
 
@@ -37,6 +37,12 @@ void Myland1::release()
 void Myland1::update()
 {
 	PLAYER->update();
+
+	RECT temp;
+	if (IntersectRect(&temp, &townrect, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("마을1");
+	}
 }
 
 void Myland1::render()
@@ -47,4 +53,8 @@ void Myland1::render()
 	PLAYER->render(getMemDC());
 	IMAGEMANAGER->render("지붕", getMemDC(), 912, 150);
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
+	if (KEYMANAGER->isToggleKey('Q'))
+	{
+		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
+	}
 }

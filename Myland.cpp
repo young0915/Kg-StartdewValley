@@ -19,7 +19,6 @@ HRESULT Myland::init()
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//카메라 위치
 
 	_minego = RectMakeCenter(430, 300, 80, 80);
-	//_myhouse = RectMakeCenter(500, 450, 250, 250);
 	IMAGEMANAGER->findImage("내집");
 	IMAGEMANAGER->findImage("지붕");
 	IMAGEMANAGER->findImage("우편");
@@ -29,6 +28,7 @@ HRESULT Myland::init()
 
 void Myland::release()
 {
+	SAFE_DELETE(_tilem);
 }
 
 void Myland::update()

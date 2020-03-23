@@ -35,24 +35,24 @@ void tileManager::render()
 		if (_map[i].obj == OBJ_NONE)continue;// Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);			//continue;
 		else IMAGEMANAGER->frameRender("¸ÊÅø¹Ù´Ú", getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].objFrameX, _map[i].objFrameY);
 	}
-	for (int i = 0; i < TILEX * TILEY; i++)
-	{
-		if (CAMERAX - 100 < _map[i].x && _map[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _map[i].y&& _map[i].y < CAMERAY + WINSIZEY + 100)
-		{
-			if (KEYMANAGER->isToggleKey(VK_TAB))
-			{
-				
-				SetBkMode(getMemDC(), TRANSPARENT);
-				//»ö»ó
-				SetTextColor(getMemDC(), RGB(255, 0, 0));
+	//for (int i = 0; i < TILEX * TILEY; i++)
+	//{
+	//	if (CAMERAX - 100 < _map[i].x && _map[i].x < CAMERAX + WINSIZEX + 100 && CAMERAY - 100 < _map[i].y&& _map[i].y < CAMERAY + WINSIZEY + 100)
+	//	{
+	//		if (KEYMANAGER->isToggleKey(VK_TAB))
+	//		{
+	//			
+	//			SetBkMode(getMemDC(), TRANSPARENT);
+	//			//»ö»ó
+	//			SetTextColor(getMemDC(), RGB(255, 0, 0));
 
-				char str[128];
-				sprintf_s(str, "%d", i);
-				TextOut(getMemDC(), _map[i].rc.left, _map[i].rc.top, str, strlen(str));
-				//Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);
-			}
-		}
-	}
+	//			char str[128];
+	//			sprintf_s(str, "%d", i);
+	//			TextOut(getMemDC(), _map[i].rc.left, _map[i].rc.top, str, strlen(str));
+	//			//Rectangle(getMemDC(), _map[i].rc.left, _map[i].rc.top, _map[i].rc.right, _map[i].rc.bottom);
+	//		}
+	//	}
+	//}
 
 }
 
