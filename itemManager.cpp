@@ -69,6 +69,14 @@ void itemManager::render(HDC hdc)
 		(*_viItem).render(hdc);
 	}
 }
+void itemManager::inrender(HDC hdc, int destX, int destY)
+{
+
+	for (_viItem = _vItem.begin(); _viItem != _vItem.end(); ++_viItem)
+	{
+		(*_viItem).inrender(hdc, destX, destY);
+	}
+}
 
 item itemManager::additem(string itemName)
 {

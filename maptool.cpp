@@ -22,7 +22,7 @@ HRESULT maptool::init()
 	for (int i = 0; i < 36; i++)
 	{
 		_springfloor[i] = new image;
-		_springfloor[i]->init("images/¸ÊÅø/maptool_tile.bmp", 600, 2000, 12, 40, true, RGB(255, 0, 255));
+		_springfloor[i]->init("images/¸ÊÅø/maptool_tile.bmp", 600, 2100, 12, 42, true, RGB(255, 0, 255));
 	}
 
 	_mousePoint.x = CAMERA->getCameraXY().x + m_ptMouse.x;
@@ -114,7 +114,7 @@ void maptool::render()
 		{
 			Rectangle(CAMERA->getCameraDC(), rc[i].left, rc[i].top, rc[i].right, rc[i].bottom);
 
-			if (page < 14)
+			if (page < 16)
 			{
 				_springfloor[i]->frameRender(CAMERA->getCameraDC(), rc[i].left, rc[i].top);										//»ùÇÃ ¹èÄ¡
 			}
@@ -470,7 +470,7 @@ void maptool::setboardbutton()
 			_samplebutton[4].rc = RectMake(_samplebutton[4].x, _samplebutton[4].y, 100, 80);
 		}
 		setpageSample();
-		if (page < 14)
+		if (page < 16)
 		{
 			sampleRc();
 		}
@@ -487,7 +487,7 @@ void maptool::sampleRc()
 		{
 			//³ª¹«Ç® ¹ç 
 		//	if (page >= 0 && page < 4)
-			if (page < 14)
+			if (page < 16)
 			{
 				rc[i] = RectMakeCenter(582 + i * 55, 120, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());						//Å¸ÀÏ Ã¹ÁÙÄ­		
 				rc[i + 6] = RectMakeCenter(582 + i * 55, 175, _springfloor[j]->getFrameWidth(), _springfloor[j]->getFrameHeight());				//Å¸ÀÏ µÎ¹øÂ° ÁÙÄ­
@@ -754,10 +754,10 @@ void maptool::setpageSample()
 			else if (i >= 24 && i <= 35)
 			{
 				_springfloor[i]->setFrameX(i - 24);
-				_springfloor[i]->setFrameY(40);
+				_springfloor[i]->setFrameY(41);
 			}
 		}
-	/*	else if (page == 14)
+		else if (page == 14)
 		{
 			if (i < 12)
 			{
@@ -774,7 +774,7 @@ void maptool::setpageSample()
 				_springfloor[i]->setFrameX(i - 24);
 				_springfloor[i]->setFrameY(44);
 			}
-		}*/
+		}
 	}
 }
 //Å¸ÀÏ µé ¼³Á¤

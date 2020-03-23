@@ -107,7 +107,9 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	case WM_MOUSEMOVE:
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
-	//	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON)) this>setMap();
+	
+		m_ptMouse.x = CAMERA->getCameraXY().x + m_ptMouse.x;
+		m_ptMouse.y = CAMERA->getCameraXY().y + m_ptMouse.y;
 		break;
 	case WM_KEYDOWN:
 

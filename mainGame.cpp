@@ -18,8 +18,14 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("ÀÎÆ®·Î", new introscene);
 	SCENEMANAGER->addScene("¸ÊÅøµé", new maptool);
 	SCENEMANAGER->addScene("³»¶¥", new Myland);
+	SCENEMANAGER->addScene("³»¶¥1", new Myland1);
+	SCENEMANAGER->addScene("³»¶¥2", new Myland2);
+	SCENEMANAGER->addScene("³»¶¥3", new Myland3);
 	SCENEMANAGER->addScene("³»Áý", new Myhouse);
 	SCENEMANAGER->addScene("µ¿±¼", new MineScene);
+	SCENEMANAGER->addScene("»óÁ¡", new shopscene);
+	SCENEMANAGER->addScene("¸¶À»1", new Town);
+	SCENEMANAGER->addScene("¸¶À»2", new town2);
 
 	SCENEMANAGER->changeScene("ÀÎÆ®·Î");
 

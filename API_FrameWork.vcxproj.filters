@@ -67,9 +67,6 @@
     <Filter Include="NPC">
       <UniqueIdentifier>{c7ddd1b9-c8cc-4ca4-83c1-5cf5274dc21b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="창고">
-      <UniqueIdentifier>{754c6143-60b4-4ea3-b7bc-1031536d7b34}</UniqueIdentifier>
-    </Filter>
     <Filter Include="맵툴">
       <UniqueIdentifier>{1e5dcb35-9d55-46b3-a4b4-8bd3377a35e3}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,21 @@
     </Filter>
     <Filter Include="아이템">
       <UniqueIdentifier>{305beadf-05b5-4437-9656-6d344e9e38e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="시계">
+      <UniqueIdentifier>{5fbdb7eb-ff9a-4cd9-90b1-7b292753c6de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="상점">
+      <UniqueIdentifier>{f4c2c56a-a0e0-41c2-8b1b-73569113f8e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="씬\마을">
+      <UniqueIdentifier>{7703a62c-1b3a-4ce6-8391-95b76912ee5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="씬\내땅\내땅시리즈">
+      <UniqueIdentifier>{bf6af29f-f3b5-47d5-a145-2669b3ca1131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="씬\로딩씬">
+      <UniqueIdentifier>{a565e8dc-69e6-4f49-81d4-ab95e408fd22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +237,30 @@
     <ClInclude Include="itemManager.h">
       <Filter>아이템</Filter>
     </ClInclude>
+    <ClInclude Include="clock.h">
+      <Filter>시계</Filter>
+    </ClInclude>
+    <ClInclude Include="shopscene.h">
+      <Filter>상점</Filter>
+    </ClInclude>
+    <ClInclude Include="Town.h">
+      <Filter>씬\마을</Filter>
+    </ClInclude>
+    <ClInclude Include="Myland1.h">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClInclude>
+    <ClInclude Include="Myland2.h">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClInclude>
+    <ClInclude Include="Myland3.h">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClInclude>
+    <ClInclude Include="town2.h">
+      <Filter>씬\마을</Filter>
+    </ClInclude>
+    <ClInclude Include="lodingscene.h">
+      <Filter>씬\로딩씬</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -337,6 +373,30 @@
     </ClCompile>
     <ClCompile Include="itemManager.cpp">
       <Filter>아이템</Filter>
+    </ClCompile>
+    <ClCompile Include="clock.cpp">
+      <Filter>시계</Filter>
+    </ClCompile>
+    <ClCompile Include="shopscene.cpp">
+      <Filter>상점</Filter>
+    </ClCompile>
+    <ClCompile Include="Town.cpp">
+      <Filter>씬\마을</Filter>
+    </ClCompile>
+    <ClCompile Include="Myland1.cpp">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClCompile>
+    <ClCompile Include="Myland2.cpp">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClCompile>
+    <ClCompile Include="Myland3.cpp">
+      <Filter>씬\내땅\내땅시리즈</Filter>
+    </ClCompile>
+    <ClCompile Include="town2.cpp">
+      <Filter>씬\마을</Filter>
+    </ClCompile>
+    <ClCompile Include="lodingscene.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

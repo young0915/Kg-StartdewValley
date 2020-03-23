@@ -31,6 +31,9 @@ private:
 	vector<taginventroy>_vinven;
 	vector<taginventroy>::iterator _vIinven;
 
+	vector<taginventroy> _vTemp;																	//담을 벡터와 아이템보여주기
+
+
 	taginventroy _invenback;
 public :
 	inventory();
@@ -38,6 +41,9 @@ public :
 	HRESULT init();
 	void release();
 	void update();
+	void inventoryItem();																				//인벤토리 요소 안에 상태를 알리기 위한 함수
+	void itemmove();																						//아이템 잡기
+	void itemremove();																					//아이템 비어 있는 상태
 
 
 

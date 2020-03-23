@@ -40,6 +40,12 @@ void item::render(HDC hdc)
 	_item._img->render(hdc, _item.rc.left, _item.rc.top);
 }
 
+void item::inrender(HDC hdc, int x, int y)
+{
+	_item._img->render(hdc,x, y);
+}
+
+
 void item::magenet(POINT _playerPoint)
 {
 	_item._x = _item.rc.left + (_item.rc.right - _item.rc.left) / 2;

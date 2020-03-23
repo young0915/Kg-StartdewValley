@@ -38,6 +38,7 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
+	void inrender(HDC hdc, int x, int y);
 
 	void magenet(POINT _playerPoint);																			//아이템 이 플레이어에게 끌어당기도록 하기
 	bool maxitem();

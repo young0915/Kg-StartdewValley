@@ -58,6 +58,7 @@ public:
 private:
 
 	LPIMAGE_INFO	_imageInfo;		//이미지 정보
+	LPIMAGE_INFO  _rotateImage; //roateate 이미지
 	char*			_fileName;		//이미지 이름
 	bool			_isTrans;		//배경색 날릴꺼니?
 	COLORREF		_transColor;	//배경색 없앨 RGB
@@ -81,6 +82,8 @@ public:
 
 	HRESULT init(const char* fileName, float x, float y, int width, int height,
 		int frameX, int frameY, bool isTrans, COLORREF transColor);
+
+	HRESULT rotateinit(const char* fileName, float width, float height, bool isTrans, COLORREF transColor);
 
 	//투명값 셋팅
 	void setTransColor(bool isTrans, COLORREF transColor);
@@ -107,6 +110,9 @@ public:
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
 
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
+
+	//회전 랜더 
+	void rotateRender(HDC hdc, float centerX, float centerY, float angle);
 
 	//DC가져와라
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }

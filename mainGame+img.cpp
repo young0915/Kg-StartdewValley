@@ -21,9 +21,12 @@ void mainGame::maingameimg()
 
 
 	//맵툴 이미지
-	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 2000, 12, 40, true, RGB(255, 0, 255));
-
-
+	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 2100, 12, 42, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵1", "images/맵툴/샵1.bmp", 50, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵2", "images/맵툴/샵2.bmp", 300 ,50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵3", "images/맵툴/샵3.bmp", 100, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("샵4", "images/맵툴/샵4.bmp", 250, 50, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("아저씨", "images/맵툴/아저씨.bmp", 60, 60, true, RGB(255, 0, 255));
 
 	//플레이어 옷 
 	IMAGEMANAGER->addFrameImage("머리", "images/cloth/머리.bmp", 33 * 2, 128 * 2, 6, 16, true, RGB(255, 0, 255));
@@ -55,9 +58,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("인벤토리", "images/인벤토리/Ui_mainInventory.bmp", 655, 90, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("E벤토리", "images/인벤토리/인벤토리창.bmp", 680,540, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("인벤칸", "images/인벤토리/인벤토리요소칸.bmp", 47, 67, true, RGB(255, 0, 255));
-	//IMAGEMANAGER->addImage("인벤칸", "images/인벤토리/인벤토리창.bmp", 45, 52, true, RGB(255, 0, 255));
-
-
+	IMAGEMANAGER->addImage("쓰레기통", "images/인벤토리/쓰레기통.bmp", 20*3, 27*3, true, RGB(255, 0, 255));
 
 	//건물
 	IMAGEMANAGER->addImage("내집", "images/맵툴/내집.bmp", 400, 400, true, RGB(255, 0, 255));
@@ -67,21 +68,28 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("침대2", "images/맵툴/내방/침대2.bmp", 32, 33, true, RGB(255, 0, 255));
 
 	//아이템
-	IMAGEMANAGER->addImage("감자", "images/item/감자.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("감자씨앗", "images/item/감자씨앗.bmp", 14, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("콜리플라워 씨앗", "images/item/콜리플라워 씨앗.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("콩종자", "images/item/콩종자.bmp", 16, 14, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("피닙스 씨앗", "images/item/피닙스 씨앗.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("게", "images/item/꽃게.bmp", 16, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("감자", "images/item/감자.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("감자씨앗", "images/item/감자씨앗.bmp", 14*3, 16*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("콜리플라워 씨앗", "images/item/콜리플라워 씨앗.bmp", 16*3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("콩종자", "images/item/콩종자.bmp", 16 * 3, 14 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("피닙스 씨앗", "images/item/피닙스 씨앗.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("게", "images/item/꽃게.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 
-	IMAGEMANAGER->addImage("나무", "images/item/나무.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("돌", "images/item/나무.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("잡초", "images/item/잡초.bmp", 16, 15, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("루비", "images/item/루비.bmp", 11, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("물뿌리개(아이템)", "images/item/물뿌리개.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("흑요소", "images/item/검.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("박쥐", "images/item/박쥐.bmp", 16, 16, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("비어있음", "images/item/비어있음.bmp", 16, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("나무", "images/item/나무.bmp", 16*3, 16*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("돌", "images/item/나무.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("잡초", "images/item/잡초.bmp", 16 * 3, 15 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("루비", "images/item/루비.bmp", 11 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("물뿌리개(아이템)", "images/item/물뿌리개.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("흑요소", "images/item/검.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("박쥐", "images/item/박쥐.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("비어있음", "images/item/비어있음.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+
+	//UI
+	IMAGEMANAGER->addImage("시계", "images/UI/Ui_time.bmp", 72*3, 57*3, true, RGB(255, 0, 255));
+
+	//상점
+	IMAGEMANAGER->addImage("상점아저씨", "images/shop/Ui_shop.bmp", 650, 395, true, RGB(255,0,255));
+
 }
 
 

@@ -21,15 +21,13 @@ HRESULT MineScene::init()
 	_astar = new aStarScene;
 	_astar->init(_tilm->getMap());
 
-	//myland = RectMakeCenter()
+	myland = RectMakeCenter(925, 350 , 100, 450);
 
 	return S_OK;
 }
 
 void MineScene::release()
 {
-	SAFE_DELETE(_tilm);
-	PLAYER->release();
 	_astar->release();
 }
 
@@ -38,11 +36,12 @@ void MineScene::update()
 	PLAYER->update();
 	_tilm->update();
 	_astar->update(_tilm->getMap(), PLAYER->getPlayerrect());
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
-	{
-	//	if(PtInRect())
-	}
 
+	if (PtInRect(&myland, m_ptMouse))
+		{
+			SCENEMANAGER->changeScene("³»¶¥1");
+			PLAYER->setplayerXY(450, 450);
+		}
 }
 
 
@@ -51,4 +50,8 @@ void MineScene::render()
 	_tilm->render();
 	_astar->render();
 	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), myland.left, myland.top, myland.right, myland.bottom);
+	}
 }

@@ -2,6 +2,7 @@
 #include "singletonBase.h"
 #include "tileManager.h"
 #include "inventory.h"
+#include "clock.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
 
@@ -134,7 +135,7 @@ struct tagplayer
 	int _frameY;
 	int _placount;														//플레이어 이미지매니저에 사용할 카운트
 	int _plaindex;														//플레이어 이미지 매니저에 사용할 인덱스
-	
+	int _money;															//플레이어 돈
 	int tileX, tileY;														//플레이어가 밟고 있는 번호
 
 	bool _istool;														//무기 사용 유무
@@ -182,6 +183,7 @@ private:
 	//다른 클래스 모임
 	tileManager* _tilem;
 	inventory* _inven;												//인벤
+	clock* _clock;														//시계
 	//커서
 	//cusor* _cursor;
 
@@ -207,6 +209,7 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
+	void inventroyrender(HDC hdc);
 
 	void playerkeycontrol();											//플레이어 키를 모아둔 곳													
 	void playermove();													//플레이어 움직임(body)
@@ -227,11 +230,18 @@ public:
 
 	int getintplayerX() { return _player.x; }
 	int getintplayerY() { return _player.y; }
+	void setplayerXY(int x, int y)
+	{
+		_player.x = x;
+		_player.y = y;
+	}
+
 
 	RECT getPlayerrect() { return _player.rc;}
-
 	RECT getplayermoverect() { return _player._playerect; }
 	
+
+
 
 	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }
 };

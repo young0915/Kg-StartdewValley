@@ -11,7 +11,7 @@ tileManager::~tileManager()
 
 HRESULT tileManager::init()
 {
-	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 1550, 12, 31, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("맵툴바닥", "images/맵툴/maptool_tile.bmp", 600, 2100, 12, 42, true, RGB(255, 0, 255));
 	return S_OK;
 }
 
@@ -21,6 +21,7 @@ void tileManager::release()
 
 void tileManager::update()
 {
+	//Mylandload();
 }
 
 void tileManager::render()
@@ -59,12 +60,8 @@ void tileManager::mapattribute()
 {
 }
 //내 땅
-void tileManager::Mylandload(int x, int y)
+void tileManager::Mylandload()
 {
-	int startpoint;
-	int endpoint;
-	startpoint = x;
-	endpoint = y;
 	HANDLE file;
 	DWORD read;
 
@@ -85,6 +82,133 @@ void tileManager::Mylandload(int x, int y)
 	{
 		_OBJattribute[i].strengh = 0;
 		if ( _map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
+		{
+			_map[i].obj = OBJ_NONE;
+		}
+
+	}
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		if (_map[i].terrain == TERAIN_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+		}
+		if (_map[i].obj == OBJ_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+			_OBJattribute[i].strengh = 1;
+		}
+	}
+}
+
+void tileManager::Mylandone()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/내땅1/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)* TILEX*TILEY, &read, NULL);
+
+	_pos[0] = 512;
+	_pos[1] = 40;
+
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		_OBJattribute[i].strengh = 0;
+		if (_map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
+		{
+			_map[i].obj = OBJ_NONE;
+		}
+
+	}
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		if (_map[i].terrain == TERAIN_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+		}
+		if (_map[i].obj == OBJ_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+			_OBJattribute[i].strengh = 1;
+		}
+	}
+}
+void tileManager::Mylandtwo()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/내땅3/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)* TILEX*TILEY, &read, NULL);
+
+	_pos[0] = 512;
+	_pos[1] = 40;
+
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		_OBJattribute[i].strengh = 0;
+		if (_map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
+		{
+			_map[i].obj = OBJ_NONE;
+		}
+
+	}
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		if (_map[i].terrain == TERAIN_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+		}
+		if (_map[i].obj == OBJ_WALL)
+		{
+			_attribute[i] |= ATTR_UNMOVABLE;
+			_OBJattribute[i].strengh = 1;
+		}
+	}
+}
+void tileManager::Mylandthree()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/내땅4/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)* TILEX*TILEY, &read, NULL);
+
+	_pos[0] = 512;
+	_pos[1] = 40;
+
+	for (int i = 0; i < TILEX*TILEY; i++)
+	{
+		_OBJattribute[i].strengh = 0;
+		if (_map[i].obj == OBJ_FARM && _map[i].obj == OBJ_FLOWER)
 		{
 			_map[i].obj = OBJ_NONE;
 		}
@@ -153,8 +277,8 @@ void tileManager::Myhouse()
 		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
 		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
 	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
-	_pos[0] = 215;
-	_pos[1] = 30;
+	_pos[0] = 555;
+	_pos[1] = 40;
 
 	//속성 정의
 	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
@@ -166,6 +290,70 @@ void tileManager::Myhouse()
 			_OBJattribute[i].strengh = 1;
 		}
 	}*/
+	
+}
+//상점
+void tileManager::shop()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/샵/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
+	_pos[0] = 556;
+	_pos[1] = 40;
+
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+}
+
+void tileManager::Town()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/맵5.map",												//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
+	_pos[0] = 556;
+	_pos[1] = 40;
+
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
+}
+
+void tileManager::TownTwo()
+{
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile(
+		"save/맵4.map",															//생성할 파일 또는 열 장치나 파일 이름
+		GENERIC_READ,															//파일이나 장치를 만들거나 열때 사용할 권한 
+		0,																						//파일 공유 모드 입력
+		NULL,																				//파일 또는 장치를 열때 보안 및 특성
+		OPEN_EXISTING,															//파일이나 장치를 열때 취할 행동
+		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
+		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
+	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
+	_pos[0] = 556;
+	_pos[1] = 40;
+
+	//속성 정의
+	memset(_attribute, 0, sizeof(DWORD)*TILEX*TILEY);
 }
 
 void tileManager::attackBlock(int tileN)

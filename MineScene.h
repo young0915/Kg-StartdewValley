@@ -10,6 +10,7 @@ private:
 
 	RECT myland;
 
+
 public:
 	MineScene();
 	~MineScene();

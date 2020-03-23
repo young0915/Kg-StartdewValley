@@ -23,7 +23,6 @@ HRESULT Myhouse::init()
 
 void Myhouse::release()
 {
-	SAFE_DELETE(_tilem);	
 	PLAYER->release();
 }
 

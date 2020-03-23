@@ -18,6 +18,7 @@ public :
 	void release();
 	void update();
 	void render(HDC hdc);
+	void inrender(HDC hdc, int destX, int destY);
 
 	item additem(string itemName);																					//이름으로 아이템을 찾아서 보내주는 함수
 	item additem(string itemName, int CntNum);															//이름으로 아이템을 찾아서  보낸주는 함수, 숫자로 수도 세팅 가능

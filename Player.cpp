@@ -19,6 +19,8 @@ HRESULT Player::init()
 	//변수 정보
 	_player._plaindex = 0;																																																					//플레이어 이미지 매니저 돌릴 index
 	_player._placount = 0;																																																					//플레이어 이미지 매니저 돌릴 count
+	_player._money = 9999;																																																				//플레이어 돈 
+
 
 	//플레이어 움직임 초기값
 	_player._playerdirection = PLAYER_D_DOWN;
@@ -63,6 +65,9 @@ HRESULT Player::init()
 
 	isinven = false;
 
+	_clock = new clock;
+	_clock->init();
+
 
 	return S_OK;
 }
@@ -81,7 +86,7 @@ void Player::update()
 	wattecanmove();
 	//	_cursor->update();
 	inventorymove();									//인벤토리
-
+	_clock->update();
 }
 
 void Player::playerkeycontrol()
@@ -1098,7 +1103,6 @@ void Player::playerenergybar()
 
 void Player::inventorymove()
 {
-
 	_inven->update();
 	if (KEYMANAGER->isOnceKeyDown('E'))
 	{
@@ -1148,7 +1152,13 @@ void Player::render(HDC hdc)
 		Rectangle(hdc, rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
 	}
+	_clock->render();
 	if(!isinven)_inven->render(hdc);
 	else _inven->invenrender(hdc);
 	//_cursor->render();																										//커서
+}
+//인벤토리 랜더
+void Player::inventroyrender(HDC hdc)
+{
+	
 }

@@ -20,9 +20,15 @@ public:
 	void render();
 	void mapattribute();
 
-	void Mylandload(int x, int y);
+	void Mylandload();
+	void Mylandone();
+	void Mylandtwo();
+	void Mylandthree();
 	void Mineload();
 	void Myhouse();
+	void shop();
+	void Town();
+	void TownTwo();
 
 	DWORD* getAttribute() { return _attribute; }
 	tagTile* getMap() { return _map; }
