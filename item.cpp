@@ -35,6 +35,11 @@ void item::update()
 	magenet(PointMake(PLAYER->getintplayerX(), PLAYER->getintplayerY()));
 }
 
+void item::render()
+{
+	_item._img->render(CAMERA->getCameraDC(), _item.rc.left, _item.rc.top);
+}
+
 void item::render(HDC hdc)
 {
 	_item._img->render(hdc, _item.rc.left, _item.rc.top);

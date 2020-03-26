@@ -56,7 +56,6 @@ void maptool::update()
 
 		drage();
 	}
-
 	//_cursor->update();
 }
 

@@ -32,6 +32,7 @@ void cameraManager::render(HDC hdc)
 void cameraManager::render(image * img)
 {
 	GdiTransparentBlt(img->getMemDC(), _center.x - WINSIZEX / 2, _center.y - WINSIZEY / 2, WINSIZEX, WINSIZEY, _camera->getMemDC(), 0, 0, WINSIZEX, WINSIZEY, RGB(255, 255, 255));
+
 }
 
 void cameraManager::setCameraCenter(POINT point)

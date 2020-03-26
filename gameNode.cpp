@@ -43,9 +43,9 @@ HRESULT gameNode::init(bool managerInit)
 		EFFECTMANAGER->init();
 		TXTDATA->init();
 		CAMERA->init();
-
+		CURSOR->init();
 	}
-
+	         
 	return S_OK;
 }
 
@@ -66,7 +66,7 @@ void gameNode::release()
 		RND->releaseSingleton();
 		TXTDATA->releaseSingleton();
 		CAMERA->releaseSingleton();
-
+		CURSOR->releaseSingleton();
 
 		KEYMANAGER->release();
 		IMAGEMANAGER->release();
@@ -75,6 +75,8 @@ void gameNode::release()
 		ANIMATIONMANAGER->release();
 		EFFECTMANAGER->release();
 		CAMERA->release();
+		CURSOR->release();
+
 	}
 
 	ReleaseDC(m_hWnd, _hdc);
@@ -87,6 +89,10 @@ void gameNode::update()
 	//InvalidateRect(m_hWnd, NULL, false);
 
 	CAMERA->update();
+	CURSOR->update();
+
+
+
 }
 
 void gameNode::render(HDC hdc)
@@ -108,8 +114,6 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		m_ptMouse.x = LOWORD(lParam);
 		m_ptMouse.y = HIWORD(lParam);
 	
-		m_ptMouse.x = CAMERA->getCameraXY().x + m_ptMouse.x;
-		m_ptMouse.y = CAMERA->getCameraXY().y + m_ptMouse.y;
 		break;
 	case WM_KEYDOWN:
 

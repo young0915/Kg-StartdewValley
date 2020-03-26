@@ -201,6 +201,9 @@ private:
 
 	float time;																//TIMEMANAGER에 사용할 것 
 	bool isinven;															//메인인벤 또는 인벤토리에 들어갔냐
+	bool ismove;
+
+	
 public:
 	Player();
 	~Player();
@@ -240,8 +243,13 @@ public:
 	RECT getPlayerrect() { return _player.rc;}
 	RECT getplayermoverect() { return _player._playerect; }
 	
-
+	int getplayermoney() {return _player._money;}
+	void setplayermoney(int _money) { _player._money = _money; }
 
 
 	void setMapMemoryAdress(tileManager* tm) { _tilem = tm; }
+
+	inventory* getinventory() { return _inven; }
+
+
 };

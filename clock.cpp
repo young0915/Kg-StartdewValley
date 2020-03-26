@@ -43,7 +43,7 @@ void clock::render()
 
 	char str[128];
 	sprintf_s(str, "%d", min);
-	TextOut(CAMERA->getCameraDC(), 800,105, str, strlen(str));
+	TextOut(CAMERA->getCameraDC(), 850,105, str, strlen(str));
 
 	char middlestr[128];
 	sprintf_s(middlestr, ":", middlestr);
@@ -51,7 +51,7 @@ void clock::render()
 
 	char hourstr[128];
 	sprintf_s(hourstr, "%d", hour);
-	TextOut(CAMERA->getCameraDC(), 850, 105, hourstr, strlen(hourstr));
+	TextOut(CAMERA->getCameraDC(), 800, 105, hourstr, strlen(hourstr));
 
 }
 

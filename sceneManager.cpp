@@ -50,6 +50,18 @@ void sceneManager::render()
 	if (_currentScene)_currentScene->render();
 }
 
+bool sceneManager::SceneName(string name)
+{
+	miSceneList iter = _mSceneList.begin();
+	for (iter; iter != _mSceneList.end(); )
+	{
+		if (iter->second == _currentScene)return true;
+		else iter++;
+	}
+	return false;
+
+}
+
 gameNode * sceneManager::addScene(string sceneName, gameNode * scene)
 {
 

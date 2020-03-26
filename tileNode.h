@@ -1,14 +1,11 @@
 #pragma once
 
-
-
 //타일사이즈
 #define TILESIZE 50
 
 //크기
 #define TILEX 50
 #define TILEY 50
-
 
 //타일 총 사이즈 
 #define TILESIZEX TILESIZE * TILEX 

@@ -16,8 +16,11 @@ private:
 	HDC _hdc;
 	bool _managerInit;
 
+	POINT mouse;
+
 
 public:
+
 	gameNode();
 	~gameNode();
 
@@ -43,8 +46,12 @@ public:
 
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
+	POINT getMouse() { return mouse; }
 
 };
 
 #define CAMERAX CAMERA->getCameraXY().x
 #define CAMERAY CAMERA->getCameraXY().y
+#define MOUSE mouse
+#define MOUSEX mouse.x
+#define MOUSEY mouse.y

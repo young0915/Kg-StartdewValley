@@ -43,9 +43,6 @@
     <Filter Include="로딩">
       <UniqueIdentifier>{ea0a14ee-3e8e-4fb0-828a-0a99336fa05e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="애니메이션">
-      <UniqueIdentifier>{815067c8-1852-4de4-88c6-942efbfbdbf6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="이펙트">
       <UniqueIdentifier>{a85304e6-b75f-4c0c-8b3c-6a086fab35f1}</UniqueIdentifier>
     </Filter>
@@ -112,6 +109,9 @@
     <Filter Include="씬\로딩씬">
       <UniqueIdentifier>{a565e8dc-69e6-4f49-81d4-ab95e408fd22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="몬스터\애니메이션">
+      <UniqueIdentifier>{815067c8-1852-4de4-88c6-942efbfbdbf6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -175,7 +175,7 @@
       <Filter>로딩</Filter>
     </ClInclude>
     <ClInclude Include="animation.h">
-      <Filter>애니메이션</Filter>
+      <Filter>몬스터\애니메이션</Filter>
     </ClInclude>
     <ClInclude Include="animationManager.h">
       <Filter>Manager</Filter>
@@ -309,7 +309,7 @@
       <Filter>로딩</Filter>
     </ClCompile>
     <ClCompile Include="animation.cpp">
-      <Filter>애니메이션</Filter>
+      <Filter>몬스터\애니메이션</Filter>
     </ClCompile>
     <ClCompile Include="animationManager.cpp">
       <Filter>Manager</Filter>

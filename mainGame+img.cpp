@@ -72,7 +72,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("°¨ÀÚ¾¾¾Ñ", "images/item/°¨ÀÚ¾¾¾Ñ.bmp", 14*3, 16*3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("Äİ¸®ÇÃ¶ó¿ö ¾¾¾Ñ", "images/item/Äİ¸®ÇÃ¶ó¿ö ¾¾¾Ñ.bmp", 16*3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("ÄáÁ¾ÀÚ", "images/item/ÄáÁ¾ÀÚ.bmp", 16 * 3, 14 * 3, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("ÇÇ´Õ½º ¾¾¾Ñ", "images/item/ÇÇ´Õ½º ¾¾¾Ñ.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("ÇÇ´Õ½º ¾¾¾Ñ","images/item/ÇÇ´Õ½º¾¾¾Ñ.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("°Ô", "images/item/²É°Ô.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("³ª¹«", "images/item/³ª¹«.bmp", 16*3, 16*3, true, RGB(255, 0, 255));
@@ -89,7 +89,7 @@ void mainGame::maingameimg()
 
 	//»óÁ¡
 	IMAGEMANAGER->addImage("»óÁ¡¾ÆÀú¾¾", "images/shop/Ui_shop.bmp", 650, 395, true, RGB(255,0,255));
-
+	IMAGEMANAGER->addImage("»óÁ¡Ä­", "images/shop/»óÁ¡Ä­.bmp", 478, 80, true, RGB(255, 0, 255));
 }
 
 

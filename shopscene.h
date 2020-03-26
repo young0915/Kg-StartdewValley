@@ -22,9 +22,13 @@ class shopscene :public gameNode
 {
 private:
 	shopmain _shopmain;
+	shop _shop;
 
-	
+	vector<shop> _vshop;
+	vector<shop>::iterator _vitershop;
 
+
+	POINT _shoppoimt;
 
 public :
 	shopscene();
@@ -33,8 +37,13 @@ public :
 	HRESULT init();
 	void rlease();
 	void update();
-	void itemsell();									//구매할 함수 
-
+	void itemSetup();
+	void sellitem();
+	
+	//void sellitem(int &gold, shop _item);
+	//void additem(shop item);
+	
+	void test();
 	void shoprender();
 	void render();
 

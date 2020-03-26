@@ -25,7 +25,7 @@ struct itemInfo
 	int _cnt;									//°¹¼ö
 	int _maxCnt;							//ÀÎº¥Åä¸® 1Ä­ ´ç ­CÀç¼ÒÁö °¹¼ö
 };
-class item :public gameNode
+class item 
 {
 private:
 	itemInfo _item;
@@ -37,6 +37,7 @@ public:
 	HRESULT init(const char* name, itemType type, int price, int shareprice, int hp,int energy, int maxCnt);							//¾ÆÀÌÅÛ ÃÊ±âÈ­
 	void release();
 	void update();
+	void render();
 	void render(HDC hdc);
 	void inrender(HDC hdc, int x, int y);
 

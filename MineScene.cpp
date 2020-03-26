@@ -37,7 +37,7 @@ void MineScene::update()
 	_tilm->update();
 	_astar->update(_tilm->getMap(), PLAYER->getPlayerrect());
 
-	if (PtInRect(&myland, m_ptMouse))
+	if (PtInRect(&myland, CURSOR->getPoint()))
 		{
 			SCENEMANAGER->changeScene("³»¶¥1");
 			PLAYER->setplayerXY(450, 450);

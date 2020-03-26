@@ -31,10 +31,19 @@ private:
 	vector<taginventroy>_vinven;
 	vector<taginventroy>::iterator _vIinven;
 
-	vector<taginventroy> _vTemp;																	//담을 벡터와 아이템보여주기
 
-
+	RECT _temp;
+	vector<taginventroy> _vTemp;																	//담을 벡터와 아이템보여주기(임시 벡터)
+	
 	taginventroy _invenback;
+
+
+	bool istouch;
+	
+	POINT invenmouse;
+
+	POINT start;
+	POINT end;
 public :
 	inventory();
 	~inventory();
@@ -43,18 +52,16 @@ public :
 	void update();
 	void inventoryItem();																				//인벤토리 요소 안에 상태를 알리기 위한 함수
 	void itemmove();																						//아이템 잡기
-	void itemremove();																					//아이템 비어 있는 상태
-
-
+	void additem(item _item);														//아이템 추가 
+	void emptyitem();
 
 	void render(HDC hdc);																			//화면상 보이는 그냥 랜더
 	void invenrender(HDC hdc);																//E번을 눌렀을 때 보이는 랜더
 	void itemrender(HDC hdc);																//아이템 랜더
 	void secitemrender(HDC hdc);															//두번째 아이템 랜더
-	void feelrender(HDC hdc);																	//호감
-	void maprender(HDC hdc);																	//지도
-	
 	bool getOpen() { return isuse; }
 	void setOpen(bool _iseuse) { isuse = _iseuse; }
+
+	void setTest(bool test) { istouch = test; }
 };
 

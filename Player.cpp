@@ -21,6 +21,8 @@ HRESULT Player::init()
 	_player._placount = 0;																																																					//플레이어 이미지 매니저 돌릴 count
 	_player._money = 9999;																																																				//플레이어 돈 
 
+	ismove = true;
+
 
 	//플레이어 움직임 초기값
 	_player._playerdirection = PLAYER_D_DOWN;
@@ -78,15 +80,17 @@ void Player::release()
 
 void Player::update()
 {
-	playerkeycontrol();
-	playerenergybar();
-	playermove();
-	attackmove();
-	weapon();
-	wattecanmove();
-	//	_cursor->update();
-	inventorymove();									//인벤토리
-	_clock->update();
+	
+		playerkeycontrol();
+		playerenergybar();
+		playermove();
+		attackmove();
+		weapon();
+		wattecanmove();
+		//	_cursor->update();
+		_clock->update();
+	 inventorymove();									//인벤토리
+
 }
 
 void Player::playerkeycontrol()
@@ -1110,11 +1114,13 @@ void Player::inventorymove()
 		{
 			isinven = true;
 			_inven->setOpen(true);
+		//	_inven->setTest(true);
 		}
 		else
 		{
 			isinven = false;
 			_inven->setOpen(false);
+			//_inven->setTest(false);
 		}
 	}
 }

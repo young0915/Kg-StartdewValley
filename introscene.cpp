@@ -27,8 +27,7 @@ HRESULT introscene::init()
 	_button[2].y = 500;
 	_button[2].rc = RectMake(_button[2].x, _button[2].y, _button[2]._img->getFrameWidth(), _button[2]._img->getFrameHeight());
 	
-	_cursor = new cusor;
-	_cursor->init();
+
 	return S_OK;
 }
 
@@ -42,13 +41,11 @@ void introscene::release()
 	{
 		SAFE_DELETE(_cloud[i]);
 	}
-	_cursor->release();
 }
 
 void introscene::update()
 {
 	introbtnn();
-	_cursor->update();
 }
 
 
@@ -70,7 +67,6 @@ void introscene::render()
 			_button[i]._img->frameRender(CAMERA->getCameraDC(), _button[i].rc.left, _button[i].rc.top, 1, 0);
 		}
 	}
-	_cursor->render();
 }
 void introscene::introbtnn()
 {
@@ -84,7 +80,6 @@ void introscene::introbtnn()
 				if (i == 0)
 				{
 					SCENEMANAGER->changeScene("³»¶¥");
-					//SCENEMANAGER->changeScene("µ¿±¼");
 				}
 				else if (i == 1)
 				{
