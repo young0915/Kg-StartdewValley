@@ -36,12 +36,14 @@ void MineScene::update()
 	PLAYER->update();
 	_tilm->update();
 	_astar->update(_tilm->getMap(), PLAYER->getPlayerrect());
-
-	if (PtInRect(&myland, CURSOR->getPoint()))
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+	{
+		if (PtInRect(&myland, CURSOR->getPoint()))
 		{
 			SCENEMANAGER->changeScene("³»¶¥1");
 			PLAYER->setplayerXY(450, 450);
 		}
+	}
 }
 
 

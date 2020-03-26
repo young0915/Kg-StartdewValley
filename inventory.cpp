@@ -107,47 +107,48 @@ void inventory::inventoryItem()
 //E 번을눌렀을 때 사용하는 함수 
 void inventory::itemmove()
 {
-	if (!isuse)	return;
-	
-	for (int i = 0; i < _vinven.size(); i++)
-	{
-		if (i < 13)
-		{
-			_vinven[i].rc = RectMakeCenter(CAMERA->getCameraXY().x + 150 + i * 49, CAMERA->getCameraXY().y + 220, _vinven[i]._img->getWidth(), _vinven[i]._img->getHeight());
-		}
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	//if (!isuse)	return;
+	if (isuse)
 	{
 		for (int i = 0; i < _vinven.size(); i++)
 		{
-			if (PtInRect(&_vinven[i].rc, CURSOR->getPoint()))
+			if (i < 13)
 			{
-				if (_vinven[i]._item.getItemInfo().itemName != "비어있음")
+				_vinven[i].rc = RectMakeCenter(CAMERA->getCameraXY().x + 150 + i * 49, CAMERA->getCameraXY().y + 220, _vinven[i]._img->getWidth(), _vinven[i]._img->getHeight());
+			}
+		}
+		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		{
+			if (_vTemp.empty())
+			{
+			for (int i = 0; i < _vinven.size(); i++)
+			{
+				if (PtInRect(&_vinven[i].rc, CURSOR->getPoint()))
 				{
-					if (_vTemp.empty())
+					if (_vinven[i]._item.getItemInfo().itemName != "비어있음")
 					{
-						_vTemp.push_back(_vinven[i]);
-						_vinven[i]._item = ITEMMANAGER->additem("비어있음");
-						break;
+							_vTemp.push_back(_vinven[i]);
+							_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+							break;
+						}
 					}
 				}
 			}
 		}
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
-	{
-		if (!_vinven.empty())
+		if (KEYMANAGER->isOnceKeyDown(VK_RBUTTON))
 		{
+			if (!_vinven.empty())
+			{
 				for (int i = 0; i < _vinven.size(); i++)
 				{
 					if (i != 39)
 					{
-					if (PtInRect(&_vinven[i].rc, CURSOR->getPoint()))
-					{
-						_vinven[i]._item = _vTemp[0]._item;
-						_vTemp[0]._item = ITEMMANAGER->additem("비어있음");
+						if (PtInRect(&_vinven[i].rc, CURSOR->getPoint()))
+						{
+							_vinven[i]._item = _vTemp[0]._item;
+							_vTemp[0]._item = ITEMMANAGER->additem("비어있음");
+						}
 					}
-				}
 					else
 					{
 						if (_vinven[i]._item.getItemInfo().itemName == "비어있음")
@@ -158,9 +159,11 @@ void inventory::itemmove()
 						}
 
 					}
+				}
 			}
 		}
 	}
+	
 }
 
 void inventory::additem(item _item)
@@ -202,6 +205,14 @@ void inventory::invenrender(HDC hdc)
 	sprintf_s(str, "%d", PLAYER->getplayermoney());
 	TextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, strlen(str));
 
+	/*for (int i = 0; i < _vTemp.size(); i++)
+	{
+		if (!_vTemp.empty())
+		{
+			_vTemp[i]._img->render(getMemDC(), CURSOR->getPoint().x, CURSOR->getPoint().y);
+		}
+	}
+	*/
 }
 //아이템 랜더
 void inventory::itemrender(HDC hdc)

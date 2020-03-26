@@ -66,6 +66,12 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("우편", "images/맵툴/우편.bmp", 70, 146, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("침대", "images/맵툴/내방/housebed.bmp", 32, 49, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("침대2", "images/맵툴/내방/침대2.bmp", 32, 33, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점", "images/맵툴/집1.bmp", 240*3, 165*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("상점1", "images/맵툴/집11.bmp", 240*3, 100*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("집1", "images/맵툴/세바스찬집.bmp", 113*4, 100*4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("집11", "images/세바스찬집1.bmp", 113*4, 150*4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("집2", "images/맵툴/집2.bmp", 150*3, 170*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("집22", "images/맵툴/집22.bmp", 150*3, 100*3, true, RGB(255, 0, 255));
 
 	//아이템
 	IMAGEMANAGER->addImage("감자", "images/item/감자.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
@@ -90,6 +96,10 @@ void mainGame::maingameimg()
 	//상점
 	IMAGEMANAGER->addImage("상점아저씨", "images/shop/Ui_shop.bmp", 650, 395, true, RGB(255,0,255));
 	IMAGEMANAGER->addImage("상점칸", "images/shop/상점칸.bmp", 478, 80, true, RGB(255, 0, 255));
+
+	//잡것
+	IMAGEMANAGER->addImage("나무1", "images/etc/나무1.bmp", 48, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("나무2", "images/etc/나무2.bmp", 50, 100, true, RGB(255, 0, 255));
 }
 
 

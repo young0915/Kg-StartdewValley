@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "tileManager.h"
+
+
 class Myland : public gameNode
 {
 private:
@@ -13,6 +15,9 @@ private:
 	tileManager* _tilem;
 	RECT _minego;
 	RECT _myhouse;
+	RECT townrect;
+
+
 public:
 	Myland();
 	~Myland();

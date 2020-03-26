@@ -55,9 +55,6 @@
     <Filter Include="씬">
       <UniqueIdentifier>{9ee32368-8c7e-43ab-bf9d-5442a4c8facf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="농장">
-      <UniqueIdentifier>{d19420c9-20f8-49e9-ae66-4f9688405578}</UniqueIdentifier>
-    </Filter>
     <Filter Include="카메라">
       <UniqueIdentifier>{b8ed33a3-fc70-4077-b0a0-74ec142c10d3}</UniqueIdentifier>
     </Filter>
@@ -112,6 +109,9 @@
     <Filter Include="몬스터\애니메이션">
       <UniqueIdentifier>{815067c8-1852-4de4-88c6-942efbfbdbf6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="기타등등">
+      <UniqueIdentifier>{d19420c9-20f8-49e9-ae66-4f9688405578}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -140,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="singletonBase.h">
       <Filter>singletonBase</Filter>
-    </ClInclude>
-    <ClInclude Include="randomFunction.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>UTIL</Filter>
@@ -260,6 +257,21 @@
     </ClInclude>
     <ClInclude Include="lodingscene.h">
       <Filter>씬\로딩씬</Filter>
+    </ClInclude>
+    <ClInclude Include="othermanager.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="stone.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="itemstone.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="ruby.h">
+      <Filter>기타등등</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +409,18 @@
     </ClCompile>
     <ClCompile Include="lodingscene.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="othermanager.cpp">
+      <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="stone.cpp">
+      <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="itemstone.cpp">
+      <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="ruby.cpp">
+      <Filter>기타등등</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

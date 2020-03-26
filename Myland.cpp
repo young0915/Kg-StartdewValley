@@ -23,6 +23,11 @@ HRESULT Myland::init()
 	IMAGEMANAGER->findImage("지붕");
 	IMAGEMANAGER->findImage("우편");
 
+	townrect = RectMakeCenter(1400,400, 50, 200);
+
+	
+
+
 	return S_OK;
 }
 
@@ -43,6 +48,13 @@ void Myland::update()
 		SCENEMANAGER->changeScene("동굴");
 		PLAYER->setplayerXY(700, 650);
 	}
+	RECT twongo;
+	if (IntersectRect(&twongo, &townrect, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("마을1");
+		PLAYER->setplayerXY(100, 300);
+	}
+
 	if (KEYMANAGER->isOnceKeyDown('9'))
 	{
 		SCENEMANAGER->changeScene("상점");
@@ -54,17 +66,20 @@ void Myland::render()
 	
 
 	_tilem->render();
-	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
-	IMAGEMANAGER->render("내집", getMemDC(), 912, 147);
+	IMAGEMANAGER->render("우편", getMemDC(), 1202, 400);
+	IMAGEMANAGER->render("내집", getMemDC(), 812, 147);
 	PLAYER->render(getMemDC());
-	IMAGEMANAGER->render("지붕", getMemDC(), 912, 150);
-	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
+	IMAGEMANAGER->render("지붕", getMemDC(), 812, 150);
+	IMAGEMANAGER->render("우편", getMemDC(), 1202, 400);
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), _minego.left, _minego.top, _minego.right, _minego.bottom);
-	//	Rectangle(getMemDC(), _myhouse.left, _myhouse.top, _myhouse.right, _myhouse.bottom);
+		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
+		//	Rectangle(getMemDC(), _myhouse.left, _myhouse.top, _myhouse.right, _myhouse.bottom);
 	}
+
+
 
 }
 
