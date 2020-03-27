@@ -22,7 +22,7 @@ HRESULT othermanager::init1()
 	return S_OK;
 }
 
-void othermanager::release(){}
+void othermanager::release() {}
 
 void othermanager::update(vector<item>& item)
 {
@@ -35,20 +35,16 @@ void othermanager::update(vector<item>& item)
 	{
 		if (_vstone[i]->getstate() == STONE_MASH)
 		{
-			// 아이템 만드는 코드..
-			// Item item = new Item;
-			// item->init();
-			// 벡터.push_back(item);
-			
 			_dropitem = _vstone[i]->getitem();
 			itemimg = _dropitem.getItemInfo()._img;
-	_dropitem.setRect(RectMakeCenter(_vstone[i]->getstonerc().right -((_vstone[i]->getstonerc().right -_vstone[i]->getstonerc().left)/2) ,
-				(_vstone[i]->getstonerc().bottom-(_vstone[i]->getstonerc().bottom - _vstone[i]->getstonerc().top))
-				, _dropitem.getItemInfo()._img->getWidth(), _dropitem.getItemInfo()._img ->getHeight()));
+
+			_dropitem.setRect(RectMakeCenter(_vstone[i]->getstonerc().right - ((_vstone[i]->getstonerc().right - _vstone[i]->getstonerc().left) / 2),
+			(_vstone[i]->getstonerc().bottom - (_vstone[i]->getstonerc().bottom - _vstone[i]->getstonerc().top) / 2), _dropitem.getItemInfo()._img->getWidth(),
+			_dropitem.getItemInfo()._img->getHeight()));
+
 			_dropitem.setMove(true);
 			item.push_back(_dropitem);
 			removestone(i);
-
 		}
 	}
 	collisionstone();
@@ -61,7 +57,7 @@ void othermanager::render()
 	{
 		(*_viterstone)->render();
 	}
-	
+
 	if (KEYMANAGER->isToggleKey('O'))
 	{
 		char str[128];
@@ -83,7 +79,7 @@ void othermanager::setStone()
 	{
 		stone* _stone;
 		_stone = new itemstone;
-		_stone->init("돌맹이", ETC_STONE, STONE_IDLE, PointMake(350 + i * 250, 650+i*50), 4);
+		_stone->init("돌맹이", ETC_STONE, STONE_IDLE, PointMake(350 + i * 250, 650 + i * 50), 4);
 		_vstone.push_back(_stone);
 	}
 	for (int i = 0; i < 2; i++)
@@ -117,16 +113,34 @@ void othermanager::collisionstone()
 	{
 		RECT temp;
 
-			if (IntersectRect(&temp, &_vstone[i]->getstonerc(), &PLAYER->getweapon()))
+		if (IntersectRect(&temp, &_vstone[i]->getstonerc(), &PLAYER->getTool()->getaxe()))
+		{
+			//상태가 돌이면 
+			if (_vstone[i]->gettype() == GRASS_TYPE || _vstone[i]->gettype() == TREE_TYPE)
 			{
-
-				//상태가 돌이면 
-				if (_vstone[i]->gettype() == ETC_STONE || _vstone[i]->gettype() == GRASS_TYPE || _vstone[i]->gettype() == TREE_TYPE)
+				atkcount++;
+				if (atkcount != 100)
+				{
+					PLAYER->setHp(PLAYER->getHp() + 0.5f);
+				}
+				else
+				{
+					_vstone[i]->setstate(STONE_MASH);
+					atkcount = 0;																	//다시 초기화
+				}
+			}
+		}
+			//루비
+			RECT etc;
+			if (IntersectRect(&etc, &_vstone[i]->getstonerc(), &PLAYER->getTool()->getpickaxe()))
+			{
+				if (_vstone[i]->gettype() == RUBY_STONE || _vstone[i]->gettype() == ETC_STONE)
 				{
 					atkcount++;
 					if (atkcount != 100)
 					{
 						PLAYER->setHp(PLAYER->getHp() + 0.5f);
+						PLAYER->setEnergy(PLAYER->getEnergy() + 0.4f);
 					}
 					else
 					{
@@ -134,13 +148,7 @@ void othermanager::collisionstone()
 						atkcount = 0;																	//다시 초기화
 					}
 				}
-				//루비
-				if(_vstone[i]->gettype() == RUBY_STONE)
-				{
-					
-				}
 			}
-
-	}
+		}
 
 }

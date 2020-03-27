@@ -46,6 +46,12 @@ HRESULT itemManager::init()
 	_vItem.push_back(_item);
 	_item.init("물뿌리개(아이템)", ITEM_SWORD, 10, 10, 0, 0, 10);
 	_vItem.push_back(_item);
+	_item.init("곡괭이(아이템)", ITEM_SWORD, 10, 10, 0, 0, 10);
+	_vItem.push_back(_item);
+	_item.init("도끼(아이템)", ITEM_SWORD, 10, 10, 0, 0, 10);
+	_vItem.push_back(_item);
+	_item.init("호미(아이템)", ITEM_SWORD, 10, 10, 0, 0, 10);
+	_vItem.push_back(_item);
 
 	return S_OK;
 }

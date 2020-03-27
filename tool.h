@@ -1,58 +1,68 @@
 #pragma once
 #include "gameNode.h"
 
-//
-//enum TOOLS
-//{
-//	TOOL_AXE,
-//	TOOL_HOE,
-//	TOOL_PICKAXE,
-//	TOOL_WATERCAN,
-//	TOOL_EMPTY
-//};
-////¹«±â ¹æÇâ
-//enum TOOLDIR
-//{
-//	T_DOWN,
-//	T_RIGHT,
-//	T_LEFT,
-//	T_UP,
-//	T_NONE
-//};
-//struct  tagtool
-//{
-//	TOOLDIR _tdir;									//¹«±â¹æÇâ
-//	TOOLS _tool;
-//	image* _img;
-//	RECT rc;
-//	float x, y;
-//	int count;
-//	int index;
-//};
-//class tool :public gameNode
-//{
-//private:
-//	tagtool _ax;															//µµ³¢
-//	tagtool _pick;														//°î±ªÀÌ
-//	tagtool _homie;													//È£¹Ì
-//	tagtool _watercan;												//¹°»Ñ¸®°³
-//	tagtool _sickle;														//³´
-//
-//	bool axisuse;			
-//
-//public:
-//	tool();
-//	~tool();
-//
-//	HRESULT init( );
-//	void release();
-//	void render();
-//	void update();
-//
-//	void axemove(int x, int y, TOOLDIR _dir);
-//	void pickmove(int x, int y, TOOLDIR _dir);
-//	void homiemove(int x, int y, TOOLDIR _dir);
-//	void watercanmove(int x, int y, TOOLDIR _dir);
-//
-//};
+enum TOOLTYPE
+{
+	TOOL_AXE,
+	TOOL_PICKAXE,
+	TOOL_HOE
+};
+
+enum TOOLMOVE
+{
+	TT_DOWN,
+	TT_RIGHT,
+	TT_LEFT,
+	TT_UP,
+	TT_NONE
+};
+
+struct tagtooluse
+{
+	TOOLTYPE _type;
+	TOOLMOVE _tm;
+	image* _img;
+	RECT _rc;
+	RECT _atkrc;
+	float x, y;
+	int _count;
+	int _index;
+};
+
+class tool :public gameNode
+{
+private:
+	tagtooluse _axe;
+	tagtooluse _pickaxe;
+	tagtooluse _hoe;
+public :
+	tool();
+	~tool();
+
+	HRESULT init();
+	void release();
+	void update();
+	void render();
+	image* getaxeimg() { return _axe._img; }
+	RECT getaxe() { return _axe._rc; }
+	RECT getpickaxe() { return _pickaxe._rc; }
+	RECT gethoe() { return _hoe._rc; }
+
+
+	TOOLTYPE axetype() { return _axe._type; }
+	void setaxetype(TOOLMOVE _axetype) { _axe._tm = _axetype; }
+	void setpicktype(TOOLMOVE _picktype) { _pickaxe._tm = _picktype; }
+	void sethomtype(TOOLMOVE _ho) { _hoe._tm = _ho; }
+
+	TOOLTYPE picktype() { return _pickaxe._type; }
+	TOOLMOVE axemove() { return _axe._tm; }
+	TOOLMOVE pickmove() { return _pickaxe._tm; }
+
+
+	void axemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move);
+	void pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move);
+	void homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move);
+
+
+};
 

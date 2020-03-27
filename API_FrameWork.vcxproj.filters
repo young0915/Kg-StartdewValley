@@ -216,9 +216,6 @@
     <ClInclude Include="aStarScene.h">
       <Filter>에이스타</Filter>
     </ClInclude>
-    <ClInclude Include="tool.h">
-      <Filter>mainGame\플레이어\기구</Filter>
-    </ClInclude>
     <ClInclude Include="Monstermanager.h">
       <Filter>몬스터</Filter>
     </ClInclude>
@@ -293,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="grass.h">
       <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="tool.h">
+      <Filter>mainGame\플레이어\기구</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +389,6 @@
     <ClCompile Include="aStarScene.cpp">
       <Filter>에이스타</Filter>
     </ClCompile>
-    <ClCompile Include="tool.cpp">
-      <Filter>mainGame\플레이어\기구</Filter>
-    </ClCompile>
     <ClCompile Include="Monstermanager.cpp">
       <Filter>몬스터</Filter>
     </ClCompile>
@@ -463,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="grass.cpp">
       <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="tool.cpp">
+      <Filter>mainGame\플레이어\기구</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

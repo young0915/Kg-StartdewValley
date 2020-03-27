@@ -5,6 +5,7 @@
 #include "clock.h"
 //#include "cusor.h"
 #include "progressBar.h"											//플레이어 프로그래스바
+#include "tool.h"
 
 
 enum PLAYERDIRECTION
@@ -162,6 +163,8 @@ struct  tagwatercan
 };
 
 
+
+
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
 {
@@ -184,6 +187,7 @@ private:
 	tileManager* _tilem;
 	inventory* _inven;												//인벤
 	clock* _clock;														//시계
+	tool* _tool;															//농기구
 	//커서
 	//cusor* _cursor;
 
@@ -257,5 +261,5 @@ public:
 
 	int getEnergy() { return _energy.energy; }
 	void setEnergy(int energy) { _energy.energy = energy; }
-
+	tool* getTool() { return _tool; }
 };

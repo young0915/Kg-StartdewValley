@@ -55,6 +55,10 @@ HRESULT inventory::init()
 	}
 	_vinven[0]._item = ITEMMANAGER->additem("물뿌리개(아이템)");
 	_vinven[1]._item = ITEMMANAGER->additem("흑요소");
+	_vinven[2]._item = ITEMMANAGER->additem("도끼(아이템)");
+	_vinven[3]._item = ITEMMANAGER->additem("곡괭이(아이템)");
+	_vinven[4]._item = ITEMMANAGER->additem("호미(아이템)");
+
 
 	_invenelement._img = IMAGEMANAGER->findImage("쓰레기통");
 	_invenelement.rc = RectMakeCenter(850, WINSIZEY / 2, _invenelement._img->getWidth(), _invenelement._img->getHeight());

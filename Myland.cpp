@@ -27,7 +27,6 @@ HRESULT Myland::init()
 
 	_other = new othermanager;
 	_other->init();
-
 	return S_OK;
 }
 
@@ -38,10 +37,8 @@ void Myland::release()
 
 void Myland::update()
 {
-	
 	PLAYER->update();
 	//이동 완료
-
 	RECT temp;
 	if (IntersectRect(&temp, &_minego, &PLAYER->getPlayerrect()))
 	{
@@ -54,15 +51,24 @@ void Myland::update()
 		SCENEMANAGER->changeScene("마을1");
 		PLAYER->setplayerXY(100, 300);
 	}
-
 	if (KEYMANAGER->isOnceKeyDown('9'))
 	{
 		SCENEMANAGER->changeScene("상점");
 	}
-
 	_other->update(_dropitem);
-
+	RECT itemtemp;
+	for (int i = 0; i < _dropitem.size(); i++)
+	{
+		_dropitem[i].update();
+		if (IntersectRect(&itemtemp, &_dropitem[i].getRect(), &PLAYER->getPlayerrect()))
+		{
+			PLAYER->getinventory()->additem(_dropitem[i]);
+			_dropitem.erase(_dropitem.begin() + i);
+			break;
+		}
+	}
 }
+
 void Myland::render()
 {
 	_tilem->render();
@@ -77,7 +83,6 @@ void Myland::render()
 	{
 		Rectangle(getMemDC(), _minego.left, _minego.top, _minego.right, _minego.bottom);
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
-		//	Rectangle(getMemDC(), _myhouse.left, _myhouse.top, _myhouse.right, _myhouse.bottom);
 	}
 
 	if (!_dropitem.empty())
@@ -87,8 +92,5 @@ void Myland::render()
 			_dropitem[i].render(getMemDC());
 		}
 	}
-
-
-
 }
 

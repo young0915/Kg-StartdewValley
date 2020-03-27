@@ -23,7 +23,6 @@ HRESULT shopscene::init()
 	IMAGEMANAGER->findImage("º•4");
 	IMAGEMANAGER->findImage("æ∆¿˙ææ");
 	shopsell = RectMakeCenter(225, 215, 300, 300);
-
 	//===========================================ªÛ¡°================================================
 	_shopmain._img = IMAGEMANAGER->findImage("ªÛ¡°æ∆¿˙ææ");
 	_shopmain.x = 100;
@@ -54,7 +53,6 @@ HRESULT shopscene::init()
 			_vshop[i]._item.setRect(_vshop[i]._rc);
 		}
 	}
-
 	//===============================================================================================
 	return S_OK;
 }
@@ -67,7 +65,6 @@ void shopscene::update()
 {
 	gameNode::update();
 	PLAYER->update();
-
 
 	//ªÛ¡° ¥≠∑∂¿ª ∂ß
 	RECT temp;
@@ -87,10 +84,7 @@ void shopscene::update()
 			}
 		}
 	}
-	
 	sellitem();
-
-
 }
 
 void shopscene::itemSetup()

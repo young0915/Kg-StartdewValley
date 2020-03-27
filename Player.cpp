@@ -70,6 +70,8 @@ HRESULT Player::init()
 	_clock = new clock;
 	_clock->init();
 
+	_tool = new tool;
+	_tool->init();
 
 	return S_OK;
 }
@@ -843,7 +845,7 @@ void Player::attackmove()
 				_player._playermove = PLAYER_PIS_LEFT;
 				_player._playerarmmove = PLAYER_ARM_PIS_LEFT;
 				_player._playerpants = PLAYER_PANTS_PIS_LEFT;
-				_attackrc = RectMakeCenter(_player.x - 50, _player.y+25, 50, 50);
+				_attackrc = RectMakeCenter(_player.x - 50, _player.y + 25, 50, 50);
 			}
 			if (_player._playerdirection == PLAYER_D_DOWN)
 			{
@@ -891,7 +893,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_RIGHT;
 			_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
 			_sword._toorldir = T_RIGHT;
-			_attackrc = RectMakeCenter(_player.x+50, _player.y + 25, 50, 50);
+			_attackrc = RectMakeCenter(_player.x + 50, _player.y + 25, 50, 50);
 		}
 		if (_player._playerdirection == PLAYER_D_LEFT)
 		{
@@ -899,7 +901,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_LEFT;
 			_player._playerpants = PLAYER_PANTS_PWR_LEFT;
 			_sword._toorldir = T_LEFT;
-			_attackrc = RectMakeCenter(_player.x - 50, _player.y+25, 50, 50);
+			_attackrc = RectMakeCenter(_player.x - 50, _player.y + 25, 50, 50);
 		}
 		if (_player._playerdirection == PLAYER_D_DOWN)
 		{
@@ -907,7 +909,7 @@ void Player::attackmove()
 			_player._playerarmmove = PlAYER_SWORD_DOWN;
 			_player._playerpants = PLAYER_PANTS_PWR_DOWN;
 			_sword._toorldir = T_DOWN;
-			_attackrc = RectMakeCenter(_player.x, _player.y+50, 50, 50);
+			_attackrc = RectMakeCenter(_player.x, _player.y + 50, 50, 50);
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp('2'))
@@ -931,14 +933,149 @@ void Player::attackmove()
 			_player._playermove = PLAYER_IDLE_DOWN;
 			_player._playerarmmove = PLAYER_ARM_IDLE_DOWN;
 			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
-			
+
 		}
 		_attackrc = RectMakeCenter(0, 0, 0, 0);
-	} 
+	}
+	//µµ³¢
+	if (KEYMANAGER->isStayKeyDown('3'))
+	{
+			if (_player._playerdirection == PLAYER_D_RIGHT)
+			{
+				_player._playermove = PLAYER_PIS_RIGHT;
+				_player._playerarmmove = PLAYER_ARM_PIS_RIGHT;
+				_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
+				_tool->axemove(_player.x, _player.y, TOOL_AXE, TT_RIGHT);
+			}
+			if (_player._playerdirection == PLAYER_D_LEFT)
+			{
+				_player._playermove = PLAYER_PIS_LEFT;
+				_player._playerarmmove = PLAYER_ARM_PIS_LEFT;
+				_player._playerpants = PLAYER_PANTS_PWR_LEFT;
+				_tool->axemove(_player.x, _player.y, TOOL_AXE, TT_LEFT);
+			}
+	}
+	if (KEYMANAGER->isOnceKeyUp('3'))
+	{
+		_tool->axemove(-50, -50, TOOL_AXE, TT_NONE);
+		if (_player._playermove == PLAYER_PIS_RIGHT && _player._playerarmmove == PLAYER_ARM_PIS_RIGHT && _player._playerpants == PLAYER_PANTS_PWR_RIGHT)
+		{
+			_player._playerarmmove = PLAYER_ARM_IDLE_RIGHT;
+			_player._playermove == PLAYER_IDLE_RIGHT;
+			_player._playerpants == PLAYER_PANTS_IDLE_RIGHT;
+		}
+		else
+		{
+			_player._playermove = PLAYER_IDLE_LEFT;
+			_player._playerarmmove = PLAYER_ARM_IDLE_LEFT;
+			_player._playerpants = PLAYER_PANTS_IDLE_LEFT;
+		}
+	}
+	//°î±ªÀÌ
+	if (KEYMANAGER->isStayKeyDown('4'))
+	{
+			if (_player._playerdirection == PLAYER_D_RIGHT)
+			{
+				_player._playermove = PLAYER_PIS_RIGHT;
+				_player._playerarmmove = PLAYER_ARM_PIS_RIGHT;
+				_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
+			_tool->pickaxemove(_player.x + 15, _player.y + 35, TOOL_PICKAXE, TT_RIGHT);
+			}
+			if (_player._playerdirection == PLAYER_D_LEFT)
+			{
+				_player._playermove = PLAYER_PIS_LEFT;
+				_player._playerarmmove = PLAYER_ARM_PIS_LEFT;
+				_player._playerpants = PLAYER_PANTS_PWR_LEFT;
+				_tool->pickaxemove(_player.x - 15, _player.y + 35, TOOL_PICKAXE, TT_LEFT);
+			}
+			if (_player._playerdirection == PLAYER_D_DOWN)
+			{
+				_player._playermove = PLAYER_PIS_DOWN;
+				_player._playerarmmove = PLAYER_ARM_PIS_DOWN;
+				_player._playerpants = PLAYER_PANTS_PWR_DOWN;
+				_tool->pickaxemove(_player.x, _player.y + 50, TOOL_PICKAXE, TT_DOWN);
+			}
+	}
+	if (KEYMANAGER->isOnceKeyUp('4'))
+	{
+		_tool->pickaxemove(-50, -50, TOOL_PICKAXE, TT_NONE);
+		if (_player._playermove == PLAYER_PIS_RIGHT && _player._playerarmmove == PLAYER_ARM_PIS_RIGHT && _player._playerpants == PLAYER_PANTS_PWR_RIGHT)
+		{
+			_player._playerarmmove = PLAYER_ARM_IDLE_RIGHT;
+			_player._playermove == PLAYER_IDLE_RIGHT;
+			_player._playerpants == PLAYER_PANTS_IDLE_RIGHT;
+		}
+		else	if (_player._playermove == PLAYER_PIS_LEFT && _player._playerarmmove == PLAYER_ARM_PIS_LEFT && _player._playerpants == PLAYER_PANTS_PWR_LEFT)
+		{
+			_player._playermove = PLAYER_IDLE_LEFT;
+			_player._playerarmmove = PLAYER_ARM_IDLE_LEFT;
+			_player._playerpants = PLAYER_PANTS_IDLE_LEFT;
+		}
+		else
+		{
+			_player._playermove = PLAYER_IDLE_DOWN;
+			_player._playerarmmove = PLAYER_ARM_IDLE_DOWN;
+			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
+		}
+	}
+	//if()
+	if (KEYMANAGER->isStayKeyDown('5'))
+	{
+		if (_player._playerdirection == PLAYER_D_RIGHT)
+		{
+			_player._playermove = PLAYER_PIS_RIGHT;
+			_player._playerarmmove = PLAYER_ARM_PIS_RIGHT;
+			_player._playerpants = PLAYER_PANTS_PWR_RIGHT;
+			_tool->homemove(_player.x + 15, _player.y + 35, TOOL_HOE, TT_RIGHT);
+		}
+		if (_player._playerdirection == PLAYER_D_LEFT)
+		{
+			_player._playermove = PLAYER_PIS_LEFT;
+			_player._playerarmmove = PLAYER_ARM_PIS_LEFT;
+			_player._playerpants = PLAYER_PANTS_PWR_LEFT;
+			_tool->homemove(_player.x - 15, _player.y + 35, TOOL_HOE, TT_LEFT);
+		}
+		if (_player._playerdirection == PLAYER_D_DOWN)
+		{
+			_player._playermove = PLAYER_PIS_DOWN;
+			_player._playerarmmove = PLAYER_ARM_PIS_DOWN;
+			_player._playerpants = PLAYER_PANTS_PWR_DOWN;
+			_tool->homemove(_player.x, _player.y + 50, TOOL_HOE, TT_DOWN);
+		}
+	}
+	if (KEYMANAGER->isOnceKeyUp('5'))
+	{
+		_tool->homemove(_player.x + 15, _player.y + 35, TOOL_HOE, TT_NONE);
+		if (_player._playermove == PLAYER_PIS_RIGHT && _player._playerarmmove == PLAYER_ARM_PIS_RIGHT && _player._playerpants == PLAYER_PANTS_PWR_RIGHT)
+		{
+			_player._playerarmmove = PLAYER_ARM_IDLE_RIGHT;
+			_player._playermove == PLAYER_IDLE_RIGHT;
+			_player._playerpants == PLAYER_PANTS_IDLE_RIGHT;
+		}
+		else	if (_player._playermove == PLAYER_PIS_LEFT && _player._playerarmmove == PLAYER_ARM_PIS_LEFT && _player._playerpants == PLAYER_PANTS_PWR_LEFT)
+		{
+			_player._playermove = PLAYER_IDLE_LEFT;
+			_player._playerarmmove = PLAYER_ARM_IDLE_LEFT;
+			_player._playerpants = PLAYER_PANTS_IDLE_LEFT;
+		}
+		else
+		{
+			_player._playermove = PLAYER_IDLE_DOWN;
+			_player._playerarmmove = PLAYER_ARM_IDLE_DOWN;
+			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
+		}
+	}
+
+
+
+
+}
+	
 
 	
 
-}
+	
+
 //¹°»Ñ¸®°³
 void Player::wattecanmove()
 {
@@ -1157,7 +1294,9 @@ void Player::render(HDC hdc)
 		Rectangle(hdc, _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 		Rectangle(hdc, rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
+		
 	}
+	_tool->render();
 	_clock->render();
 	if(!isinven)_inven->render(hdc);
 	else _inven->invenrender(hdc);

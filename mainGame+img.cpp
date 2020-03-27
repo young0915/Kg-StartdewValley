@@ -89,6 +89,9 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("Èæ¿ä¼Ò", "images/item/°Ë.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("¹ÚÁã", "images/item/¹ÚÁã.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("ºñ¾îÀÖÀ½", "images/item/ºñ¾îÀÖÀ½.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("°î±ªÀÌ(¾ÆÀÌÅÛ)", "images/item/°î±ªÀÌ.bmp", 48, 48, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("µµ³¢(¾ÆÀÌÅÛ)", "images/item/µµ³¢.bmp", 48, 48, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("È£¹Ì(¾ÆÀÌÅÛ)", "images/item/È£¹Ì.bmp", 48, 48, true, RGB(255, 0, 255));
 
 	//UI
 	IMAGEMANAGER->addImage("½Ã°è", "images/UI/Ui_time.bmp", 72*3, 57*3, true, RGB(255, 0, 255));

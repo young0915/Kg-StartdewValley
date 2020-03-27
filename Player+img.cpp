@@ -22,4 +22,7 @@ void Player::playerimg()
 	//¹«±â
 	IMAGEMANAGER->addFrameImage("Ä®", "images/±â±¸/weapon_glaxysward.bmp", 160 * 3, 160 * 3, 5, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("¹°»Ñ¸®°³", "images/±â±¸/tool_wateringcan.bmp", 96*3, 160*3, 3,5,true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("µµ³¢", "images/±â±¸/tool_axe.bmp", 110*3, 110*3, 5, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("°î±ªÀÌ", "images/±â±¸/tool_pickaxe.bmp", 110 * 3, 110 * 3, 5, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("È£¹Ì", "images/±â±¸/tool_hoe.bmp", 110 * 3, 110 * 3, 5, 5, true, RGB(255, 0, 255));
 }
