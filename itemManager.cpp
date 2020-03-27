@@ -47,13 +47,10 @@ HRESULT itemManager::init()
 	_item.init("물뿌리개(아이템)", ITEM_SWORD, 10, 10, 0, 0, 10);
 	_vItem.push_back(_item);
 
-
 	return S_OK;
 }
 
-void itemManager::release()
-{
-}
+void itemManager::release(){}
 
 void itemManager::update()
 {
@@ -69,11 +66,9 @@ void itemManager::render(HDC hdc)
 	{
 		(*_viItem).render(hdc);
 	}
-	
 }
 void itemManager::inrender(HDC hdc, int destX, int destY)
 {
-
 	for (_viItem = _vItem.begin(); _viItem != _vItem.end(); ++_viItem)
 	{
 		(*_viItem).inrender(hdc, destX, destY);
@@ -82,7 +77,6 @@ void itemManager::inrender(HDC hdc, int destX, int destY)
 
 item itemManager::additem(string itemName)
 {
-
 	for (_viItem = _vItem.begin(); _viItem != _vItem.end(); ++_viItem)
 	{
 		if (_viItem->getItemInfo().itemName == itemName)

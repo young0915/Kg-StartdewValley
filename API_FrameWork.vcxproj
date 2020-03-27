@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Abigail.h" />
+    <ClInclude Include="Alex.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
@@ -158,6 +160,7 @@
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="gameNode.h" />
+    <ClInclude Include="grass.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="introscene.h" />
@@ -177,6 +180,8 @@
     <ClInclude Include="Myland1.h" />
     <ClInclude Include="Myland2.h" />
     <ClInclude Include="Myland3.h" />
+    <ClInclude Include="NPCbase.h" />
+    <ClInclude Include="NPCMANAGER.h" />
     <ClInclude Include="othermanager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="progressBar.h" />
@@ -185,6 +190,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ruby.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="Sebastian.h" />
     <ClInclude Include="shopscene.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
@@ -198,10 +204,13 @@
     <ClInclude Include="tool.h" />
     <ClInclude Include="Town.h" />
     <ClInclude Include="town2.h" />
+    <ClInclude Include="tree.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Abigail.cpp" />
+    <ClCompile Include="Alex.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="aStarScene.cpp" />
@@ -211,6 +220,7 @@
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="grass.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="introscene.cpp" />
@@ -231,6 +241,8 @@
     <ClCompile Include="Myland1.cpp" />
     <ClCompile Include="Myland2.cpp" />
     <ClCompile Include="Myland3.cpp" />
+    <ClCompile Include="NPCbase.cpp" />
+    <ClCompile Include="NPCMANAGER.cpp" />
     <ClCompile Include="othermanager.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -238,6 +250,7 @@
     <ClCompile Include="rat.cpp" />
     <ClCompile Include="ruby.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="Sebastian.cpp" />
     <ClCompile Include="shopscene.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stone.cpp" />
@@ -247,6 +260,7 @@
     <ClCompile Include="tool.cpp" />
     <ClCompile Include="Town.cpp" />
     <ClCompile Include="town2.cpp" />
+    <ClCompile Include="tree.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="winMain.cpp" />

@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "Player.h"
-/*
-이곳은 플레이어 이미지만 있는 곳
-*/
+
 /*
 이곳은 플레이어 이미지만 있는 곳
 */

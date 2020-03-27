@@ -28,13 +28,14 @@ HRESULT mainGame::init()
 	SCENEMANAGER->addScene("마을2", new town2);
 
 	SCENEMANAGER->changeScene("인트로");
-
+	CURSOR->init();
 	return S_OK;
 }
 
 void mainGame::release()
 {
 	gameNode::release();
+	CURSOR->release();
 	SCENEMANAGER->release();
 }
 
@@ -43,6 +44,7 @@ void mainGame::update()
 	gameNode::update();
 	SCENEMANAGER->update();
 	ANIMATIONMANAGER->update();
+	CURSOR->update();
 }
 
 void mainGame::render(/*HDC hdc*/)
@@ -54,7 +56,7 @@ void mainGame::render(/*HDC hdc*/)
 
 	//====================================================
 	SCENEMANAGER->render();
-
+	CURSOR->render(getMemDC());
 	TIMEMANAGER->render(CAMERA->getCameraDC());
 
 	

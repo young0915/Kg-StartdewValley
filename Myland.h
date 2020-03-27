@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tileManager.h"
-
+#include "othermanager.h"
 
 class Myland : public gameNode
 {
@@ -17,7 +17,8 @@ private:
 	RECT _myhouse;
 	RECT townrect;
 
-
+	othermanager* _other;
+	vector<item> _dropitem;
 public:
 	Myland();
 	~Myland();

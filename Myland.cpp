@@ -25,8 +25,8 @@ HRESULT Myland::init()
 
 	townrect = RectMakeCenter(1400,400, 50, 200);
 
-	
-
+	_other = new othermanager;
+	_other->init();
 
 	return S_OK;
 }
@@ -60,23 +60,32 @@ void Myland::update()
 		SCENEMANAGER->changeScene("상점");
 	}
 
+	_other->update(_dropitem);
+
 }
 void Myland::render()
 {
-	
-
 	_tilem->render();
+	
 	IMAGEMANAGER->render("우편", getMemDC(), 1202, 400);
 	IMAGEMANAGER->render("내집", getMemDC(), 812, 147);
 	PLAYER->render(getMemDC());
 	IMAGEMANAGER->render("지붕", getMemDC(), 812, 150);
 	IMAGEMANAGER->render("우편", getMemDC(), 1202, 400);
-
+	_other->render();
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), _minego.left, _minego.top, _minego.right, _minego.bottom);
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
 		//	Rectangle(getMemDC(), _myhouse.left, _myhouse.top, _myhouse.right, _myhouse.bottom);
+	}
+
+	if (!_dropitem.empty())
+	{
+		for (int i = 0; i < _dropitem.size(); i++)
+		{
+			_dropitem[i].render(getMemDC());
+		}
 	}
 
 

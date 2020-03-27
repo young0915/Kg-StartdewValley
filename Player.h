@@ -242,6 +242,7 @@ public:
 
 	RECT getPlayerrect() { return _player.rc;}
 	RECT getplayermoverect() { return _player._playerect; }
+	RECT getweapon() { return _attackrc; }
 	
 	int getplayermoney() {return _player._money;}
 	void setplayermoney(int _money) { _player._money = _money; }
@@ -251,5 +252,10 @@ public:
 
 	inventory* getinventory() { return _inven; }
 
+	int getHp() { return _hp.Hp; }
+	void setHp(int hp) { _hp.Hp = hp; }
+
+	int getEnergy() { return _energy.energy; }
+	void setEnergy(int energy) { _energy.energy = energy; }
 
 };

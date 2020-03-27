@@ -15,7 +15,7 @@ HRESULT item::init(const char * name, itemType type, int price, int shareprice, 
 	_item.itemName = name;
 	_item._img = IMAGEMANAGER->findImage(name);
 	_item._type = type;
-	_item.rc = RectMakeCenter(_item._x, _item._y, _item._img->getWidth(), _item._img->getHeight());
+	_item.rc = RectMakeCenter(-50, -50, _item._img->getWidth(), _item._img->getHeight());
 	_item.move = false;
 	_item._Price = price;
 	_item._sharePrice = shareprice;
@@ -37,7 +37,7 @@ void item::update()
 
 void item::render()
 {
-	_item._img->render(CAMERA->getCameraDC(), _item.rc.left, _item.rc.top);
+	//_item._img->render(, _item.rc.left, _item.rc.top);
 }
 
 void item::render(HDC hdc)

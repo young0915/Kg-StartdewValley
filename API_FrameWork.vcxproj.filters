@@ -273,6 +273,27 @@
     <ClInclude Include="ruby.h">
       <Filter>기타등등</Filter>
     </ClInclude>
+    <ClInclude Include="tree.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
+    <ClInclude Include="Sebastian.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCbase.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Alex.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Abigail.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCMANAGER.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="grass.h">
+      <Filter>기타등등</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -420,6 +441,27 @@
       <Filter>기타등등</Filter>
     </ClCompile>
     <ClCompile Include="ruby.cpp">
+      <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.cpp">
+      <Filter>기타등등</Filter>
+    </ClCompile>
+    <ClCompile Include="Abigail.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Alex.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCbase.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Sebastian.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCMANAGER.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="grass.cpp">
       <Filter>기타등등</Filter>
     </ClCompile>
   </ItemGroup>

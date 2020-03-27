@@ -82,7 +82,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("게", "images/item/꽃게.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("나무", "images/item/나무.bmp", 16*3, 16*3, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("돌", "images/item/나무.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("돌", "images/item/돌.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("잡초", "images/item/잡초.bmp", 16 * 3, 15 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("루비", "images/item/루비.bmp", 11 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("물뿌리개(아이템)", "images/item/물뿌리개.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
@@ -99,7 +99,10 @@ void mainGame::maingameimg()
 
 	//잡것
 	IMAGEMANAGER->addImage("나무1", "images/etc/나무1.bmp", 48, 100, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("나무2", "images/etc/나무2.bmp", 50, 100, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("나무2", "images/etc/나무2.bmp", 50*3, 100*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("돌맹이", "images/기타등등/돌맹이.bmp", 48, 48, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("루비돌", "images/기타등등/루비돌.bmp", 48, 48, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("잔디", "images/etc/잔디.bmp", 48, 48, true, RGB(255, 0, 255));
 }
 
 
