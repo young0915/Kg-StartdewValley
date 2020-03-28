@@ -112,6 +112,9 @@
     <Filter Include="기타등등">
       <UniqueIdentifier>{d19420c9-20f8-49e9-ae66-4f9688405578}</UniqueIdentifier>
     </Filter>
+    <Filter Include="농장">
+      <UniqueIdentifier>{9627d013-c9fc-49b2-8347-efd89c7db4e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -294,6 +297,21 @@
     <ClInclude Include="tool.h">
       <Filter>mainGame\플레이어\기구</Filter>
     </ClInclude>
+    <ClInclude Include="watercanground.h">
+      <Filter>농장</Filter>
+    </ClInclude>
+    <ClInclude Include="justground.h">
+      <Filter>농장</Filter>
+    </ClInclude>
+    <ClInclude Include="hoeground.h">
+      <Filter>농장</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>농장</Filter>
+    </ClInclude>
+    <ClInclude Include="groundManager.h">
+      <Filter>농장</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -463,6 +481,21 @@
     </ClCompile>
     <ClCompile Include="tool.cpp">
       <Filter>mainGame\플레이어\기구</Filter>
+    </ClCompile>
+    <ClCompile Include="ground.cpp">
+      <Filter>농장</Filter>
+    </ClCompile>
+    <ClCompile Include="hoeground.cpp">
+      <Filter>농장</Filter>
+    </ClCompile>
+    <ClCompile Include="justground.cpp">
+      <Filter>농장</Filter>
+    </ClCompile>
+    <ClCompile Include="watercanground.cpp">
+      <Filter>농장</Filter>
+    </ClCompile>
+    <ClCompile Include="groundManager.cpp">
+      <Filter>농장</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

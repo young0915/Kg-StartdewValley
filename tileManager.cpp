@@ -331,7 +331,7 @@ void tileManager::Town()
 		FILE_ATTRIBUTE_NORMAL,										//파일이나 장치를 열때 갖게 될 특성
 		NULL);																				//만들어질 파일이 갖게 될 확장 특성에 대한 정보
 	ReadFile(file, _map, sizeof(tagTile)*TILEX* TILEY, &read, NULL);
-	_pos[0] = 556;
+	_pos[0] =400;
 	_pos[1] = 40;
 
 	//속성 정의

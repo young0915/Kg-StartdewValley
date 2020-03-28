@@ -99,6 +99,7 @@ void mainGame::maingameimg()
 	//»óÁ¡
 	IMAGEMANAGER->addImage("»óÁ¡¾ÆÀú¾¾", "images/shop/Ui_shop.bmp", 650, 395, true, RGB(255,0,255));
 	IMAGEMANAGER->addImage("»óÁ¡Ä­", "images/shop/»óÁ¡Ä­.bmp", 478, 80, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("Ä«ÆêÆ®", "images/shop/Ä«ÆêÆ®.bmp", 100, 50, true, RGB(255, 0, 255));
 
 	//Àâ°Í
 	IMAGEMANAGER->addImage("³ª¹«1", "images/etc/³ª¹«1.bmp", 48, 100, true, RGB(255, 0, 255));

@@ -52,6 +52,8 @@ HRESULT Town::init()
 			_twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
 		_twtree[i]._isnear = false;
 	}
+
+	martgo = RectMakeCenter(1430, 540, 100, 50);
 	return S_OK;
 }
 
@@ -87,7 +89,12 @@ void Town::update()
 			_twtree[i]._isnear = false;
 		}
 	}
-	
+	RECT tmep;
+	if (IntersectRect(&tmep, &martgo, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("»óÁ¡");
+		PLAYER->setplayerXY(500, 500);
+	}
 
 }
 
@@ -121,6 +128,7 @@ void Town::render()
 		{
 			Rectangle(getMemDC(), _tree[i].midrc.left, _tree[i].midrc.top, _tree[i].midrc.right, _tree[i].midrc.bottom);
 			Rectangle(getMemDC(), _twtree[i].midrc.left, _twtree[i].midrc.top, _twtree[i].midrc.right, _twtree[i].midrc.bottom);
+			Rectangle(getMemDC(), martgo.left, martgo.top, martgo.right, martgo.bottom);
 		}
 	}
 

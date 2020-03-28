@@ -18,17 +18,26 @@ struct shop
 	int x, y;
 };
 
+struct tagCarpet
+{
+	image* _img;
+	RECT _rc;
+	int x, y;
+};
+
 class shopscene :public gameNode
 {
 private:
 	shopmain _shopmain;
 	shop _shop;
-
+	tagCarpet  _carpet;
 	vector<shop> _vshop;
 	vector<shop>::iterator _vitershop;
 
 
 	POINT _shoppoimt;
+
+	RECT _gotown;
 
 public :
 	shopscene();

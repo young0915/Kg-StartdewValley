@@ -49,12 +49,9 @@ void Myland::update()
 	if (IntersectRect(&twongo, &townrect, &PLAYER->getPlayerrect()))
 	{
 		SCENEMANAGER->changeScene("마을1");
-		PLAYER->setplayerXY(100, 300);
+		PLAYER->setplayerXY(500, 300);
 	}
-	if (KEYMANAGER->isOnceKeyDown('9'))
-	{
-		SCENEMANAGER->changeScene("상점");
-	}
+	
 	_other->update(_dropitem);
 	RECT itemtemp;
 	for (int i = 0; i < _dropitem.size(); i++)

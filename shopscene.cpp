@@ -54,6 +54,11 @@ HRESULT shopscene::init()
 		}
 	}
 	//===============================================================================================
+	_gotown = RectMakeCenter(450, 620, 100, 50);
+	_carpet._img = IMAGEMANAGER->findImage("Ä«ÆêÆ®");
+	_carpet.x = 450;
+	_carpet.y = 572;
+	_carpet._rc = RectMakeCenter(_carpet.x, _carpet.y, _carpet._img->getWidth(), _carpet._img->getHeight());
 	return S_OK;
 }
 
@@ -84,6 +89,13 @@ void shopscene::update()
 			}
 		}
 	}
+	RECT gotwon;
+	if (IntersectRect(&gotwon, &_gotown, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("¸¶À»2");
+		PLAYER->setplayerXY(1450, 520);
+	}
+
 	sellitem();
 }
 
@@ -169,10 +181,13 @@ void shopscene::render()
 	IMAGEMANAGER->render("¼¥4", getMemDC(), 200, 250);
 	IMAGEMANAGER->render("¼¥3", getMemDC(), 100, 525);
 	IMAGEMANAGER->render("¾ÆÀú¾¾", getMemDC(), 225, 215);
+
+	_carpet._img->render(getMemDC(), _carpet.x, _carpet.y);
 	PLAYER->render(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), shopsell.left, shopsell.top, shopsell.right, shopsell.bottom);
+		Rectangle(getMemDC(), _gotown.left, _gotown.top, _gotown.right, _gotown.bottom);
 	}
 	if (_shopmain._isopen)shoprender();
 	CURSOR->render(getMemDC());

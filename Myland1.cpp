@@ -21,12 +21,10 @@ HRESULT Myland1::init()
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//카메라 위치
 
-	//_minego = RectMakeCenter(430, 300, 80, 80);
-	//_myhouse = RectMakeCenter(500, 450, 250, 250);
 	IMAGEMANAGER->findImage("내집");
 	IMAGEMANAGER->findImage("지붕");
 	IMAGEMANAGER->findImage("우편");
-	townrect = RectMakeCenter(1500, 500, 80, 80);
+	townrect = RectMakeCenter(1400, 400, 50, 200);
 	return S_OK;
 }
 
@@ -42,6 +40,7 @@ void Myland1::update()
 	if (IntersectRect(&temp, &townrect, &PLAYER->getPlayerrect()))
 	{
 		SCENEMANAGER->changeScene("마을1");
+		PLAYER->setplayerXY(500, 300);
 	}
 }
 
@@ -53,7 +52,7 @@ void Myland1::render()
 	PLAYER->render(getMemDC());
 	IMAGEMANAGER->render("지붕", getMemDC(), 912, 150);
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
-	if (KEYMANAGER->isToggleKey('Q'))
+	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
 	}

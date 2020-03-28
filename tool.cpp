@@ -40,7 +40,7 @@ void tool::axemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 	_axe.y = _y;
 	_axe._tm = _move;
 	_axe._type = _ttype;
-	_axe._rc = RectMakeCenter(-50, -50, _axe._img->getFrameWidth(), _axe._img->getFrameHeight());
+	_axe._rc = RectMakeCenter(-100, -100, _axe._img->getFrameWidth(), _axe._img->getFrameHeight());
 	
 	switch (_move)
 	{

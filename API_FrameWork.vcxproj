@@ -161,6 +161,9 @@
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="gameNode.h" />
     <ClInclude Include="grass.h" />
+    <ClInclude Include="ground.h" />
+    <ClInclude Include="groundManager.h" />
+    <ClInclude Include="hoeground.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
     <ClInclude Include="introscene.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="item.h" />
     <ClInclude Include="itemManager.h" />
     <ClInclude Include="itemstone.h" />
+    <ClInclude Include="justground.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="loading.h" />
     <ClInclude Include="lodingscene.h" />
@@ -207,6 +211,7 @@
     <ClInclude Include="tree.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="watercanground.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Abigail.cpp" />
@@ -221,6 +226,9 @@
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
     <ClCompile Include="grass.cpp" />
+    <ClCompile Include="ground.cpp" />
+    <ClCompile Include="groundManager.cpp" />
+    <ClCompile Include="hoeground.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageManager.cpp" />
     <ClCompile Include="introscene.cpp" />
@@ -228,6 +236,7 @@
     <ClCompile Include="item.cpp" />
     <ClCompile Include="itemManager.cpp" />
     <ClCompile Include="itemstone.cpp" />
+    <ClCompile Include="justground.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="loading.cpp" />
     <ClCompile Include="lodingscene.cpp" />
@@ -263,6 +272,7 @@
     <ClCompile Include="tree.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="watercanground.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -18,6 +18,8 @@ private:
 	tileManager* _tilem;
 	treeone _tree[2];
 	treeone _twtree[2];
+	RECT martgo;
+
 public :
 	Town();
 	~Town();
