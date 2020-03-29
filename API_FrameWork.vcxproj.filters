@@ -58,9 +58,6 @@
     <Filter Include="카메라">
       <UniqueIdentifier>{b8ed33a3-fc70-4077-b0a0-74ec142c10d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NPC">
-      <UniqueIdentifier>{c7ddd1b9-c8cc-4ca4-83c1-5cf5274dc21b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="맵툴">
       <UniqueIdentifier>{1e5dcb35-9d55-46b3-a4b4-8bd3377a35e3}</UniqueIdentifier>
     </Filter>
@@ -264,9 +261,6 @@
     <ClInclude Include="stone.h">
       <Filter>기타등등</Filter>
     </ClInclude>
-    <ClInclude Include="randomFunction.h">
-      <Filter>기타등등</Filter>
-    </ClInclude>
     <ClInclude Include="itemstone.h">
       <Filter>기타등등</Filter>
     </ClInclude>
@@ -275,21 +269,6 @@
     </ClInclude>
     <ClInclude Include="tree.h">
       <Filter>기타등등</Filter>
-    </ClInclude>
-    <ClInclude Include="Sebastian.h">
-      <Filter>NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="NPCbase.h">
-      <Filter>NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="Alex.h">
-      <Filter>NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="Abigail.h">
-      <Filter>NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="NPCMANAGER.h">
-      <Filter>NPC</Filter>
     </ClInclude>
     <ClInclude Include="grass.h">
       <Filter>기타등등</Filter>
@@ -311,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="groundManager.h">
       <Filter>농장</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -460,21 +442,6 @@
     </ClCompile>
     <ClCompile Include="tree.cpp">
       <Filter>기타등등</Filter>
-    </ClCompile>
-    <ClCompile Include="Abigail.cpp">
-      <Filter>NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="Alex.cpp">
-      <Filter>NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="NPCbase.cpp">
-      <Filter>NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="Sebastian.cpp">
-      <Filter>NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="NPCMANAGER.cpp">
-      <Filter>NPC</Filter>
     </ClCompile>
     <ClCompile Include="grass.cpp">
       <Filter>기타등등</Filter>

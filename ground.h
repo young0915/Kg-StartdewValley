@@ -1,6 +1,5 @@
 #pragma once
 #include "gameNode.h"
-#include "item.h"
 
 enum STATE_GROUND
 {
@@ -13,7 +12,6 @@ enum STATE_GROUND
 struct  taggorundtile
 {
 	STATE_GROUND _state_ground;
-	item _item;
 	image* _img;
 	RECT _rc;
 	int _x, _y;
@@ -31,16 +29,20 @@ public :
 	ground();
 	~ground();
 
+	HRESULT init(const char* groundname, POINT position, STATE_GROUND stateground, bool isact);
+	void release();
+	void update();
+	void render();
+	void move();
+
 	bool getisact() { return _tile._isact; }
 	void setisact(bool isact) { _tile._isact = isact; }
 
 	STATE_GROUND getsateground() { return _tile._state_ground; }
 	void setstateground(STATE_GROUND _state) { _tile._state_ground = _state; }
 
-	HRESULT init(const char* groundname, POINT position, STATE_GROUND stateground, bool isact);
-	void release();
-	void update();
-	void render();
+	RECT getgroundrect() { return _tile._rc; }
+
 
 };
 

@@ -42,6 +42,8 @@ void Myland1::update()
 		SCENEMANAGER->changeScene("¸¶À»1");
 		PLAYER->setplayerXY(500, 300);
 	}
+	
+
 }
 
 void Myland1::render()

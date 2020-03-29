@@ -64,6 +64,11 @@ void Myland::update()
 			break;
 		}
 	}
+	if (KEYMANAGER->isOnceKeyDown('U'))
+	{
+		SCENEMANAGER->changeScene("³»¶¥2");
+	}
+
 }
 
 void Myland::render()

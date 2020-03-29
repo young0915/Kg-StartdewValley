@@ -24,5 +24,5 @@ void Player::playerimg()
 	IMAGEMANAGER->addFrameImage("물뿌리개", "images/기구/tool_wateringcan.bmp", 96*3, 160*3, 3,5,true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("도끼", "images/기구/tool_axe.bmp", 110*3, 110*3, 5, 5, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("곡괭이", "images/기구/tool_pickaxe.bmp", 110 * 3, 110 * 3, 5, 5, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("호미", "images/기구/tool_hoe.bmp", 110 * 3, 110 * 3, 5, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("호미", "images/기구/tool_hoe.bmp", 100 * 3, 110 * 3, 5, 5, true, RGB(255, 0, 255));
 }

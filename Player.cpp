@@ -1018,7 +1018,6 @@ void Player::attackmove()
 			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
 		}
 	}
-	//if()
 	if (KEYMANAGER->isStayKeyDown('5'))
 	{
 		if (_player._playerdirection == PLAYER_D_RIGHT)
@@ -1045,7 +1044,7 @@ void Player::attackmove()
 	}
 	if (KEYMANAGER->isOnceKeyUp('5'))
 	{
-		_tool->homemove(_player.x + 15, _player.y + 35, TOOL_HOE, TT_NONE);
+		_tool->homemove(-50, -50, TOOL_HOE, TT_NONE);
 		if (_player._playermove == PLAYER_PIS_RIGHT && _player._playerarmmove == PLAYER_ARM_PIS_RIGHT && _player._playerpants == PLAYER_PANTS_PWR_RIGHT)
 		{
 			_player._playerarmmove = PLAYER_ARM_IDLE_RIGHT;
@@ -1065,16 +1064,7 @@ void Player::attackmove()
 			_player._playerpants = PLAYER_PANTS_IDLE_DOWN;
 		}
 	}
-
-
-
-
 }
-	
-
-	
-
-	
 
 //¹°»Ñ¸®°³
 void Player::wattecanmove()

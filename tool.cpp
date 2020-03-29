@@ -182,7 +182,6 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 		}
 		_pickaxe._img->setFrameX(_pickaxe._index);
 		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 50, 50);
-
 		break;
 	case TT_UP:
 		_pickaxe._count++;
@@ -214,8 +213,9 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 		_pickaxe._img->setFrameX(_pickaxe._index);
 		_pickaxe._rc = RectMakeCenter(-50, -50, 0, 0);
 		break;
-	
+
 	}
+
 }
 
 void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
@@ -241,7 +241,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY(), 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() + 50, 50, 50);
 		break;
 	case TT_RIGHT:
 		_hoe._count++;
@@ -256,7 +256,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() -20, 50, 50);
 		break;
 	case TT_LEFT:
 		_hoe._count++;
@@ -271,7 +271,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY()-20, 50, 50);
 
 		break;
 	case TT_UP:
@@ -306,18 +306,20 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 		break;
 
 	}
+
 }
 
 void tool::render()
 {
+		_hoe._img->frameRender(getMemDC(), _hoe._rc.left, _hoe._rc.top);
 		_axe._img->frameRender(getMemDC(), _axe._rc.left, _axe._rc.top);
 		_pickaxe._img->frameRender(getMemDC(), _pickaxe._rc.left, _pickaxe._rc.top);
-		_hoe._img->frameRender(getMemDC(), _hoe._rc.left, _hoe._rc.top);
+
 	if (KEYMANAGER->isToggleKey('L'))
 	{
+		Rectangle(getMemDC(), _hoe._rc.left, _hoe._rc.top, _hoe._rc.right, _hoe._rc.bottom);
 		Rectangle(getMemDC(), _axe._rc.left, _axe._rc.top, _axe._rc.right, _axe._rc.bottom);
 		Rectangle(getMemDC(), _pickaxe._rc.left, _pickaxe._rc.top, _pickaxe._rc.right, _pickaxe._rc.bottom);
-
 	}
 
 }
