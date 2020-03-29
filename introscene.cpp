@@ -87,7 +87,7 @@ void introscene::introbtnn()
 				}
 				else
 				{
-
+					PostQuitMessage(0);
 				}
 			}
 		}

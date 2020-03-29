@@ -57,7 +57,7 @@ HRESULT Player::init()
 	_can._waterindex = 0;
 
 	_attackrc = RectMakeCenter(_player.x, _player.y, 50, 50);
-
+	seedRECT = RectMakeCenter(0, 0, 0, 0);
 	//다른 클래스 불러오기
 	//_cursor = new cusor;
 	//_cursor->init();
@@ -76,9 +76,7 @@ HRESULT Player::init()
 	return S_OK;
 }
 
-void Player::release()
-{
-}
+void Player::release(){}
 
 void Player::update()
 {
@@ -92,7 +90,27 @@ void Player::update()
 		//	_cursor->update();
 		_clock->update();
 	 inventorymove();									//인벤토리
-
+	 if (KEYMANAGER->isOnceKeyDown('6') || KEYMANAGER->isOnceKeyDown('7') || KEYMANAGER->isOnceKeyDown('8') || KEYMANAGER->isOnceKeyDown('9'))
+	 {
+		
+			 if (_player._playerdirection == PLAYER_D_DOWN)
+			 {
+				 seedRECT = RectMakeCenter(_player.x, _player.y + 50, 40, 40);
+			 }
+			 if (_player._playerdirection == PLAYER_D_RIGHT)
+			 {
+				 seedRECT = RectMakeCenter(_player.x+40, _player.y + 20, 40, 40);
+			 }
+			 if (_player._playerdirection == PLAYER_D_LEFT)
+			 {
+				 seedRECT = RectMakeCenter(_player.x - 40, _player.y + 20, 40, 40);
+			 }
+			 _inven->createseed();
+	 }
+	 if (KEYMANAGER->isOnceKeyUp('6') || KEYMANAGER->isOnceKeyUp('7') || KEYMANAGER->isOnceKeyUp('8') || KEYMANAGER->isOnceKeyUp('9'))
+	 {
+		 if (_player._playerdirection == PLAYER_D_DOWN || _player._playerdirection == PLAYER_D_RIGHT || _player._playerdirection == PLAYER_D_LEFT) seedRECT = RectMakeCenter(-50, -50, 0, 0);
+	 }
 }
 
 void Player::playerkeycontrol()
@@ -1284,7 +1302,7 @@ void Player::render(HDC hdc)
 		Rectangle(hdc, _player.rc.left, _player.rc.top, _player.rc.right, _player.rc.bottom);
 		Rectangle(hdc, rcCollision.left, rcCollision.top, rcCollision.right, rcCollision.bottom);
 		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
-		
+		Rectangle(hdc, seedRECT.left, seedRECT.top, seedRECT.right, seedRECT.bottom);
 	}
 	_tool->render();
 	_clock->render();

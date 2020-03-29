@@ -58,7 +58,7 @@ HRESULT inventory::init()
 	_vinven[2]._item = ITEMMANAGER->additem("도끼(아이템)");
 	_vinven[3]._item = ITEMMANAGER->additem("곡괭이(아이템)");
 	_vinven[4]._item = ITEMMANAGER->additem("호미(아이템)");
-
+	_vinven[5]._item = ITEMMANAGER->additem("감자씨앗");
 
 	_invenelement._img = IMAGEMANAGER->findImage("쓰레기통");
 	_invenelement.rc = RectMakeCenter(850, WINSIZEY / 2, _invenelement._img->getWidth(), _invenelement._img->getHeight());
@@ -187,6 +187,25 @@ void inventory::emptyitem()
 		_invenelement._item.setRect(_invenelement.rc);
 		_vinven.push_back(_invenelement);
 	
+}
+//씨앗 사용
+void inventory::createseed()
+{
+	//화면상 보이는 거
+	for (int i = 5; i < 13; i++)
+	{
+		//수량 체크 
+		if (0 < _vinven[i]._item.getItemInfo()._cnt)
+		{
+			_vinven[i]._item.setItemCnt(-1);
+			if (_vinven[i]._item.getItemInfo()._cnt == 0)
+			{
+				_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+			}
+		}
+	}
+
+
 }
 
 //화면상 보이는 그냥 랜더

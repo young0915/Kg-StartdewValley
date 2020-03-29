@@ -200,8 +200,9 @@ private:
 	tagwatercan _can;												//물뿌리개
 
 	RECT rcCollision;
-
 	RECT _attackrc;														//공격 랙트 설정
+	RECT seedRECT;
+
 
 	float time;																//TIMEMANAGER에 사용할 것 
 	bool isinven;															//메인인벤 또는 인벤토리에 들어갔냐
@@ -247,6 +248,7 @@ public:
 	RECT getPlayerrect() { return _player.rc;}
 	RECT getplayermoverect() { return _player._playerect; }
 	RECT getweapon() { return _attackrc; }
+	RECT getSeed() { return seedRECT; }
 	
 	int getplayermoney() {return _player._money;}
 	void setplayermoney(int _money) { _player._money = _money; }

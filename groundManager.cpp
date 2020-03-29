@@ -86,7 +86,10 @@ void groundManager::sethoeground()
 			_vground.push_back(_hoeground);
 		}
 	}
+
+
 }
+
 
 void groundManager::setwetground()
 {
@@ -122,6 +125,17 @@ void groundManager::collision()
 			if (_vground[i]->getsateground() == MASH_GROUND)
 			{
 				removetile(i);
+			}
+		}
+		//씨앗을 뿌렸을 때
+		RECT seedTemp;
+		if (IntersectRect(&seedTemp, &_vground[i]->getgroundrect(), &PLAYER->getSeed()))
+		{
+			if (_vground[i]->getsateground() == WET_GROUND)
+			{
+
+
+				_vground[i]->setstateground(ITEM_GROUND);										//아이템 생성 이거 어떻게 설정할 지 에휴
 			}
 		}
 	}

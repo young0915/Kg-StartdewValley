@@ -54,6 +54,7 @@ public :
 	void itemmove();																						//아이템 잡기
 	void additem(item _item);														//아이템 추가 
 	void emptyitem();
+	void createseed();																				//씨앗 사용하는 함수
 
 	void render(HDC hdc);																			//화면상 보이는 그냥 랜더
 	void invenrender(HDC hdc);																//E번을 눌렀을 때 보이는 랜더
@@ -63,5 +64,7 @@ public :
 	void setOpen(bool _iseuse) { isuse = _iseuse; }
 
 	void setTest(bool test) { istouch = test; }
+
+	
 };
 
