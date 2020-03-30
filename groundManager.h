@@ -21,7 +21,7 @@ public :
 	~groundManager();
 
 	HRESULT init();										//MYLAND2에 넣을 것 
-	void update(vector<item> &itme);
+	void update(/*vector<item> &itme*/);
 	void release();
 	void render();
 	void removetile(int num);					//타일을 지워주는 함수

@@ -28,6 +28,9 @@ HRESULT Myland2::init()
 	_ground = new groundManager;
 	_ground->init();
 
+	_vegetable = new vegetablemanager;
+	_vegetable->init();
+
 	return S_OK;
 }
 
@@ -39,13 +42,15 @@ void Myland2::release()
 void Myland2::update()
 {
 	PLAYER->update();
-	_ground->update(_item);
+	_ground->update();
+	_vegetable->update(_item);
 }
 
 void Myland2::render()
 {
 	_tilem->render();
 	_ground->render();
+	_vegetable->render();
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
 	IMAGEMANAGER->render("내집", getMemDC(), 912, 147);
 	PLAYER->render(getMemDC());

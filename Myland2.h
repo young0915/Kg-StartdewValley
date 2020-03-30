@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tileManager.h"
 #include "groundManager.h"
+#include "vegetablemanager.h"
 #include "item.h"
 
 /*
@@ -14,6 +15,7 @@ class Myland2 : public gameNode
 private :
 	tileManager* _tilem;
 	groundManager* _ground;
+	vegetablemanager* _vegetable;
 	vector<item> _item;
 public :
 	Myland2();

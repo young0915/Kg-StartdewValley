@@ -184,6 +184,7 @@
     <ClInclude Include="Myland3.h" />
     <ClInclude Include="othermanager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="potato.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="rat.h" />
@@ -206,6 +207,8 @@
     <ClInclude Include="tree.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="vegetable.h" />
+    <ClInclude Include="vegetablemanager.h" />
     <ClInclude Include="watercanground.h" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +249,7 @@
     <ClCompile Include="othermanager.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="potato.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="rat.cpp" />
     <ClCompile Include="ruby.cpp" />
@@ -262,6 +266,8 @@
     <ClCompile Include="tree.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="vegetable.cpp" />
+    <ClCompile Include="vegetablemanager.cpp" />
     <ClCompile Include="watercanground.cpp" />
     <ClCompile Include="winMain.cpp" />
     <ClCompile Include="stdafx.cpp">

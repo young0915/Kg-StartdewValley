@@ -57,7 +57,7 @@ void tool::axemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_axe._img->setFrameX(_axe._index);
-		_axe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() , 50, 50);
+		_axe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() , 40, 40);
 
 		break;
 	case T_RIGHT:
@@ -73,7 +73,7 @@ void tool::axemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_axe._img->setFrameX(_axe._index);
-		_axe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_axe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() - 20, 40, 40);
 
 		break;
 	case T_LEFT:
@@ -89,7 +89,7 @@ void tool::axemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_axe._img->setFrameX(_axe._index);
-		_axe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_axe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 40, 40);
 		break;
 	case T_UP:
 		_axe._count++;
@@ -151,7 +151,7 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_pickaxe._img->setFrameX(_pickaxe._index);
-		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() + 50, 50, 50);
+		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() + 50, 40, 40);
 		break;
 	case TT_RIGHT:
 		_pickaxe._count++;
@@ -166,7 +166,7 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_pickaxe._img->setFrameX(_pickaxe._index);
-		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() - 20, 40, 40);
 		break;
 	case TT_LEFT:
 		_pickaxe._count++;
@@ -181,7 +181,7 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_pickaxe._img->setFrameX(_pickaxe._index);
-		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 50, 50);
+		_pickaxe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY() - 20, 40, 40);
 		break;
 	case TT_UP:
 		_pickaxe._count++;
@@ -241,7 +241,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() + 50, 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX(), PLAYER->getintplayerY() + 50, 40, 40);
 		break;
 	case TT_RIGHT:
 		_hoe._count++;
@@ -256,7 +256,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() -20, 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() + 25, PLAYER->getintplayerY() -20, 40, 40);
 		break;
 	case TT_LEFT:
 		_hoe._count++;
@@ -271,7 +271,7 @@ void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 			}
 		}
 		_hoe._img->setFrameX(_hoe._index);
-		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY()-20, 50, 50);
+		_hoe._rc = RectMakeCenter(PLAYER->getintplayerX() - 25, PLAYER->getintplayerY()-20, 40, 40);
 
 		break;
 	case TT_UP:

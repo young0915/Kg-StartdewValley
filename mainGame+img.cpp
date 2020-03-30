@@ -112,7 +112,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("비어진 땅", "images/타일/비어진땅.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("물뿌리개타일", "images/타일/물뿌리개타일.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("호미타일", "images/타일/호미타일.bmp", 50, 50, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("감자농장", "images/타일/감자농장.bmp", 50, 350, 1,7,true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("감자농장", "images/타일/감자농장.bmp", 312, 72, 8,1,true, RGB(255, 0, 255));
 }
 
 

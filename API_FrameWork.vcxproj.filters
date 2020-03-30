@@ -112,6 +112,12 @@
     <Filter Include="농장">
       <UniqueIdentifier>{9627d013-c9fc-49b2-8347-efd89c7db4e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="농장\농장땅">
+      <UniqueIdentifier>{c31f340b-31d5-4d9b-b7fd-2650a328c3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="농장\채소">
+      <UniqueIdentifier>{afcf510a-0ad7-4cfb-bb55-98fc5b80dc69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -276,23 +282,32 @@
     <ClInclude Include="tool.h">
       <Filter>mainGame\플레이어\기구</Filter>
     </ClInclude>
-    <ClInclude Include="watercanground.h">
-      <Filter>농장</Filter>
-    </ClInclude>
-    <ClInclude Include="justground.h">
-      <Filter>농장</Filter>
-    </ClInclude>
-    <ClInclude Include="hoeground.h">
-      <Filter>농장</Filter>
-    </ClInclude>
-    <ClInclude Include="ground.h">
-      <Filter>농장</Filter>
-    </ClInclude>
-    <ClInclude Include="groundManager.h">
-      <Filter>농장</Filter>
-    </ClInclude>
     <ClInclude Include="randomFunction.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>농장\농장땅</Filter>
+    </ClInclude>
+    <ClInclude Include="groundManager.h">
+      <Filter>농장\농장땅</Filter>
+    </ClInclude>
+    <ClInclude Include="hoeground.h">
+      <Filter>농장\농장땅</Filter>
+    </ClInclude>
+    <ClInclude Include="justground.h">
+      <Filter>농장\농장땅</Filter>
+    </ClInclude>
+    <ClInclude Include="watercanground.h">
+      <Filter>농장\농장땅</Filter>
+    </ClInclude>
+    <ClInclude Include="vegetable.h">
+      <Filter>농장\채소</Filter>
+    </ClInclude>
+    <ClInclude Include="vegetablemanager.h">
+      <Filter>농장\채소</Filter>
+    </ClInclude>
+    <ClInclude Include="potato.h">
+      <Filter>농장\채소</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -450,19 +465,28 @@
       <Filter>mainGame\플레이어\기구</Filter>
     </ClCompile>
     <ClCompile Include="ground.cpp">
-      <Filter>농장</Filter>
-    </ClCompile>
-    <ClCompile Include="hoeground.cpp">
-      <Filter>농장</Filter>
-    </ClCompile>
-    <ClCompile Include="justground.cpp">
-      <Filter>농장</Filter>
-    </ClCompile>
-    <ClCompile Include="watercanground.cpp">
-      <Filter>농장</Filter>
+      <Filter>농장\농장땅</Filter>
     </ClCompile>
     <ClCompile Include="groundManager.cpp">
-      <Filter>농장</Filter>
+      <Filter>농장\농장땅</Filter>
+    </ClCompile>
+    <ClCompile Include="hoeground.cpp">
+      <Filter>농장\농장땅</Filter>
+    </ClCompile>
+    <ClCompile Include="justground.cpp">
+      <Filter>농장\농장땅</Filter>
+    </ClCompile>
+    <ClCompile Include="watercanground.cpp">
+      <Filter>농장\농장땅</Filter>
+    </ClCompile>
+    <ClCompile Include="vegetablemanager.cpp">
+      <Filter>농장\채소</Filter>
+    </ClCompile>
+    <ClCompile Include="vegetable.cpp">
+      <Filter>농장\채소</Filter>
+    </ClCompile>
+    <ClCompile Include="potato.cpp">
+      <Filter>농장\채소</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

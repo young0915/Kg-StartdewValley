@@ -13,8 +13,7 @@ HRESULT groundManager::init()
 
 	return S_OK;
 }
-
-void groundManager::update(vector<item>& itme)
+void groundManager::update()
 {
 	for (_viterground = _vground.begin(); _viterground != _vground.end(); ++_viterground)
 	{
@@ -28,6 +27,21 @@ void groundManager::update(vector<item>& itme)
 		}
 	}
 }
+//
+//void groundManager::update(vector<item>& itme)
+//{
+//	for (_viterground = _vground.begin(); _viterground != _vground.end(); ++_viterground)
+//	{
+//		(*_viterground)->update();
+//	}
+//	for (int i = 0; i < _vground.size(); i++)
+//	{
+//		if (_vground[i]->getsateground() == JUST_GROUND)
+//		{
+//			collision();
+//		}
+//	}
+//}
 void groundManager::release(){}
 void groundManager::render()
 {
@@ -67,7 +81,7 @@ void groundManager::setjustground()
 		{
 			ground* _justground;
 			_justground = new justground;
-			_justground->init("비어진 땅", PointMake(575 + i * 50, 575 + j * 50), JUST_GROUND, false);
+			_justground->init("비어진 땅", PointMake(575 + i * 52, 575 + j * 52), JUST_GROUND, false);
 			_vground.push_back(_justground);
 		}
 	}
@@ -82,12 +96,10 @@ void groundManager::sethoeground()
 		{
 			ground* _hoeground;
 			_hoeground = new hoeground;
-			_hoeground->init("호미타일", PointMake(575 + i * 50, 575 + j * 50), MASH_GROUND, false);
+			_hoeground->init("호미타일", PointMake(575 + i * 52, 575 + j * 52), MASH_GROUND, false);
 			_vground.push_back(_hoeground);
 		}
 	}
-
-
 }
 
 
@@ -100,7 +112,7 @@ void groundManager::setwetground()
 		{
 			ground* _wetground;
 			_wetground = new justground;
-			_wetground->init("물뿌리개타일", PointMake(575 + i * 50, 575 + j * 50), WET_GROUND, false);
+			_wetground->init("물뿌리개타일", PointMake(575 + i * 52, 575 + j * 52), WET_GROUND, false);
 			_vground.push_back(_wetground);
 		}
 	}
@@ -128,15 +140,13 @@ void groundManager::collision()
 			}
 		}
 		//씨앗을 뿌렸을 때
-		RECT seedTemp;
-		if (IntersectRect(&seedTemp, &_vground[i]->getgroundrect(), &PLAYER->getSeed()))
-		{
-			if (_vground[i]->getsateground() == WET_GROUND)
-			{
-
-
-				_vground[i]->setstateground(ITEM_GROUND);										//아이템 생성 이거 어떻게 설정할 지 에휴
-			}
-		}
+		//RECT seedTemp;
+		//if (IntersectRect(&seedTemp, &_vground[i]->getgroundrect(), &PLAYER->getSeed()))
+		//{
+		//	if (_vground[i]->getsateground() == WET_GROUND)
+		//	{
+		//	//	_vground[i]->setstateground(ITEM_GROUND);										//아이템 생성 이거 어떻게 설정할 지 에휴
+		//	}
+		//}
 	}
 }
