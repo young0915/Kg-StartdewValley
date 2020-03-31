@@ -69,3 +69,23 @@ inline void AlphaRectangle(HDC hdc, int left, int top, int right, int bottom)
 	SelectObject(hdc, oldBrush);
 	DeleteObject(myBrush);
 }
+
+// 글자 폰트 바꿔서 출력하는 함수
+inline void FontTextOut(HDC hdc, int drawX, int drawY, LPCSTR str,
+	int fontSize, LPCSTR fontName, COLORREF color = RGB(0, 0, 0))
+{
+	// 글자의 색깔을 바꾸는 부분
+	COLORREF oldTextColor = SetTextColor(hdc, color);
+	// 글자의 폰트를 바꾸는 부분
+	HFONT font = CreateFont(fontSize, 0, 0, 0, 0, 0, 0, 0, DEFAULT_CHARSET,
+		0, 0, 0, 0, fontName);
+	HFONT oldFont = (HFONT)SelectObject(hdc, font);
+	// 배경을 투명하게 바꾸는 부분
+	SetBkMode(hdc, TRANSPARENT);
+	TextOut(hdc, drawX, drawY, str, strlen(str));
+	// 바꿨던 글자 색깔을 해제하는 부분
+	SetTextColor(hdc, oldTextColor);
+	// 폰트를 해제하는 부분
+	SelectObject(hdc, oldFont);
+	DeleteObject(font);
+}

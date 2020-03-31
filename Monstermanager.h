@@ -13,6 +13,7 @@ private:
 	item _dropitem;
 	image* _itemimg;
 	int  atkcount=0;
+	int test;
 public :
 	Monstermanager();
 	~Monstermanager();

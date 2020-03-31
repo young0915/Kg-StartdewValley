@@ -254,12 +254,12 @@ void aStarScene::render()
 				TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
 			}
 		}
-		_rat->render();
+	//	_rat->render();
 		colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
 		colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);  // 플레이어
 		colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
 	}
-
+	_rat->render();
 }
 
 void aStarScene::Astar()

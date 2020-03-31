@@ -151,10 +151,10 @@ void shopscene::shoprender()
 		TCHAR str123[1024];
 
 		sprintf_s(str123, "%s", _vshop[i]._item.getItemInfo().itemName.c_str());
-		TextOut(getMemDC(), _vshop[i]._rc.left + 100, _vshop[i]._rc.top + 30, str123, strlen(str123));
+		FontTextOut(getMemDC(), _vshop[i]._rc.left + 100, _vshop[i]._rc.top + 30, str123, 20, "경기천년제목L Light", RGB(41, 41, 41));
 
 		sprintf_s(str, "%d", _vshop[i]._item.getItemInfo()._Price);
-		TextOut(getMemDC(), _vshop[i]._rc.left + 300, _vshop[i]._rc.top + 30, str, strlen(str));
+		FontTextOut(getMemDC(), _vshop[i]._rc.left + 300, _vshop[i]._rc.top + 30, str, 20, "경기천년제목L Light", RGB(41, 41, 41));
 
 		if (KEYMANAGER->isToggleKey('5'))
 		{

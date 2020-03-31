@@ -224,7 +224,8 @@ void inventory::invenrender(HDC hdc)
 	if (isuse) itemrender(getMemDC());
 	char str[128];
 	sprintf_s(str, "%d", PLAYER->getplayermoney());
-	TextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, strlen(str));
+	//TextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, strlen(str));
+	FontTextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, 20, "경기천년제목L Light", RGB(41, 41, 41));
 
 	/*for (int i = 0; i < _vTemp.size(); i++)
 	{
