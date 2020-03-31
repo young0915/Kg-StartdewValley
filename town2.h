@@ -17,6 +17,9 @@ private:
 	tileManager* _tilem;
 	treetwo _tree[2];
 	treetwo _twtree[2];
+
+	RECT myhome;						//집으로 가는랙트 
+
 public :
 	town2();
 	~town2();

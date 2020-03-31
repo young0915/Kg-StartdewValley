@@ -37,6 +37,7 @@ void mainGame::release()
 	gameNode::release();
 	CURSOR->release();
 	SCENEMANAGER->release();
+	ANIMATIONMANAGER->deleteALL();
 }
 
 void mainGame::update()

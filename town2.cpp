@@ -52,6 +52,8 @@ HRESULT town2::init()
 			_twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
 		_twtree[i]._isnear = false;
 	}
+	
+	myhome = RectMakeCenter(100, 500, 50, 500);
 	return S_OK;
 }
 
@@ -86,6 +88,12 @@ void town2::update()
 		{
 			_twtree[i]._isnear = false;
 		}
+	}
+	RECT temp;
+	if (IntersectRect(&temp, &myhome, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("³»¶¥2");
+		PLAYER->setplayerXY(1500, 400);
 	}
 }
 

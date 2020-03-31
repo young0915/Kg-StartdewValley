@@ -204,57 +204,62 @@ void aStarScene::update(tagTile _tile[], RECT playerRc)
 
 void aStarScene::render()
 {
-	for (int i = 0; i < astarTileSize; i++)
-	{
-		if (tile[i].block)
-		{
-			if (i == startTile)
-			{
-				startTile = -1;
-			}
-			if (i == endTile)
-			{
-				endTile = -1;
-			}
-		}
-		else if (i == startTile)
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 0, 255, 0);
-		}
-		else if (i == endTile)
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 0, 0);
-		}
-		else if (tile[i].showState == STATE_OPEN)
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 255);
-		}
-		else if (tile[i].showState == STATE_CLOSE)		//초록줄
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 0);
-		}
-		else if (tile[i].showState == STATE_PATH)			//찾는줄
-		{
-			colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 128, 128);
-		}
-	}
-	for (int i = 0; i < astarTileSize; i++)
-	{
-		if (KEYMANAGER->isToggleKey('0'))
-		{
-			SetBkMode(getMemDC(), TRANSPARENT);
-			//색상
-			SetTextColor(getMemDC(), RGB(255, 0, 0));
 
-			char str[128];
-			sprintf_s(str, "%d", i);
-			TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		for (int i = 0; i < astarTileSize; i++)
+		{
+			if (tile[i].block)
+			{
+				if (i == startTile)
+				{
+					startTile = -1;
+				}
+				if (i == endTile)
+				{
+					endTile = -1;
+				}
+			}
+			else if (i == startTile)
+			{
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 0, 255, 0);
+			}
+			else if (i == endTile)
+			{
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 0, 0);
+			}
+			else if (tile[i].showState == STATE_OPEN)
+			{
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 255);
+			}
+			else if (tile[i].showState == STATE_CLOSE)		//초록줄
+			{
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 128, 255, 0);
+			}
+			else if (tile[i].showState == STATE_PATH)			//찾는줄
+			{
+				colorRectangle(getMemDC(), tile[i].rc.left, tile[i].rc.top, 50, 50, 255, 128, 128);
+			}
 		}
+		for (int i = 0; i < astarTileSize; i++)
+		{
+			if (KEYMANAGER->isToggleKey('0'))
+			{
+				SetBkMode(getMemDC(), TRANSPARENT);
+				//색상
+				SetTextColor(getMemDC(), RGB(255, 0, 0));
+
+				char str[128];
+				sprintf_s(str, "%d", i);
+				TextOut(getMemDC(), tile[i].rc.left, tile[i].rc.top, str, strlen(str));
+			}
+		}
+		_rat->render();
+		colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
+		colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);  // 플레이어
+		colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
 	}
-	_rat->render();
-	colorRectangle(getMemDC(), _rat->getratInfo().rc.left, _rat->getratInfo().rc.top, 50, 50, 100, 100, 30);
-	colorRectangle(getMemDC(), tile[m_endY * 20 + m_endX].rc.left, tile[m_endY * 20 + m_endX].rc.top, 50, 50, 0, 255, 0);  // 플레이어
-	colorRectangle(getMemDC(), tile[m_startY * 20 + m_startX].rc.left, tile[m_startY * 20 + m_startX].rc.top, 50, 50, 0, 0, 200);
+
 }
 
 void aStarScene::Astar()

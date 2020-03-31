@@ -50,10 +50,10 @@ void Myland2::render()
 {
 	_tilem->render();
 	_ground->render();
-	_vegetable->render();
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
 	IMAGEMANAGER->render("내집", getMemDC(), 912, 147);
 	PLAYER->render(getMemDC());
+	_vegetable->render();
 	IMAGEMANAGER->render("지붕", getMemDC(), 912, 150);
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
 }

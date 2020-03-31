@@ -94,16 +94,21 @@ void othermanager::setStone()
 	_tree->init("나무2", TREE_TYPE, STONE_IDLE, PointMake(550, 500), 1);
 	_vstone.push_back(_tree);
 
+
+
 }
 
 void othermanager::setruby()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		stone* _ruby;
-		_ruby = new ruby;
-		_ruby->init("루비돌", RUBY_STONE, STONE_IDLE, PointMake(350, 350 + i * 200), 3);
-		_vstone.push_back(_ruby);
+		for (int j = 0; j < 2; j++)
+		{
+			stone* _ruby;
+			_ruby = new ruby;
+			_ruby->init("루비돌", RUBY_STONE, STONE_IDLE, PointMake(600+j*400, 600 + i * 400), 3);
+			_vstone.push_back(_ruby);
+		}
 	}
 }
 
@@ -119,7 +124,7 @@ void othermanager::collisionstone()
 			if (_vstone[i]->gettype() == GRASS_TYPE || _vstone[i]->gettype() == TREE_TYPE)
 			{
 				atkcount++;
-				if (atkcount != 100)
+				if (atkcount != 50)
 				{
 					PLAYER->setHp(PLAYER->getHp() + 0.5f);
 				}
@@ -130,25 +135,24 @@ void othermanager::collisionstone()
 				}
 			}
 		}
-			//루비
-			RECT etc;
-			if (IntersectRect(&etc, &_vstone[i]->getstonerc(), &PLAYER->getTool()->getpickaxe()))
+		//루비
+		RECT etc;
+		if (IntersectRect(&etc, &_vstone[i]->getstonerc(), &PLAYER->getTool()->getpickaxe()))
+		{
+			if (_vstone[i]->gettype() == RUBY_STONE || _vstone[i]->gettype() == ETC_STONE)
 			{
-				if (_vstone[i]->gettype() == RUBY_STONE || _vstone[i]->gettype() == ETC_STONE)
+				atkcount++;
+				if (atkcount != 50)
 				{
-					atkcount++;
-					if (atkcount != 100)
-					{
-						PLAYER->setHp(PLAYER->getHp() + 0.5f);
-						PLAYER->setEnergy(PLAYER->getEnergy() + 0.4f);
-					}
-					else
-					{
-						_vstone[i]->setstate(STONE_MASH);
-						atkcount = 0;																	//다시 초기화
-					}
+					PLAYER->setHp(PLAYER->getHp() + 1);
+					PLAYER->setEnergy(PLAYER->getEnergy() + 1);
+				}
+				else
+				{
+					_vstone[i]->setstate(STONE_MASH);
+					atkcount = 0;																	//다시 초기화
 				}
 			}
 		}
-
+	}
 }

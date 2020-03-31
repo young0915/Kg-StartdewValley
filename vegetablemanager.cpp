@@ -12,6 +12,7 @@ vegetablemanager::~vegetablemanager()
 HRESULT vegetablemanager::init()
 {
 	this->setpotato();
+	_item = ITEMMANAGER->additem("감자");
 	return S_OK;
 }
 
@@ -29,7 +30,6 @@ void vegetablemanager::update(vector<item> &item)
 				(*_itervegeta)->update();
 			}
 			
-				//_item = 
 		}
 	}
 	collisiongrow();
@@ -41,8 +41,6 @@ void vegetablemanager::render()
 	{
 		(*_itervegeta)->render();
 	}
-	
-
 }
 
 void vegetablemanager::setpotato()
@@ -53,11 +51,13 @@ void vegetablemanager::setpotato()
 		{
 			vegetable* _potato;
 			_potato = new potato;
-			_potato->init("감자농장", PointMake(575 + i * 51, 575 + j * 51), NOT_GROW, false);
+			_potato->init("감자농장", PointMake(575 + i *51, 575 + j * 51), NOT_GROW, false);
 			//_potato->init("감자농장", PointMake(575 , 575), NOT_GROW, false);
 			_vegeta.push_back(_potato);
 			_item = ITEMMANAGER->additem("감자");
+		
 		}
+		break;
 	}
 }
 
@@ -74,6 +74,7 @@ void vegetablemanager::collisiongrow()
 				_vegeta[i]->setstateveg(GROWING);
 			}
 		}
+		break;
 	}
 
 }

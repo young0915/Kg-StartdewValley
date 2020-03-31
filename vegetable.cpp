@@ -31,7 +31,7 @@ void vegetable::update()
 void vegetable::render()
 {
 	if (KEYMANAGER->isToggleKey('L'))
-	{
+	{ 
 		Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);
 	}
 	_vegetableimg->frameRender(getMemDC(), rc.left, rc.top);

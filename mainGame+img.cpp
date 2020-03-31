@@ -47,9 +47,8 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addFrameImage("³ª°¡±â¹öÆ°", "images/introscene/³ª°¡±â.bmp", 148 * 3, 58 * 3, 2, 1, true, RGB(255, 0, 255));
 
 	//¸ó½ºÅÍ 
-	IMAGEMANAGER->addFrameImage("°Ô", "images/¸ó½ºÅÍ/²É°Ô.bmp", 64, 144, 4, 6, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("¹ÚÁã", "images/¸ó½ºÅÍ/¹ÚÁã.bmp", 64, 80, 4, 5, true, RGB(255, 0, 255));
-
+	IMAGEMANAGER->addFrameImage("²É°Ô", "images/¸ó½ºÅÍ/²É°Ô.bmp", 64*3, 96*3, 4, 4, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("¹ÚÁã", "images/¸ó½ºÅÍ/¹ÚÁã.bmp", 64*2, 80*2, 4, 5, true, RGB(255, 0, 255));
 
 	//Ä¿¼­ 
 	IMAGEMANAGER->addFrameImage("Ä¿¼­", "images/cursor/Ui_cursor.bmp", 128 * 2, 16 * 2, 8, 1, true, RGB(255, 0, 255));
@@ -113,6 +112,9 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("¹°»Ñ¸®°³Å¸ÀÏ", "images/Å¸ÀÏ/¹°»Ñ¸®°³Å¸ÀÏ.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("È£¹ÌÅ¸ÀÏ", "images/Å¸ÀÏ/È£¹ÌÅ¸ÀÏ.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("°¨ÀÚ³óÀå", "images/Å¸ÀÏ/°¨ÀÚ³óÀå.bmp", 312, 72, 8,1,true, RGB(255, 0, 255));
+
+
+
 }
 
 

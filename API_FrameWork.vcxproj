@@ -154,6 +154,7 @@
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="crab.h" />
     <ClInclude Include="cusor.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -176,6 +177,7 @@
     <ClInclude Include="mainGame.h" />
     <ClInclude Include="maptool.h" />
     <ClInclude Include="MineScene.h" />
+    <ClInclude Include="monster.h" />
     <ClInclude Include="Monstermanager.h" />
     <ClInclude Include="Myhouse.h" />
     <ClInclude Include="Myland.h" />
@@ -217,6 +219,7 @@
     <ClCompile Include="aStarScene.cpp" />
     <ClCompile Include="cameraManager.cpp" />
     <ClCompile Include="clock.cpp" />
+    <ClCompile Include="crab.cpp" />
     <ClCompile Include="cusor.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
@@ -240,6 +243,7 @@
     <ClCompile Include="mainGame.cpp" />
     <ClCompile Include="maptool.cpp" />
     <ClCompile Include="MineScene.cpp" />
+    <ClCompile Include="monster.cpp" />
     <ClCompile Include="Monstermanager.cpp" />
     <ClCompile Include="Myhouse.cpp" />
     <ClCompile Include="Myland.cpp" />

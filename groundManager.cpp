@@ -63,13 +63,7 @@ void groundManager::render()
 void groundManager::removetile(int num)
 {
 	//±×³É ¶¥°ú À¸±ü¶¥¿¡¸¸ Àû¿ë
-	for (int i = 0; i < _vground.size(); i++)
-	{
-		if (_vground[i]->getsateground() == JUST_GROUND /*|| _vground[i]->getsateground() == MASH_GROUND*/)
-		{
 			_vground.erase(_vground.begin() + num);
-		}
-	}
 }
 
 void groundManager::setjustground()

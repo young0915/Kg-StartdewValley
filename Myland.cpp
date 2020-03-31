@@ -64,17 +64,11 @@ void Myland::update()
 			break;
 		}
 	}
-	if (KEYMANAGER->isOnceKeyDown('U'))
-	{
-		SCENEMANAGER->changeScene("내땅2");
-	}
-
 }
 
 void Myland::render()
 {
 	_tilem->render();
-	
 	IMAGEMANAGER->render("우편", getMemDC(), 1202, 400);
 	IMAGEMANAGER->render("내집", getMemDC(), 812, 147);
 	PLAYER->render(getMemDC());
