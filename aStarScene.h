@@ -52,9 +52,10 @@ class aStarScene : public gameNode
 {
 private:
 	tileManager* _mine;
-	rat* _rat;
+
 	tagastarTile tile[astarTileSize];
 
+	rat* _rat;
 	vector<int> openlist;
 	vector<int>closelist;
 	vector<int>pathList;
@@ -116,7 +117,7 @@ public :
 	void blockType();
 
 	void rectMoveDirect();
-
+	void remove(int num);
 
 //	void mineastar();															//동굴 박쥐에게 사용할 에이스타
 //	void villageastar();														//마을에서 사용할 에이스타

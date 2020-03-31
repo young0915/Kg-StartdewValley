@@ -1304,14 +1304,16 @@ void Player::render(HDC hdc)
 		Rectangle(hdc, _attackrc.left, _attackrc.top, _attackrc.right, _attackrc.bottom);
 		Rectangle(hdc, seedRECT.left, seedRECT.top, seedRECT.right, seedRECT.bottom);
 	}
-	_tool->render();
-	_clock->render();
-	if(!isinven)_inven->render(hdc);
-	else _inven->invenrender(hdc);
+
+
 	//_cursor->render();																										//커서
+	_tool->render();
+
 }
-//인벤토리 랜더
-void Player::inventroyrender(HDC hdc)
+
+void Player::invenrender(HDC hdc)
 {
-	
+	_clock->render();
+	if (!isinven)_inven->render(hdc);
+	else _inven->invenrender(hdc);
 }

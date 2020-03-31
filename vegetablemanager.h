@@ -12,11 +12,11 @@ private:
 	_vegetable _vegeta;
 	_itervegetable _itervegeta;
 	item _item;
-
-public:
+	image* _dropimg;
+	int time;
+	public:
 	vegetablemanager();
 	~vegetablemanager();
-
 
 	HRESULT init();
 	void release();
@@ -25,7 +25,7 @@ public:
 
 	void setpotato();
 	void collisiongrow();																//¾¾¾ÑÀÌ ¶¥¿¡ ´ê¾ÒÀ» ¶§ 
-
+	void removepotato(int num);
 
 };
 

@@ -118,6 +118,9 @@
     <Filter Include="농장\채소">
       <UniqueIdentifier>{afcf510a-0ad7-4cfb-bb55-98fc5b80dc69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NPC">
+      <UniqueIdentifier>{65eaab36-2b67-4953-9944-716d6b7859cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -315,6 +318,18 @@
     <ClInclude Include="monster.h">
       <Filter>몬스터</Filter>
     </ClInclude>
+    <ClInclude Include="NPCMANAGER.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Sebastian.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Abigail.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Alex.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -499,6 +514,18 @@
     </ClCompile>
     <ClCompile Include="crab.cpp">
       <Filter>몬스터</Filter>
+    </ClCompile>
+    <ClCompile Include="Abigail.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Alex.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCMANAGER.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Sebastian.cpp">
+      <Filter>NPC</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

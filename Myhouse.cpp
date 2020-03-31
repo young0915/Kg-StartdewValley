@@ -14,7 +14,7 @@ HRESULT Myhouse::init()
 	_tilem = new tileManager;
 	_tilem->Myhouse();
 	//플레이어
-	PLAYER->init();
+//	PLAYER->init();
 	PLAYER->setMapMemoryAdress(_tilem);
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));

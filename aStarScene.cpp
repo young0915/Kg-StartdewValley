@@ -66,6 +66,27 @@ void aStarScene::release() {}
 
 void aStarScene::update(tagTile _tile[], RECT playerRc)
 {
+	_rat->update();
+	RECT temp;
+
+	for (int i = 0; i < openlist.size(); i++)
+	{
+		for (int j = 0; j < closelist.size(); j++)
+		{
+			for (int z = 0; z < pathList.size(); z++)
+			{
+				if (IntersectRect(&temp, &_rat->getrat(), &PLAYER->getweapon()))
+				{
+					openlist.erase(openlist.begin() + i);
+					closelist.erase(closelist.begin() + j);
+					pathList.erase(pathList.begin() + z); 
+				//	_rat->release();
+				}
+			}
+		}
+	}
+
+
 	RECT temp1;
 	PLAYER->getPlayerrect() = playerRc;
 	deltaTime = TIMEMANAGER->getElapsedTime();
@@ -596,4 +617,9 @@ void aStarScene::rectMoveDirect()
 			}
 		}
 	}
+}
+
+void aStarScene::remove(int num)
+{
+
 }

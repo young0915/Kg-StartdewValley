@@ -30,6 +30,7 @@ private :
 	animation* _ani;
 	RECT _rc;
 	RECT _atkrc;
+	image* _imgitem;
 	item _item;
 	int index;
 	int count;

@@ -48,7 +48,7 @@ void mainGame::maingameimg()
 
 	//몬스터 
 	IMAGEMANAGER->addFrameImage("꽃게", "images/몬스터/꽃게.bmp", 64*3, 96*3, 4, 4, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("박쥐", "images/몬스터/박쥐.bmp", 64*2, 80*2, 4, 5, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("박쥐", "images/몬스터/박쥐.bmp", 64*3, 64*3, 4, 4, true, RGB(255, 0, 255));
 
 	//커서 
 	IMAGEMANAGER->addFrameImage("커서", "images/cursor/Ui_cursor.bmp", 128 * 2, 16 * 2, 8, 1, true, RGB(255, 0, 255));
@@ -113,6 +113,11 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("호미타일", "images/타일/호미타일.bmp", 50, 50, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("감자농장", "images/타일/감자농장.bmp", 312, 72, 8,1,true, RGB(255, 0, 255));
 
+
+	//NPC
+	 IMAGEMANAGER->addFrameImage("아비게일", "images/NPC/Abigail.bmp", 64 * 3, 32 * 3, 4, 1, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addFrameImage("알렉스", "images/NPC/Alex.bmp", 64 * 3, 64 * 3, 4, 2, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addFrameImage("세바스찬", "images/NPC/Sebastian.bmp", 64 * 3, 64 * 3, 4, 2, true, RGB(255, 0, 255));
 
 
 }

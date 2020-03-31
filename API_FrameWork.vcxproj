@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Abigail.h" />
+    <ClInclude Include="Alex.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="animationManager.h" />
     <ClInclude Include="API_FrameWork.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="Myland1.h" />
     <ClInclude Include="Myland2.h" />
     <ClInclude Include="Myland3.h" />
+    <ClInclude Include="NPCMANAGER.h" />
     <ClInclude Include="othermanager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="potato.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ruby.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="Sebastian.h" />
     <ClInclude Include="shopscene.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="soundManager.h" />
@@ -214,6 +218,8 @@
     <ClInclude Include="watercanground.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Abigail.cpp" />
+    <ClCompile Include="Alex.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="animationManager.cpp" />
     <ClCompile Include="aStarScene.cpp" />
@@ -250,6 +256,7 @@
     <ClCompile Include="Myland1.cpp" />
     <ClCompile Include="Myland2.cpp" />
     <ClCompile Include="Myland3.cpp" />
+    <ClCompile Include="NPCMANAGER.cpp" />
     <ClCompile Include="othermanager.cpp" />
     <ClCompile Include="Player+img.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -258,6 +265,7 @@
     <ClCompile Include="rat.cpp" />
     <ClCompile Include="ruby.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="Sebastian.cpp" />
     <ClCompile Include="shopscene.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stone.cpp" />

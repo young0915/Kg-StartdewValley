@@ -14,7 +14,7 @@ private:
 	Monstermanager* _monster;
 	RECT myland;
 	vector<item> _dropitem;
-
+	vector<item> _item;
 
 public:
 	MineScene();

@@ -15,7 +15,6 @@ HRESULT Town::init()
 	_tilem->Town();
 
 	//플레이어
-	PLAYER->init();
 	PLAYER->setMapMemoryAdress(_tilem);
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//카메라 위치
@@ -123,6 +122,7 @@ void Town::render()
 		if (_twtree[i]._isnear) _twtree[i]._img->alphaRender(getMemDC(), _twtree[i].midrc.left, _twtree[i].midrc.top, 100);
 		else _twtree[i]._img->render(getMemDC(), _twtree[i].midrc.left, _twtree[i].midrc.top);
 
+		PLAYER->invenrender(getMemDC());
 
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{

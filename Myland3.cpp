@@ -11,7 +11,7 @@ Myland3::~Myland3()
 
 HRESULT Myland3::init()
 {
-	return E_NOTIMPL;
+	return S_OK;
 }
 
 void Myland3::release()

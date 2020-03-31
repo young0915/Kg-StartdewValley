@@ -16,7 +16,7 @@ HRESULT Myland1::init()
 	_tilem->Mylandone();
 
 	//플레이어
-	PLAYER->init();
+	//PLAYER->init();
 	PLAYER->setMapMemoryAdress(_tilem);
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//카메라 위치
@@ -54,6 +54,7 @@ void Myland1::render()
 	PLAYER->render(getMemDC());
 	IMAGEMANAGER->render("지붕", getMemDC(), 912, 150);
 	IMAGEMANAGER->render("우편", getMemDC(), 1302, 400);
+	PLAYER->invenrender(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);

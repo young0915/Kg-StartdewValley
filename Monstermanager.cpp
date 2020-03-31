@@ -13,7 +13,7 @@ HRESULT Monstermanager::init()
 	return S_OK;
 }
 void Monstermanager::release() {}
-void Monstermanager::update(vector<item> _item)
+void Monstermanager::update(vector<item> &_item)
 {
 	for (_vitermonser = _vmonster.begin(); _vitermonser != _vmonster.end(); ++_vitermonser)
 	{
@@ -126,7 +126,7 @@ void Monstermanager::attackmonster()
 		if (IntersectRect(&playertemp, &_vmonster[i]->getRect(), &PLAYER->getPlayerrect()))
 		{
 			PLAYER->setEnergy(PLAYER->getEnergy() + 0.5f);
-			PLAYER->setHp(PLAYER->getHp() + 1);
+			PLAYER->setHp(PLAYER->getHp() + 0.5);
 			break;
 		}
 	}
@@ -140,11 +140,6 @@ void Monstermanager::render()
 	{
 		(*_vitermonser)->render();
 	}
-	char str[128];
-
-	sprintf_s(str, "%d", atkcount);
-	TextOut(CAMERA->getCameraDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-
-
+	
 
 }

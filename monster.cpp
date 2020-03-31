@@ -26,7 +26,7 @@ HRESULT monster::init(const char * name, POINT position, M_DIRECTION direction, 
 void monster::release()
 {
 	ANIMATIONMANAGER->deleteALL();
-	SAFE_DELETE(_img);
+
 }
 
 void monster::update()

@@ -195,17 +195,46 @@ void inventory::createseed()
 	for (int i = 5; i < 13; i++)
 	{
 		//수량 체크 
-		if (0 < _vinven[i]._item.getItemInfo()._cnt)
+
+		if (_vinven[i]._item.getItemInfo().itemName == "감자씨앗")
 		{
-			_vinven[i]._item.setItemCnt(-1);
-			if (_vinven[i]._item.getItemInfo()._cnt == 0)
+			if (0 < _vinven[i]._item.getItemInfo()._cnt)
 			{
-				_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+				_vinven[i]._item.setItemCnt(-1);
+				if (_vinven[i]._item.getItemInfo()._cnt == 0)
+				{
+					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+				}
 			}
 		}
+		if (_vinven[i]._item.getItemInfo().itemName == "감자")
+		{
+			if (0 < _vinven[i]._item.getItemInfo()._cnt)
+			{
+				PLAYER->setEnergy(PLAYER->getHp() + 50);
+				PLAYER->setHp(PLAYER->getEnergy() + 50);
+				_vinven[i]._item.setItemCnt(-1);
+				if (_vinven[i]._item.getItemInfo()._cnt == 0)
+				{
+					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+				}
+			}
+		}
+		if (_vinven[i]._item.getItemInfo().itemName == "게")
+		{
+			if (0 < _vinven[i]._item.getItemInfo()._cnt)
+			{
+				PLAYER->setEnergy(PLAYER->getHp() + 30);
+				PLAYER->setHp(PLAYER->getEnergy() + 10);
+				_vinven[i]._item.setItemCnt(-1);
+				if (_vinven[i]._item.getItemInfo()._cnt == 0)
+				{
+					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+				}
+			}
+
+		}
 	}
-
-
 }
 
 //화면상 보이는 그냥 랜더
@@ -224,17 +253,7 @@ void inventory::invenrender(HDC hdc)
 	if (isuse) itemrender(getMemDC());
 	char str[128];
 	sprintf_s(str, "%d", PLAYER->getplayermoney());
-	//TextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, strlen(str));
 	FontTextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, 20, "경기천년제목L Light", RGB(41, 41, 41));
-
-	/*for (int i = 0; i < _vTemp.size(); i++)
-	{
-		if (!_vTemp.empty())
-		{
-			_vTemp[i]._img->render(getMemDC(), CURSOR->getPoint().x, CURSOR->getPoint().y);
-		}
-	}
-	*/
 }
 //아이템 랜더
 void inventory::itemrender(HDC hdc)

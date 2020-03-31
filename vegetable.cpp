@@ -16,8 +16,8 @@ HRESULT vegetable::init(const char * imagename, POINT postion, VEGETABLESTATE ve
 	_vegetableimg = IMAGEMANAGER->findImage(imagename);
 	rc = RectMakeCenter(postion.x, postion.y, _vegetableimg->getFrameWidth(), _vegetableimg->getFrameHeight());
 	_isgrow = vegstate;
-	_isgrowup = isgrowup;
-
+	_isgrowup = isgrowup; 
+	_item = ITEMMANAGER->additem("°¨ÀÚ");
 	return S_OK;
 }
 
@@ -25,11 +25,13 @@ void vegetable::release(){}
 
 void vegetable::update()
 {
+	_item.update();
 	vegatablegrow();
 }
 
 void vegetable::render()
 {
+	_item.render();
 	if (KEYMANAGER->isToggleKey('L'))
 	{ 
 		Rectangle(getMemDC(), rc.left, rc.top, rc.right, rc.bottom);

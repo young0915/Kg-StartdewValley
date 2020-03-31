@@ -20,7 +20,7 @@ public :
 
 	HRESULT init();
 	void release();
-	void update(vector<item> _item);
+	void update(vector<item> &_item);
 	void render();
 	void acessmonster();										//접근 몬스터
 	void attackmonster();

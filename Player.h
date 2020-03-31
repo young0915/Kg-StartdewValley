@@ -162,9 +162,6 @@ struct  tagwatercan
 	int _waterindex;
 };
 
-
-
-
 //플레이어 프로그래스바(Hp & Energy)
 struct tagplayerHpbar
 {
@@ -217,7 +214,7 @@ public:
 	void release();
 	void update();
 	void render(HDC hdc);
-	void inventroyrender(HDC hdc);
+	void invenrender(HDC hdc);
 
 	void playerkeycontrol();											//플레이어 키를 모아둔 곳													
 	void playermove();													//플레이어 움직임(body)

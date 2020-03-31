@@ -75,6 +75,7 @@ void Myland::render()
 	IMAGEMANAGER->render("ÁöºØ", getMemDC(), 812, 150);
 	IMAGEMANAGER->render("¿ìÆí", getMemDC(), 1202, 400);
 	_other->render();
+	PLAYER->invenrender(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), _minego.left, _minego.top, _minego.right, _minego.bottom);

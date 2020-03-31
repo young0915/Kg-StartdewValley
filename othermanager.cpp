@@ -52,20 +52,10 @@ void othermanager::update(vector<item>& item)
 
 void othermanager::render()
 {
-
 	for (_viterstone = _vstone.begin(); _viterstone != _vstone.end(); ++_viterstone)
 	{
 		(*_viterstone)->render();
 	}
-
-	if (KEYMANAGER->isToggleKey('O'))
-	{
-		char str[128];
-		sprintf_s(str, "%d", atkcount);
-		TextOut(getMemDC(), WINSIZEX / 2, WINSIZEY / 2, str, strlen(str));
-
-	}
-
 }
 
 void othermanager::removestone(int num)
