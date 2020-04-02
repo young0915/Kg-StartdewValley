@@ -94,8 +94,7 @@ void Myhouse::render()
 	{
 		Rectangle(getMemDC(), _sleep.bedrect.left, _sleep.bedrect.top, _sleep.bedrect.right, _sleep.bedrect.bottom);
 	}
-	//_bk->alphaRender(getMemDC(), CAMERA->getCameraXY().x, CAMERA->getCameraXY().y, i++);
-	
+
 }
 
 void Myhouse::uirender()
@@ -113,7 +112,11 @@ void Myhouse::uirender()
 	}
 	if (isblank)
 	{
-		_bk->alphaRender(CAMERA->getCameraDC(), 0, 0, i++);
+		_bk->alphaRender(CAMERA->getCameraDC(), 0, 0,i++);
+		if (i == 250)
+		{
+			isblank = false;
+		}
 	}
 
 }

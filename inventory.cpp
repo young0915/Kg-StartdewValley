@@ -1,14 +1,9 @@
 #include "stdafx.h"
 #include "inventory.h"
 
-inventory::inventory()
-{
-}
+inventory::inventory(){}
 
-inventory::~inventory()
-{
-}
-
+inventory::~inventory(){}
 
 HRESULT inventory::init()
 {
@@ -65,6 +60,8 @@ HRESULT inventory::init()
 	_invenelement._item = ITEMMANAGER->additem("비어있음");
 	_invenelement._item.setRect(_invenelement.rc);
 	_vinven.push_back(_invenelement);
+	IMAGEMANAGER->findImage("물어보는창");
+
 
 	//==============================================================================================================
 	_invenback._img = IMAGEMANAGER->findImage("인벤토리");
@@ -73,8 +70,8 @@ HRESULT inventory::init()
 
 	_invenback.rc = RectMakeCenter(_invenback.x, _invenback.y, _invenback._img->getFrameWidth(), _invenback._img->getFrameHeight());
 	//==============================================================================================================
-
-
+	iseat = false;
+	iseatwindow = false;
 	return S_OK;
 }
 
@@ -93,6 +90,17 @@ void inventory::update()
 	inventoryItem();
 	//E 번을눌렀을 때 사용하는 함수 
 	if (isuse)	itemmove();
+
+	if (KEYMANAGER->isOnceKeyDown('8'))
+	{
+		if (iseatwindow)
+		{
+			iseat = true;
+			iseatwindow = false;
+		}
+		else 
+			iseatwindow = true;
+	}
 }
 //인벤토리 아이템 셋팅
 void inventory::inventoryItem()
@@ -195,46 +203,58 @@ void inventory::createseed()
 	for (int i = 5; i < 13; i++)
 	{
 		//수량 체크 
-
-		if (_vinven[i]._item.getItemInfo().itemName == "감자씨앗")
+		if (!iseat)
 		{
-			if (0 < _vinven[i]._item.getItemInfo()._cnt)
+			if (_vinven[i]._item.getItemInfo().itemName == "감자씨앗")
 			{
-				_vinven[i]._item.setItemCnt(-1);
-				if (_vinven[i]._item.getItemInfo()._cnt == 0)
+				if (0 < _vinven[i]._item.getItemInfo()._cnt)
 				{
-					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+					_vinven[i]._item.setItemCnt(-1);
+					if (_vinven[i]._item.getItemInfo()._cnt == 0)
+					{
+						_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+					}
 				}
 			}
 		}
-		if (_vinven[i]._item.getItemInfo().itemName == "감자")
+		if (iseat)
 		{
-			if (0 < _vinven[i]._item.getItemInfo()._cnt)
+			if (_vinven[i]._item.getItemInfo().itemName == "감자")
 			{
-				PLAYER->setEnergy(PLAYER->getHp() + 50);
-				PLAYER->setHp(PLAYER->getEnergy() + 50);
-				_vinven[i]._item.setItemCnt(-1);
-				if (_vinven[i]._item.getItemInfo()._cnt == 0)
+				if (0 < _vinven[i]._item.getItemInfo()._cnt)
 				{
-					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+					PLAYER->setEnergy(PLAYER->getHp() + 50);
+					PLAYER->setHp(PLAYER->getEnergy() + 50);
+					_vinven[i]._item.setItemCnt(-1);
+					if (_vinven[i]._item.getItemInfo()._cnt == 0)
+					{
+						_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+					}
 				}
 			}
+			if (_vinven[i]._item.getItemInfo().itemName == "게")
+			{
+				if (0 < _vinven[i]._item.getItemInfo()._cnt)
+				{
+					PLAYER->setEnergy(PLAYER->getHp() + 30);
+					PLAYER->setHp(PLAYER->getEnergy() + 10);
+					_vinven[i]._item.setItemCnt(-1);
+					if (_vinven[i]._item.getItemInfo()._cnt == 0)
+					{
+						_vinven[i]._item = ITEMMANAGER->additem("비어있음");
+					}
+				}
 		}
-		if (_vinven[i]._item.getItemInfo().itemName == "게")
-		{
-			if (0 < _vinven[i]._item.getItemInfo()._cnt)
-			{
-				PLAYER->setEnergy(PLAYER->getHp() + 30);
-				PLAYER->setHp(PLAYER->getEnergy() + 10);
-				_vinven[i]._item.setItemCnt(-1);
-				if (_vinven[i]._item.getItemInfo()._cnt == 0)
-				{
-					_vinven[i]._item = ITEMMANAGER->additem("비어있음");
-				}
-			}
-
 		}
 	}
+}
+
+void inventory::askeatwindow(HDC hdc)
+{
+	IMAGEMANAGER->render("물어보는창", CAMERA->getCameraDC(), 10, WINSIZEY / 2 + 100);
+	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 150, "아이템을 먹을까요?", 30, "경기천년제목L Light", RGB(41, 41, 41));
+	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 200, "네", 30, "경기천년제목L Light", RGB(41, 41, 41));
+	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 250, "아니오", 30, "경기천년제목L Light", RGB(41, 41, 41));
 }
 
 //화면상 보이는 그냥 랜더
@@ -242,7 +262,7 @@ void inventory::render(HDC hdc)
 {
 	_invenback._img->render(getMemDC(),CAMERA->getCameraXY().x +  _invenback.x, CAMERA->getCameraXY().y + _invenback.y);
 	if (!isuse)itemrender(getMemDC());
-
+	if (iseatwindow)askeatwindow(hdc);
 }
 //E번을 눌렀을 때 보이는 랜더
 void inventory::invenrender(HDC hdc)

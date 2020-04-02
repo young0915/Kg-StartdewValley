@@ -90,7 +90,7 @@ void Player::update()
 		//	_cursor->update();
 		_clock->update();
 	 inventorymove();									//인벤토리
-	 if (KEYMANAGER->isOnceKeyDown('6') || KEYMANAGER->isOnceKeyDown('7') || KEYMANAGER->isOnceKeyDown('8') || KEYMANAGER->isOnceKeyDown('9'))
+	 if (KEYMANAGER->isOnceKeyDown('6') || KEYMANAGER->isOnceKeyDown('7') /*|| KEYMANAGER->isOnceKeyDown('8') || KEYMANAGER->isOnceKeyDown('9')*/)
 	 {
 		
 			 if (_player._playerdirection == PLAYER_D_DOWN)
@@ -106,7 +106,17 @@ void Player::update()
 				 seedRECT = RectMakeCenter(_player.x - 40, _player.y + 20, 40, 40);
 			 }
 			 _inven->createseed();
+			 _inven->seteat(false);
+		
 	 }
+	 if (KEYMANAGER->isOnceKeyDown('9'))
+	 {
+		 _inven->seteat(true);
+		 _inven->createseed();
+		 _inven->setOpen(false);
+	}
+
+
 	 if (KEYMANAGER->isOnceKeyUp('6') || KEYMANAGER->isOnceKeyUp('7') || KEYMANAGER->isOnceKeyUp('8') || KEYMANAGER->isOnceKeyUp('9'))
 	 {
 		 if (_player._playerdirection == PLAYER_D_DOWN || _player._playerdirection == PLAYER_D_RIGHT || _player._playerdirection == PLAYER_D_LEFT) seedRECT = RectMakeCenter(-50, -50, 0, 0);
