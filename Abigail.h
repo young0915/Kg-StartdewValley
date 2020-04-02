@@ -1,14 +1,15 @@
 #pragma once
-#include "NPCMANAGER.h"
+#include "gameNode.h"
 
 struct  taghumanone
 {
 	image* img;
 	animation* animation;
 	RECT rc;
+	bool ischeck;
 };
 
-class Abigail :public NPCMANAGER
+class Abigail :public gameNode
 {
 private:
 	taghumanone _abigail;
@@ -20,5 +21,9 @@ public:
 	void release();
 	void update();
 	void render();
+	void dialogrender();
+	
+
+	RECT getabigail() { return _abigail.rc; }
 };
 

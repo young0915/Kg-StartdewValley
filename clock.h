@@ -26,6 +26,9 @@ public:
 	void timemove();
 	void clockmove();
 
+	void textrenderone();
+	void textrendertwo();
+
 
 	//야외에 있을 경우 색이 바꾸도록 할 것 
 	int gethour() { return hour; }

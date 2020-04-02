@@ -2,7 +2,6 @@
 #include "gameNode.h"
 #include "tileManager.h"
 #include "othermanager.h"
-
 class Myland : public gameNode
 {
 private:
@@ -19,6 +18,7 @@ private:
 
 	othermanager* _other;
 	vector<item> _dropitem;
+
 public:
 	Myland();
 	~Myland();

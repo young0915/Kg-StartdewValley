@@ -63,8 +63,8 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("내집", "images/맵툴/내집.bmp", 400, 400, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("지붕", "images/맵툴/지붕.bmp", 400, 140, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("우편", "images/맵툴/우편.bmp", 70, 146, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("침대", "images/맵툴/내방/housebed.bmp", 32, 49, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("침대2", "images/맵툴/내방/침대2.bmp", 32, 33, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("침대", "images/맵툴/내방/housebed.bmp", 110, 119, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("침대2", "images/맵툴/내방/침대2.bmp", 110, 106, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점", "images/맵툴/집1.bmp", 240*3, 165*3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("상점1", "images/맵툴/집11.bmp", 240*3, 100*3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("집1", "images/맵툴/세바스찬집.bmp", 113*4, 100*4, true, RGB(255, 0, 255));
@@ -94,6 +94,7 @@ void mainGame::maingameimg()
 
 	//UI
 	IMAGEMANAGER->addImage("시계", "images/UI/Ui_time.bmp", 72*3, 57*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("물어보는창", "images/UI/Ui_selectDialog.bmp", 880, 228, true, RGB(255, 0, 255));
 
 	//상점
 	IMAGEMANAGER->addImage("상점아저씨", "images/shop/Ui_shop.bmp", 650, 395, true, RGB(255,0,255));
@@ -115,10 +116,14 @@ void mainGame::maingameimg()
 
 
 	//NPC
-	 IMAGEMANAGER->addFrameImage("아비게일", "images/NPC/Abigail.bmp", 64 * 3, 32 * 3, 4, 1, true, RGB(255, 0, 255));
-	 IMAGEMANAGER->addFrameImage("알렉스", "images/NPC/Alex.bmp", 64 * 3, 64 * 3, 4, 2, true, RGB(255, 0, 255));
-	 IMAGEMANAGER->addFrameImage("세바스찬", "images/NPC/Sebastian.bmp", 64 * 3, 64 * 3, 4, 2, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addFrameImage("아비게일", "images/NPC/Abigail.bmp", 64 * 3.5, 32 * 3.5, 4, 1, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addFrameImage("알렉스", "images/NPC/Alex.bmp", 64 * 3.5, 64 * 3.5, 4, 2, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addFrameImage("세바스찬", "images/NPC/Sebastian.bmp", 64 * 3.5, 64 * 3.5, 4, 2, true, RGB(255, 0, 255));
 
+	 //대화창
+	 IMAGEMANAGER->addImage("세바스찬대화창", "images/NPC/Ui_dialog세바스찬.bmp", 800, 284, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("아비게일대화창", "images/NPC/Ui_dialog아비게일.bmp", 800, 284, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("알렉스대화창", "images/NPC/Ui_dialog알렉스.bmp", 800, 284, true, RGB(255, 0, 255));
 
 }
 

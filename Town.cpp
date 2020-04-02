@@ -14,6 +14,9 @@ HRESULT Town::init()
 	_tilem = new tileManager;
 	_tilem->Town();
 
+	_npcmanager = new NPCMANAGER;
+	_npcmanager->init();
+
 	//플레이어
 	PLAYER->setMapMemoryAdress(_tilem);
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
@@ -63,7 +66,7 @@ void Town::release()
 void Town::update()
 {
 	PLAYER->update();
-
+	_npcmanager->update();
 	//나무 1 과 닿으면
 	for (int i = 0; i < 2; i++)
 	{
@@ -108,7 +111,7 @@ void Town::render()
 
 	PLAYER->render(getMemDC());
 
-
+	_npcmanager->render();
 	//집 지붕
 	IMAGEMANAGER->render("집22", getMemDC(), 1000, 750);
 	IMAGEMANAGER->render("상점1", getMemDC(),900, 50);

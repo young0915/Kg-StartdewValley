@@ -13,7 +13,6 @@ HRESULT shopscene::init()
 {
 	_tilem = new tileManager;
 	_tilem->shop();
-	PLAYER->init();
 	PLAYER->setMapMemoryAdress(_tilem);
 	PLAYER->setPlayerPosition(_tilem->getMap()[_tilem->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//Ä«¸Þ¶ó À§Ä¡
@@ -175,7 +174,6 @@ void shopscene::shoprender()
 void shopscene::render()
 {
 	_tilem->render();
-
 	IMAGEMANAGER->render("¼¥1", getMemDC(), 100, 200);
 	IMAGEMANAGER->render("¼¥2", getMemDC(), 450, 300);
 	IMAGEMANAGER->render("¼¥4", getMemDC(), 200, 250);
@@ -184,6 +182,7 @@ void shopscene::render()
 
 	_carpet._img->render(getMemDC(), _carpet.x, _carpet.y);
 	PLAYER->render(getMemDC());
+	PLAYER->invenrender(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		Rectangle(getMemDC(), shopsell.left, shopsell.top, shopsell.right, shopsell.bottom);

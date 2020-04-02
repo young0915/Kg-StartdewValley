@@ -17,6 +17,8 @@ private :
 	groundManager* _ground;
 	vegetablemanager* _vegetable;
 	vector<item> _item;
+
+	RECT myhome;
 public :
 	Myland2();
 	~Myland2();

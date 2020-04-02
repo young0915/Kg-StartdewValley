@@ -43,16 +43,15 @@ void clock::render()
 
 	char str[128];
 	sprintf_s(str, "%d", min);
-	TextOut(CAMERA->getCameraDC(), 850,105, str, strlen(str));
-
-	char middlestr[128];
-	sprintf_s(middlestr, ":", middlestr);
-	TextOut(CAMERA->getCameraDC(), 830, 105, middlestr, strlen(middlestr));
+	FontTextOut(CAMERA->getCameraDC(), 850, 105, str, 20, "경기천년제목L Light", RGB(41, 41, 41));
+	FontTextOut(CAMERA->getCameraDC(), 830, 105, ":", 20, "경기천년제목L Light", RGB(41, 41, 41));
 
 	char hourstr[128];
 	sprintf_s(hourstr, "%d", hour);
-	TextOut(CAMERA->getCameraDC(), 800, 105, hourstr, strlen(hourstr));
-
+	FontTextOut(CAMERA->getCameraDC(), 800, 105, hourstr, 20, "경기천년제목L Light", RGB(41, 41, 41));
+	
+	//임시로 넣음
+	textrenderone();
 }
 
 void clock::timemove()
@@ -107,4 +106,14 @@ void clock::clockmove()
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 1050, 0);
 	}
 	
+}
+
+void clock::textrenderone()
+{
+	FontTextOut(CAMERA->getCameraDC(), 805, 35, "월요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+}
+
+void clock::textrendertwo()
+{
+	FontTextOut(CAMERA->getCameraDC(), 805, 35, "화요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
 }

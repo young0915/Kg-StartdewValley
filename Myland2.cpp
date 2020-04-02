@@ -25,6 +25,7 @@ HRESULT Myland2::init()
 	IMAGEMANAGER->findImage("雖種");
 	IMAGEMANAGER->findImage("辦ら");
 
+	myhome = RectMakeCenter(1200, 450, 80, 80);
 	_ground = new groundManager;
 	_ground->init();
 
@@ -55,6 +56,13 @@ void Myland2::update()
 			break;
 		}
 	}
+
+	RECT hometemp;
+	if (IntersectRect(&hometemp, &myhome, &PLAYER->getPlayerrect()))
+	{
+		SCENEMANAGER->changeScene("頂餵");
+		PLAYER->setplayerXY(300, 500);
+	}
 }
 
 void Myland2::render()
@@ -68,6 +76,12 @@ void Myland2::render()
 	IMAGEMANAGER->render("雖種", getMemDC(), 912, 150);
 	IMAGEMANAGER->render("辦ら", getMemDC(), 1302, 400);
 	PLAYER->invenrender(getMemDC());
+
+
+	if (KEYMANAGER->isToggleKey(VK_TAB))
+	{
+		Rectangle(getMemDC(), myhome.left, myhome.top, myhome.right, myhome.bottom);
+	}
 
 	if (!_item.empty())
 	{

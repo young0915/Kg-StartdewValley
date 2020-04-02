@@ -27,6 +27,7 @@ HRESULT Myland::init()
 
 	_other = new othermanager;
 	_other->init();
+
 	return S_OK;
 }
 

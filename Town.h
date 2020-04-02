@@ -1,6 +1,8 @@
 #pragma once
 #include "gameNode.h"
 #include "tileManager.h"
+#include "NPCMANAGER.h"
+
 
 struct treeone
 {
@@ -19,7 +21,7 @@ private:
 	treeone _tree[2];
 	treeone _twtree[2];
 	RECT martgo;
-
+	NPCMANAGER* _npcmanager;
 public :
 	Town();
 	~Town();
