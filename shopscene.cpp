@@ -54,6 +54,11 @@ HRESULT shopscene::init()
 	}
 	//===============================================================================================
 	_gotown = RectMakeCenter(450, 620, 100, 50);
+	_gotowntwinkle = RectMakeCenter(450, 590, 200, 50);
+	i = 20;
+	istwinkel = false;
+	_twinkle = new image;
+	_twinkle->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
 	_carpet._img = IMAGEMANAGER->findImage("Ä«ÆêÆ®");
 	_carpet.x = 450;
 	_carpet.y = 572;
@@ -69,7 +74,7 @@ void shopscene::update()
 {
 	gameNode::update();
 	PLAYER->update();
-
+	PLAYER->getclock()->setisturn(false);
 	//»óÁ¡ ´­·¶À» ¶§
 	RECT temp;
 	if (IntersectRect(&temp, &shopsell, &PLAYER->getPlayerrect()))
@@ -95,6 +100,11 @@ void shopscene::update()
 		PLAYER->setplayerXY(1450, 520);
 	}
 
+	RECT temptwinkle;
+	if (IntersectRect(&temptwinkle, &_gotowntwinkle, &PLAYER->getPlayerrect()))
+	{
+		istwinkel = true;
+	}
 	sellitem();
 }
 
@@ -185,11 +195,13 @@ void shopscene::render()
 	PLAYER->invenrender(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
+		Rectangle(getMemDC(), _gotowntwinkle.left, _gotowntwinkle.top, _gotowntwinkle.right, _gotowntwinkle.bottom);
 		Rectangle(getMemDC(), shopsell.left, shopsell.top, shopsell.right, shopsell.bottom);
 		Rectangle(getMemDC(), _gotown.left, _gotown.top, _gotown.right, _gotown.bottom);
 	}
 	if (_shopmain._isopen)shoprender();
 	CURSOR->render(getMemDC());
+	if (istwinkel) _twinkle->alphaRender(getMemDC(), i++);
 }
 
 

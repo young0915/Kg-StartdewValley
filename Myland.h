@@ -13,11 +13,17 @@ private:
 	int _pos[2];
 	tileManager* _tilem;
 	RECT _minego;
-	RECT _myhouse;
+	RECT _minegotwinkle;
+
 	RECT townrect;
 
 	othermanager* _other;
 	vector<item> _dropitem;
+
+	image* _twinkle;
+	bool isturnon;
+	bool istwinkel;
+	int i;
 
 public:
 	Myland();

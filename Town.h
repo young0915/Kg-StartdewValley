@@ -21,6 +21,10 @@ private:
 	treeone _tree[2];
 	treeone _twtree[2];
 	RECT martgo;
+	RECT martgotwinkle;
+	image* _bkimg;
+	bool istwinkle;
+	int i = 0;
 	NPCMANAGER* _npcmanager;
 public :
 	Town();

@@ -1316,7 +1316,6 @@ void Player::render(HDC hdc)
 	}
 
 
-	//_cursor->render();																										//Ä¿¼­
 	_tool->render();
 
 }
@@ -1324,6 +1323,7 @@ void Player::render(HDC hdc)
 void Player::invenrender(HDC hdc)
 {
 	_clock->render();
+	//_clock->setDay(MONDAY);
 	if (!isinven)_inven->render(hdc);
 	else _inven->invenrender(hdc);
 }

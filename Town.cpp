@@ -40,7 +40,7 @@ HRESULT Town::init()
 		_tree[1].y = 400;
 		_tree[i].rc = RectMakeCenter(_tree[i].x, _tree[i].y, _tree[i]._img->getWidth(), _tree[i]._img->getHeight());
 		_tree[i].midrc = RectMakeCenter((_tree[i].rc.right - (_tree[i].rc.right - _tree[i].rc.left) / 2),
-			(_tree[i].rc.bottom - (_tree[i].rc.bottom - _tree[i].rc.top) / 2), _tree[i]._img->getWidth(), _tree[i]._img->getHeight());
+			(_tree[i].rc.bottom - (_tree[i].rc.bottom - _tree[i].rc.top) / 2), _tree[i]._img->getWidth()-10, _tree[i]._img->getHeight()-50);
 		_tree[i]._isnear = false;
 
 		_twtree[i]._img = new image;
@@ -50,12 +50,21 @@ HRESULT Town::init()
 		_twtree[1].x = 1300;
 		_twtree[1].y = 1100;
 		_twtree[i].rc = RectMakeCenter(_twtree[i].x, _twtree[i].y, _twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
-		_twtree[i].midrc = RectMakeCenter((_twtree[i].rc.right - (_twtree[i].rc.left - _twtree[i].rc.left) / 2), (_twtree[i].rc.bottom - (_twtree[i].rc.bottom - _twtree[i].rc.top) / 2),
-			_twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
+	_twtree[i].midrc = RectMakeCenter((_twtree[i].rc.right - (_twtree[i].rc.left - _twtree[i].rc.left) / 2), (_twtree[i].rc.bottom - (_twtree[i].rc.bottom - _twtree[i].rc.top) / 2),
+			_twtree[i]._img->getWidth()-30, _twtree[i]._img->getHeight()-50);
+
+
 		_twtree[i]._isnear = false;
 	}
 
+	_bkimg = new image;
+	_bkimg ->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
+
 	martgo = RectMakeCenter(1430, 540, 100, 50);
+	martgotwinkle = RectMakeCenter(1430, 560, 250, 150);
+	istwinkle = false;
+	i = 100;
+
 	return S_OK;
 }
 
@@ -66,23 +75,31 @@ void Town::release()
 void Town::update()
 {
 	PLAYER->update();
+	if (PLAYER->getclock()->gethour() == 5)
+	{
+		PLAYER->getclock()->setisturn(true);
+	}
+	else
+	{
+		PLAYER->getclock()->setisturn(false);
+
+	}
 	_npcmanager->update();
 	//³ª¹« 1 °ú ´êÀ¸¸é
 	for (int i = 0; i < 2; i++)
 	{
 		RECT temp;
-		if (IntersectRect(&temp, &_tree[i].rc, &PLAYER->getPlayerrect()))
+		if (IntersectRect(&temp, &_tree[i].midrc, &PLAYER->getPlayerrect()))
 		{
 			_tree[i]._isnear = true;
 		}
 		else
 		{
 			_tree[i]._isnear = false;
-
 		}
 		//³ª¹« 2¿Í ´êÀ¸¸é 
 		RECT othertemp;
-		if (IntersectRect(&othertemp, &_twtree[i].rc, &PLAYER->getPlayerrect()))
+		if (IntersectRect(&othertemp, &_twtree[i].midrc, &PLAYER->getPlayerrect()))
 		{
 			_twtree[i]._isnear = true;
 		}
@@ -97,7 +114,11 @@ void Town::update()
 		SCENEMANAGER->changeScene("»óÁ¡");
 		PLAYER->setplayerXY(500, 500);
 	}
-
+	RECT temptwinkle;
+	if (IntersectRect(&temptwinkle, &martgotwinkle, &PLAYER->getPlayerrect()))
+	{
+		istwinkle = true;
+	}
 }
 
 void Town::render()
@@ -129,10 +150,12 @@ void Town::render()
 
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{
+			Rectangle(getMemDC(), martgotwinkle.left, martgotwinkle.top, martgotwinkle.right, martgotwinkle.bottom);
 			Rectangle(getMemDC(), _tree[i].midrc.left, _tree[i].midrc.top, _tree[i].midrc.right, _tree[i].midrc.bottom);
 			Rectangle(getMemDC(), _twtree[i].midrc.left, _twtree[i].midrc.top, _twtree[i].midrc.right, _twtree[i].midrc.bottom);
 			Rectangle(getMemDC(), martgo.left, martgo.top, martgo.right, martgo.bottom);
 		}
 	}
+	if (istwinkle)_bkimg->alphaRender(getMemDC(), i++);
 
 }

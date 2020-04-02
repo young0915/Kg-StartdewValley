@@ -11,6 +11,7 @@ Myhouse::~Myhouse()
 
 HRESULT Myhouse::init()
 {
+	time = 0;
 	_tilem = new tileManager;
 	_tilem->Myhouse();
 	//플레이어
@@ -21,7 +22,7 @@ HRESULT Myhouse::init()
 	IMAGEMANAGER->findImage("침대");
 	IMAGEMANAGER->findImage("침대2");
 
-	_sleep.x = 690; 
+	_sleep.x = 690;
 	_sleep.y = 520;
 	_sleep.bedrect = RectMakeCenter(_sleep.x, _sleep.y, 50, 200);
 
@@ -47,30 +48,33 @@ void Myhouse::release()
 void Myhouse::update()
 {
 	PLAYER->update();
+	PLAYER->getclock()->setisturn(false);
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
+		time = TIMEMANAGER->getWorldTime();
 		for (int i = 0; i < 2; i++)
 		{
-			if(PtInRect(&askrect[i], m_ptMouse))
-			if (i == 0)
-			{
-				isblank = true;
-				time = TIMEMANAGER->getWorldTime();
-				PLAYER->init();
-
-			/*	if (TIMEMANAGER->getWorldTime() - time < 1.5)
+			if (PtInRect(&askrect[i], m_ptMouse))
+				if (i == 0)
 				{
-					isblank = false;
-				}*/
-			}
-			else
-			{
-				ischeck = false;
-			}
+					isblank = true;
+					PLAYER->init();
+					if (TIMEMANAGER->getWorldTime() - time <= 1.5)
+					{
+						if (PLAYER->getclock()->getDay() == MONDAY)
+						{
+							PLAYER->getclock()->setDay(TUESDAY);
+						}
+					}
+				}
+				else
+				{
+					ischeck = false;
+				}
 		}
 	}
 
-	if (getDistance(_sleep.x, _sleep.y, PLAYER->getplayerX(), PLAYER->getplayerY())<50)
+	if (getDistance(_sleep.x, _sleep.y, PLAYER->getplayerX(), PLAYER->getplayerY()) < 50)
 	{
 		ischeck = true;
 	}
@@ -78,7 +82,7 @@ void Myhouse::update()
 	{
 		ischeck = false;
 	}
-	
+
 }
 
 void Myhouse::render()
@@ -99,8 +103,8 @@ void Myhouse::render()
 
 void Myhouse::uirender()
 {
-	IMAGEMANAGER->render("물어보는창", CAMERA->getCameraDC(), 10, WINSIZEY / 2+100);
-	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 150, "오늘은 이만 잠들까요?", 30, "경기천년제목L Light", RGB(41,41,41));
+	IMAGEMANAGER->render("물어보는창", CAMERA->getCameraDC(), 10, WINSIZEY / 2 + 100);
+	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 150, "오늘은 이만 잠들까요?", 30, "경기천년제목L Light", RGB(41, 41, 41));
 	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 200, "네", 30, "경기천년제목L Light", RGB(41, 41, 41));
 	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 250, "아니오", 30, "경기천년제목L Light", RGB(41, 41, 41));
 	if (KEYMANAGER->isToggleKey('9'))
@@ -112,7 +116,7 @@ void Myhouse::uirender()
 	}
 	if (isblank)
 	{
-		_bk->alphaRender(CAMERA->getCameraDC(), 0, 0,i++);
+		_bk->alphaRender(CAMERA->getCameraDC(), 0, 0, i++);
 		if (i == 250)
 		{
 			isblank = false;
@@ -120,13 +124,3 @@ void Myhouse::uirender()
 	}
 
 }
-
-
-/*
-네
-아니오
-
-아이템을 먹을까요?
-네
-아니오
-*/

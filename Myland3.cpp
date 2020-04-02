@@ -20,6 +20,7 @@ void Myland3::release()
 
 void Myland3::update()
 {
+		PLAYER->getclock()->setisturn(false);
 }
 
 void Myland3::render()

@@ -271,9 +271,11 @@ void inventory::invenrender(HDC hdc)
 	_invenmain.img->render(getMemDC(),CAMERA->getCameraXY().x +  _invenmain.invenrc.left, CAMERA->getCameraXY().y +_invenmain.invenrc.top);
 	secitemrender(getMemDC());
 	if (isuse) itemrender(getMemDC());
+	FontTextOut(CAMERA->getCameraDC(), 450, WINSIZEY / 2 + 70, "경일게임아카데미농장", 50, "나눔손글씨 펜", RGB(41, 41, 41));
+	FontTextOut(CAMERA->getCameraDC(), WINSIZEX / 2 +80, WINSIZEY / 2 + 130, "고복희", 40, "나눔손글씨 펜", RGB(41, 41, 41));
 	char str[128];
 	sprintf_s(str, "%d", PLAYER->getplayermoney());
-	FontTextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 200, str, 20, "경기천년제목L Light", RGB(41, 41, 41));
+	FontTextOut(CAMERA->getCameraDC(), WINSIZEX / 2 + 80, WINSIZEY / 2 + 180, str, 40, "나눔손글씨 펜", RGB(41, 41, 41));
 }
 //아이템 랜더
 void inventory::itemrender(HDC hdc)

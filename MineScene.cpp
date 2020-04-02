@@ -19,7 +19,12 @@ HRESULT MineScene::init()
 	PLAYER->setPlayerPosition(_tilm->getMap()[_tilm->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));
 	myland = RectMakeCenter(925, 350, 100, 450);
+	mylandrmidle = RectMakeCenter(925, 350, 400, 450);
+	istwinkle = false;
+	i = 10;
 
+	_night = new image;
+	_night->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
 
 	_astar = new aStarScene;
 	_astar->init(_tilm->getMap());
@@ -29,7 +34,6 @@ HRESULT MineScene::init()
 
 	_monster = new Monstermanager;
 	_monster->init();
-
 	return S_OK;
 }
 
@@ -42,6 +46,7 @@ void MineScene::release()
 void MineScene::update()
 {
 	PLAYER->update();
+	PLAYER->getclock()->setisturn(false);
 	_tilm->update();
 	_astar->update(_tilm->getMap(), PLAYER->getPlayerrect());
 
@@ -71,7 +76,10 @@ void MineScene::update()
 			break;
 		}
 	}
-
+	if (PtInRect(&mylandrmidle, CURSOR->getPoint()))
+	{
+		istwinkle = true;
+	}
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
 		if (PtInRect(&myland, CURSOR->getPoint()))
@@ -80,7 +88,6 @@ void MineScene::update()
 			PLAYER->setplayerXY(450, 450);
 		}
 	}
-
 }
 
 
@@ -92,8 +99,8 @@ void MineScene::render()
 	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
+		Rectangle(getMemDC(), mylandrmidle.left, mylandrmidle.top, mylandrmidle.right, mylandrmidle.bottom);
 		Rectangle(getMemDC(), myland.left, myland.top, myland.right, myland.bottom);
-	
 	}
 	_other->render();
 	_monster->render();
@@ -113,6 +120,5 @@ void MineScene::render()
 			_item[i].render(getMemDC());
 		}
 	}
-
-
+	if (istwinkle)_night->alphaRender(getMemDC(), i++);
 }

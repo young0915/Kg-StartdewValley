@@ -19,26 +19,32 @@ HRESULT Myland::init()
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));						//Ä«¸Þ¶ó À§Ä¡
 
 	_minego = RectMakeCenter(430, 300, 80, 80);
+	_minegotwinkle = RectMakeCenter(430, 320, 120, 160);
 	IMAGEMANAGER->findImage("³»Áý");
 	IMAGEMANAGER->findImage("ÁöºØ");
 	IMAGEMANAGER->findImage("¿ìÆí");
-
+	_twinkle = new image;
+	_twinkle->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
 	townrect = RectMakeCenter(1400,400, 50, 200);
+
+	isturnon = false;
+	i = 100;
 
 	_other = new othermanager;
 	_other->init();
-
 	return S_OK;
 }
 
 void Myland::release()
 {
 	SAFE_DELETE(_tilem);
+	SAFE_DELETE(_twinkle);
 }
 
 void Myland::update()
 {
 	PLAYER->update();
+
 	//ÀÌµ¿ ¿Ï·á
 	RECT temp;
 	if (IntersectRect(&temp, &_minego, &PLAYER->getPlayerrect()))
@@ -46,6 +52,12 @@ void Myland::update()
 		SCENEMANAGER->changeScene("µ¿±¼");
 		PLAYER->setplayerXY(700, 650);
 	}
+	RECT twinkeltemp;
+	if (IntersectRect(&twinkeltemp, &_minegotwinkle, &PLAYER->getPlayerrect()))
+	{
+		isturnon = true;
+	}
+
 	RECT twongo;
 	if (IntersectRect(&twongo, &townrect, &PLAYER->getPlayerrect()))
 	{
@@ -65,6 +77,8 @@ void Myland::update()
 			break;
 		}
 	}
+
+
 }
 
 void Myland::render()
@@ -79,6 +93,7 @@ void Myland::render()
 	PLAYER->invenrender(getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
+		Rectangle(getMemDC(), _minegotwinkle.left, _minegotwinkle.top, _minegotwinkle.right, _minegotwinkle.bottom);
 		Rectangle(getMemDC(), _minego.left, _minego.top, _minego.right, _minego.bottom);
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
 	}
@@ -90,5 +105,7 @@ void Myland::render()
 			_dropitem[i].render(getMemDC());
 		}
 	}
+	if (isturnon) _twinkle->alphaRender(getMemDC(), i++);
+
 }
 

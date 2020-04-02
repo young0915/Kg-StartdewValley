@@ -13,9 +13,14 @@ private:
 	othermanager* _other;
 	Monstermanager* _monster;
 	RECT myland;
+	RECT mylandrmidle;
 	vector<item> _dropitem;
 	vector<item> _item;
 
+	bool istwinkle;
+	int   i = -0;
+
+	image* _night; 
 public:
 	MineScene();
 	~MineScene();

@@ -19,6 +19,11 @@ private :
 	vector<item> _item;
 
 	RECT myhome;
+	RECT myhomerect;
+	image* _twinkle;
+	bool istwinkel;
+	int i;
+
 public :
 	Myland2();
 	~Myland2();

@@ -19,7 +19,10 @@ private:
 	treetwo _twtree[2];
 
 	RECT myhome;						//집으로 가는랙트 
-
+	RECT myhomerect;
+	image* _twinkle;
+	bool istwinkle;
+	int i;
 public :
 	town2();
 	~town2();

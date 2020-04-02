@@ -20,13 +20,17 @@ HRESULT clock::init()
 
 	min = 10;
 	mintest = TIMEMANAGER->getWorldTime();
-
-
-	return S_OK;
+	isturnon = false;
+	
+		_night = new image;
+		_night->init("images/UI/낮과밤.bmp", 2000, 1700, true, RGB(255, 0, 255));
+		_oneday = MONDAY;
+		return S_OK;
 }
 
 void clock::release()
 {
+	SAFE_DELETE(_night);
 }
 
 void clock::update()
@@ -50,6 +54,11 @@ void clock::render()
 	sprintf_s(hourstr, "%d", hour);
 	FontTextOut(CAMERA->getCameraDC(), 800, 105, hourstr, 20, "경기천년제목L Light", RGB(41, 41, 41));
 	
+	char money[128];
+	sprintf_s(money, "%d", PLAYER->getplayermoney());
+	FontTextOut(CAMERA->getCameraDC(), 831, 160, money, 20, "경기천년제목L Light", RGB(41, 41, 41));
+
+	if(isturnon)moningnightchange();
 	//임시로 넣음
 	textrenderone();
 }
@@ -76,9 +85,11 @@ void clock::timemove()
 
 void clock::clockmove()
 {
+
 	if (hour ==11)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 150, 0);
+		
 	}
 	if (hour==1)
 	{
@@ -87,6 +98,7 @@ void clock::clockmove()
 	if (hour ==3)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 450, 0);
+		_nightchange = NIGHRT_ONE;
 	}
 	if (hour ==5)
 	{
@@ -96,24 +108,53 @@ void clock::clockmove()
 	if (hour ==7)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 750, 0);
+	_nightchange = NIGHRT_ONE;
 	}
 	if (hour ==9)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 900, 0);
+		_nightchange = NIGHRT_THREE;
 	}
 	if (hour ==10)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 1050, 0);
+	_nightchange = NIGHRT_FOUR;
 	}
-	
 }
 
 void clock::textrenderone()
 {
-	FontTextOut(CAMERA->getCameraDC(), 805, 35, "월요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+	//FontTextOut(CAMERA->getCameraDC(), 805, 35, "월요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+
+	switch (_oneday)
+	{
+	case MONDAY:
+		FontTextOut(CAMERA->getCameraDC(), 805, 35, "월요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+		break;
+	case TUESDAY:
+		FontTextOut(CAMERA->getCameraDC(), 805, 35, "화요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+		break;
+	case WENSDAY:
+		FontTextOut(CAMERA->getCameraDC(), 805, 35, "수요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+		break;
+	}
 }
 
-void clock::textrendertwo()
+void clock::moningnightchange()
 {
-	FontTextOut(CAMERA->getCameraDC(), 805, 35, "화요일", 20, "경기천년제목L Light", RGB(41, 41, 41));
+		switch (_nightchange)
+		{
+		case NIGHRT_ONE:
+			_night->alphaRender(getMemDC(), 0, 0, 50);
+				break;
+		case NIGHRT_TWO:
+			_night->alphaRender(getMemDC(), 0, 0, 70);
+			break;
+		case NIGHRT_THREE:
+			_night->alphaRender(getMemDC(), 0, 0, 90);
+			break;
+		case NIGHRT_FOUR:
+			_night->alphaRender(getMemDC(), 0, 0,110 );
+			break;
+		}
 }

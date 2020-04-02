@@ -38,7 +38,10 @@ private:
 	POINT _shoppoimt;
 
 	RECT _gotown;
-
+	RECT _gotowntwinkle;
+	image* _twinkle;
+	bool istwinkel;
+	int i;
 public :
 	shopscene();
 	~shopscene();

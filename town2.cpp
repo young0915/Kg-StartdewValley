@@ -37,7 +37,7 @@ HRESULT town2::init()
 		_tree[1].y = 400;
 		_tree[i].rc = RectMakeCenter(_tree[i].x, _tree[i].y, _tree[i]._img->getWidth(), _tree[i]._img->getHeight());
 		_tree[i].midrc = RectMakeCenter((_tree[i].rc.right - (_tree[i].rc.right - _tree[i].rc.left) / 2),
-			(_tree[i].rc.bottom - (_tree[i].rc.bottom - _tree[i].rc.top) / 2), _tree[i]._img->getWidth(), _tree[i]._img->getHeight());
+			(_tree[i].rc.bottom - (_tree[i].rc.bottom - _tree[i].rc.top) / 2), _tree[i]._img->getWidth() - 10, _tree[i]._img->getHeight() - 50);
 		_tree[i]._isnear = false;
 
 		_twtree[i]._img = new image;
@@ -48,11 +48,16 @@ HRESULT town2::init()
 		_twtree[1].y = 1100;
 		_twtree[i].rc = RectMakeCenter(_twtree[i].x, _twtree[i].y, _twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
 		_twtree[i].midrc = RectMakeCenter((_twtree[i].rc.right - (_twtree[i].rc.left - _twtree[i].rc.left) / 2), (_twtree[i].rc.bottom - (_twtree[i].rc.bottom - _twtree[i].rc.top) / 2),
-			_twtree[i]._img->getWidth(), _twtree[i]._img->getHeight());
+			_twtree[i]._img->getWidth() - 30, _twtree[i]._img->getHeight() - 50);
 		_twtree[i]._isnear = false;
 	}
-	
-	myhome = RectMakeCenter(100, 500, 50, 500);
+	istwinkle = false;
+	myhome = RectMakeCenter(100,0, 50, 500);
+
+	_twinkle = new image;
+	_twinkle->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
+	i = 10;
+	myhomerect = RectMakeCenter(150, 0, 300, 550);
 	return S_OK;
 }
 
@@ -63,12 +68,19 @@ void town2::release()
 void town2::update()
 {
 	PLAYER->update();
-
+	if (PLAYER->getclock()->gethour() == 5)
+	{
+		PLAYER->getclock()->setisturn(true);
+	}
+	else
+	{
+		PLAYER->getclock()->setisturn(false);
+	}
 	//³ª¹« 1 °ú ´êÀ¸¸é
 	for (int i = 0; i < 2; i++)
 	{
 		RECT temp;
-		if (IntersectRect(&temp, &_tree[i].rc, &PLAYER->getPlayerrect()))
+		if (IntersectRect(&temp, &_tree[i].midrc, &PLAYER->getPlayerrect()))
 		{
 			_tree[i]._isnear = true;
 		}
@@ -79,7 +91,7 @@ void town2::update()
 		}
 		//³ª¹« 2¿Í ´êÀ¸¸é 
 		RECT othertemp;
-		if (IntersectRect(&othertemp, &_twtree[i].rc, &PLAYER->getPlayerrect()))
+		if (IntersectRect(&othertemp, &_twtree[i].midrc, &PLAYER->getPlayerrect()))
 		{
 			_twtree[i]._isnear = true;
 		}
@@ -94,6 +106,12 @@ void town2::update()
 		SCENEMANAGER->changeScene("³»¶¥2");
 		PLAYER->setplayerXY(1500, 400);
 	}
+	RECT temptwinkle;
+	if (IntersectRect(&temptwinkle, &myhomerect, &PLAYER->getPlayerrect()))
+	{
+		istwinkle = true;
+	}
+
 }
 
 
@@ -126,9 +144,10 @@ void town2::render()
 
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{
+			Rectangle(getMemDC(), myhomerect.left, myhomerect.top, myhomerect.right, myhomerect.bottom);
 			Rectangle(getMemDC(), _tree[i].midrc.left, _tree[i].midrc.top, _tree[i].midrc.right, _tree[i].midrc.bottom);
 			Rectangle(getMemDC(), _twtree[i].midrc.left, _twtree[i].midrc.top, _twtree[i].midrc.right, _twtree[i].midrc.bottom);
 		}
 	}
-
+	if (istwinkle) _twinkle->alphaRender(getMemDC(), i++);
 }

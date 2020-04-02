@@ -261,4 +261,6 @@ public:
 	int getEnergy() { return _energy.energy; }
 	void setEnergy(int energy) { _energy.energy = energy; }
 	tool* getTool() { return _tool; }
+
+	clock* getclock() { return _clock; }
 };

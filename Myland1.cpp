@@ -24,7 +24,14 @@ HRESULT Myland1::init()
 	IMAGEMANAGER->findImage("³»Áý");
 	IMAGEMANAGER->findImage("ÁöºØ");
 	IMAGEMANAGER->findImage("¿ìÆí");
-	townrect = RectMakeCenter(1400, 400, 50, 200);
+	townrect = RectMakeCenter(1400, 400, 50, 500);
+	towntwinkle = RectMakeCenter(1300, 400, 50, 500);
+	i = 100;
+	istwinkle = false;
+
+	_twinkle = new image;
+	_twinkle->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
+
 	return S_OK;
 }
 
@@ -35,15 +42,28 @@ void Myland1::release()
 void Myland1::update()
 {
 	PLAYER->update();
-
+	//PLAYER->getclock()->setisturn(false);
 	RECT temp;
 	if (IntersectRect(&temp, &townrect, &PLAYER->getPlayerrect()))
 	{
 		SCENEMANAGER->changeScene("¸¶À»1");
 		PLAYER->setplayerXY(500, 300);
 	}
-	
+	RECT twinkletemp;
+	if (IntersectRect(&twinkletemp, &towntwinkle, &PLAYER->getPlayerrect()))
+	{
+		istwinkle = true;
+	}
 
+
+	if (PLAYER->getclock()->gethour() == 5)
+	{
+		PLAYER->getclock()->setisturn(true);
+	}
+	else
+	{
+		PLAYER->getclock()->setisturn(false);
+	}
 }
 
 void Myland1::render()
@@ -59,4 +79,6 @@ void Myland1::render()
 	{
 		Rectangle(getMemDC(), townrect.left, townrect.top, townrect.right, townrect.bottom);
 	}
+	if (istwinkle) _twinkle->alphaRender(getMemDC(), i++);
+
 }
