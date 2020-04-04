@@ -11,6 +11,8 @@ Myland1::~Myland1()
 
 HRESULT Myland1::init()
 {
+	SOUNDMANAGER->stop("µ¿±¼");
+	SOUNDMANAGER->play("¸¶À»");
 	////¸Ê
 	_tilem = new tileManager;
 	_tilem->Mylandone();
@@ -56,7 +58,7 @@ void Myland1::update()
 	}
 
 
-	if (PLAYER->getclock()->gethour() == 5)
+	if (PLAYER->getclock()->gethour() >= 7)
 	{
 		PLAYER->getclock()->setisturn(true);
 	}

@@ -2,6 +2,19 @@
 #include "gameNode.h"
 #include "tileManager.h"
 #include "othermanager.h"
+#include "effect.h"
+struct tagtrees
+{
+	animation* _ani;
+	image* _img;
+	RECT rc;
+	float x, y;
+	bool ischeck;
+	int time;
+	int atkcount;
+};
+
+
 class Myland : public gameNode
 {
 private:
@@ -24,7 +37,18 @@ private:
 	bool isturnon;
 	bool istwinkel;
 	int i;
+	int time2;
 
+	tagtrees  tree;
+
+	effect* treedrop;
+	effect* grassdrop;
+	effect* grassdrop1;
+	effect* rockdrop;
+	effect* rockdrop1;
+
+	RECT mashrect[4];
+	int count;
 public:
 	Myland();
 	~Myland();
@@ -33,5 +57,6 @@ public:
 	void release();
 	void update();
 	void render();
+	void mashground();
 };
 

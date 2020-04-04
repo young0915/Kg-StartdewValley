@@ -83,7 +83,7 @@ void mainGame::maingameimg()
 	IMAGEMANAGER->addImage("나무", "images/item/나무.bmp", 16*3, 16*3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌", "images/item/돌.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("잡초", "images/item/잡초.bmp", 16 * 3, 15 * 3, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addImage("루비", "images/item/루비.bmp", 11 * 3, 16 * 3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("루비", "images/item/루비.bmp", 11 * 4, 16 * 4, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("물뿌리개(아이템)", "images/item/물뿌리개.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("흑요소", "images/item/검.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("박쥐", "images/item/박쥐.bmp", 16 * 3, 16 * 3, true, RGB(255, 0, 255));
@@ -104,6 +104,7 @@ void mainGame::maingameimg()
 	//잡것
 	IMAGEMANAGER->addImage("나무1", "images/etc/나무1.bmp", 48, 100, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("나무2", "images/etc/나무2.bmp", 50*3, 100*3, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("나무3", "images/이팩트효과/tree_1.bmp", 142, 285, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("돌맹이", "images/기타등등/돌맹이.bmp", 48, 48, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("루비돌", "images/기타등등/루비돌.bmp", 48, 48, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("잔디", "images/etc/잔디.bmp", 48, 48, true, RGB(255, 0, 255));
@@ -124,6 +125,28 @@ void mainGame::maingameimg()
 	 IMAGEMANAGER->addImage("세바스찬대화창", "images/NPC/Ui_dialog세바스찬.bmp", 800, 284, true, RGB(255, 0, 255));
 	 IMAGEMANAGER->addImage("아비게일대화창", "images/NPC/Ui_dialog아비게일.bmp", 800, 284, true, RGB(255, 0, 255));
 	 IMAGEMANAGER->addImage("알렉스대화창", "images/NPC/Ui_dialog알렉스.bmp", 800, 284, true, RGB(255, 0, 255));
+
+	 //효과
+	 IMAGEMANAGER->addFrameImage("나무가쓰러짐", "images/이팩트효과/maptool_tree1_down.bmp", 2592, 2160, 9, 5, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("잔디떨어짐", "images/이팩트효과/animation_grass.bmp", 336, 48, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("돌깨짐", "images/이팩트효과/animation_rock.bmp", 336, 48, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("물떨어짐", "images/이팩트효과/animation_water.bmp", 480, 48, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("나뭇잎", "images/이팩트효과/animation_removeTree.bmp", 2800, 160, true, RGB(255, 0, 255));
+	 IMAGEMANAGER->addImage("호미질", "images/이팩트효과/animation_hoe.bmp", 336, 48, true, RGB(255, 0, 255));
+
+	 //사운드
+	 SOUNDMANAGER->addSound("인트로", "sound/01 - Stardew Valley Overture.mp3", true, true);
+	 SOUNDMANAGER->addSound("마을", "sound/05 - Spring (It's A Big World Outside).mp3", true, true);
+	 SOUNDMANAGER->addSound("-", "sound/06 - Spring (The Valley Comes Alive).mp3", true, true);
+	 SOUNDMANAGER->addSound("동굴", "sound/58 - Mines (Star Lumpy).mp3", true, true);
+
+	 SOUNDMANAGER->addSound("나무뿌심", "sound/나무를 뿌시는 소리.mp3", true, true);
+	 SOUNDMANAGER->addSound("도끼부심", "sound/도끼부심.mp3", true, true);
+	 SOUNDMANAGER->addSound("돌깨는 소리", "sound/돌깨는 소리.mp3", true, true);
+	 SOUNDMANAGER->addSound("몬스터 죽는 소리", "sound/몬스터 죽는 소리.mp3", true, true);
+	 SOUNDMANAGER->addSound("물뿌리는 소리", "sound/물뿌리는 소리.mp3", true, true);
+	 SOUNDMANAGER->addSound("칼질", "sound/칼질.mp3", true, true);
+	 SOUNDMANAGER->addSound("호미뿌심", "sound/호미뿌심.mp3", true, true);
 
 }
 

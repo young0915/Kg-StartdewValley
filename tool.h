@@ -1,6 +1,6 @@
 #pragma once
 #include "gameNode.h"
-
+#include "effect.h"
 enum TOOLTYPE
 {
 	TOOL_AXE,
@@ -27,6 +27,8 @@ struct tagtooluse
 	float x, y;
 	int _count;
 	int _index;
+
+
 };
 
 class tool :public gameNode
@@ -35,6 +37,8 @@ private:
 	tagtooluse _axe;
 	tagtooluse _pickaxe;
 	tagtooluse _hoe;
+
+	
 public :
 	tool();
 	~tool();

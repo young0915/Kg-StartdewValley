@@ -11,6 +11,8 @@ Myland2::~Myland2()
 
 HRESULT Myland2::init()
 {
+	SOUNDMANAGER->stop("¸¶À»1");
+	SOUNDMANAGER->play("¸¶À»1");
 	//¸Ê
 	_tilem = new tileManager;
 	_tilem->Mylandtwo();
@@ -27,8 +29,9 @@ HRESULT Myland2::init()
 
 	_twinkle = new image;
 	_twinkle->init("images/UI/³·°ú¹ã.bmp", 2000, 1700, true, RGB(255, 0, 255));
-	myhomerect = RectMakeCenter(1200, 500, 100, 100);
+	myhomerect = RectMakeCenter(1200, 450, 100, 100);
 	i = 20;
+	count = 0;
 	istwinkel = false;
 	myhome = RectMakeCenter(1200, 450, 80, 80);
 	_ground = new groundManager;
@@ -36,6 +39,7 @@ HRESULT Myland2::init()
 
 	_vegetable = new vegetablemanager;
 	_vegetable->init();
+
 
 	return S_OK;
 }
@@ -48,7 +52,7 @@ void Myland2::release()
 void Myland2::update()
 {
 	PLAYER->update();
-	if (PLAYER->getclock()->gethour() == 5)
+	if (PLAYER->getclock()->gethour() == 7)
 	{
 		PLAYER->getclock()->setisturn(true);
 	}
@@ -83,6 +87,7 @@ void Myland2::update()
 	{
 		istwinkel = true;
 	}
+
 }
 
 void Myland2::render()
@@ -100,6 +105,9 @@ void Myland2::render()
 
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
+		for (int i = 0; i < 4; i++)
+		{
+		}
 		Rectangle(getMemDC(), myhomerect.left, myhomerect.top, myhomerect.right, myhomerect.bottom);
 		Rectangle(getMemDC(), myhome.left, myhome.top, myhome.right, myhome.bottom);
 	}
@@ -112,5 +120,11 @@ void Myland2::render()
 		}
 	}
 	if (istwinkel)_twinkle->alphaRender(getMemDC(), i++);
+
+}
+
+void Myland2::groundmash()
+{
+	
 
 }

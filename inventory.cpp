@@ -53,7 +53,8 @@ HRESULT inventory::init()
 	_vinven[2]._item = ITEMMANAGER->additem("µµ³¢(¾ÆÀÌÅÛ)");
 	_vinven[3]._item = ITEMMANAGER->additem("°î±ªÀÌ(¾ÆÀÌÅÛ)");
 	_vinven[4]._item = ITEMMANAGER->additem("È£¹Ì(¾ÆÀÌÅÛ)");
-	_vinven[5]._item = ITEMMANAGER->additem("°¨ÀÚ¾¾¾Ñ");
+	//_vinven[5]._item = ITEMMANAGER->additem("°Ô");
+
 
 	_invenelement._img = IMAGEMANAGER->findImage("¾²·¹±âÅë");
 	_invenelement.rc = RectMakeCenter(850, WINSIZEY / 2, _invenelement._img->getWidth(), _invenelement._img->getHeight());
@@ -223,8 +224,8 @@ void inventory::createseed()
 			{
 				if (0 < _vinven[i]._item.getItemInfo()._cnt)
 				{
-					PLAYER->setEnergy(PLAYER->getHp() + 50);
-					PLAYER->setHp(PLAYER->getEnergy() + 50);
+					PLAYER->setEnergy(PLAYER->getHp() - 50);
+					PLAYER->setHp(PLAYER->getEnergy() - 50);
 					_vinven[i]._item.setItemCnt(-1);
 					if (_vinven[i]._item.getItemInfo()._cnt == 0)
 					{
@@ -236,8 +237,9 @@ void inventory::createseed()
 			{
 				if (0 < _vinven[i]._item.getItemInfo()._cnt)
 				{
-					PLAYER->setEnergy(PLAYER->getHp() + 30);
-					PLAYER->setHp(PLAYER->getEnergy() + 10);
+					PLAYER->setEnergy(PLAYER->getHp() - 30);
+					PLAYER->setHp(PLAYER->getEnergy() - 30);
+
 					_vinven[i]._item.setItemCnt(-1);
 					if (_vinven[i]._item.getItemInfo()._cnt == 0)
 					{

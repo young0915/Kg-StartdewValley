@@ -11,6 +11,8 @@ MineScene::~MineScene()
 
 HRESULT MineScene::init()
 {
+	SOUNDMANAGER->stop("¸¶À»");
+	SOUNDMANAGER->play("µ¿±¼");
 	_tilm = new tileManager;
 	_tilm->Mineload();
 	//ÇÃ·¹ÀÌ¾î
@@ -19,7 +21,7 @@ HRESULT MineScene::init()
 	PLAYER->setPlayerPosition(_tilm->getMap()[_tilm->getPosFirst()].rc);
 	CAMERA->setCameraCenter(PointMake(PLAYER->getplayerX(), PLAYER->getplayerY()));
 	myland = RectMakeCenter(925, 350, 100, 450);
-	mylandrmidle = RectMakeCenter(925, 350, 400, 450);
+	mylandrmidle = RectMakeCenter(925, 350, 400, 300);
 	istwinkle = false;
 	i = 10;
 
@@ -34,6 +36,23 @@ HRESULT MineScene::init()
 
 	_monster = new Monstermanager;
 	_monster->init();
+
+
+	count = 0;
+	rockdrop[0] = RectMakeCenter(600, 600, 50, 50);
+	rockdrop[1] = RectMakeCenter(1000, 600, 50, 50);
+	rockdrop[2] = RectMakeCenter(600, 1000, 50, 50);
+	rockdrop[3] = RectMakeCenter(1000, 1000, 50, 50);
+
+	drop1 = new effect;
+	drop1->init(IMAGEMANAGER->findImage("µ¹±úÁü"), 48, 48, 1, 1.0f);
+	drop2 = new effect;
+	drop2->init(IMAGEMANAGER->findImage("µ¹±úÁü"), 48, 48, 1, 1.0f);
+	drop3 = new effect;
+	drop3->init(IMAGEMANAGER->findImage("µ¹±úÁü"), 48, 48, 1, 1.0f);
+	drop4 = new effect;
+	drop4->init(IMAGEMANAGER->findImage("µ¹±úÁü"), 48, 48, 1, 1.0f);
+
 	return S_OK;
 }
 
@@ -76,10 +95,10 @@ void MineScene::update()
 			break;
 		}
 	}
-	if (PtInRect(&mylandrmidle, CURSOR->getPoint()))
-	{
-		istwinkle = true;
-	}
+	//if (PtInRect(&mylandrmidle, CURSOR->getPoint()))
+	//{
+	//	istwinkle = true;
+	//}
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
 		if (PtInRect(&myland, CURSOR->getPoint()))
@@ -88,6 +107,8 @@ void MineScene::update()
 			PLAYER->setplayerXY(450, 450);
 		}
 	}
+
+	mashrock();
 }
 
 
@@ -96,12 +117,19 @@ void MineScene::render()
 {
 	_tilm->render();
 	_astar->render();
-	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
+		for (int i = 0; i < 4; i++)
+		{
+			Rectangle(getMemDC(), rockdrop[i].left, rockdrop[i].top, rockdrop[i].right, rockdrop[i].bottom);
+		}
 		Rectangle(getMemDC(), mylandrmidle.left, mylandrmidle.top, mylandrmidle.right, mylandrmidle.bottom);
 		Rectangle(getMemDC(), myland.left, myland.top, myland.right, myland.bottom);
 	}
+	PLAYER->render(/*CAMERA->getCameraDC()*/getMemDC());
+
+	
+
 	_other->render();
 	_monster->render();
 	PLAYER->invenrender(getMemDC());
@@ -121,4 +149,58 @@ void MineScene::render()
 		}
 	}
 	if (istwinkle)_night->alphaRender(getMemDC(), i++);
+	drop1->render();
+	drop2->render();
+	drop3->render();
+	drop4->render();
+}
+
+void MineScene::mashrock()
+{
+	RECT temp1;
+	if (IntersectRect(&temp1, &rockdrop[0], &PLAYER->getTool()->getpickaxe()))
+	{
+		count++;
+		if (count == 50)
+		{
+			drop1->startEffect(600, 600);
+			count = 0;
+		}
+	}
+	RECT temp2;
+	if (IntersectRect(&temp1, &rockdrop[1], &PLAYER->getTool()->getpickaxe()))
+	{
+		count++;
+		if (count == 50)
+		{
+			drop2->startEffect(1000, 600);
+			count = 0;
+		}
+	}
+	RECT temp3;
+	if (IntersectRect(&temp1, &rockdrop[2], &PLAYER->getTool()->getpickaxe()))
+	{
+		count++;
+		if (count == 50)
+		{
+			drop3->startEffect(600, 1000);
+			count = 0;
+		}
+	}
+	RECT temp4;
+	if (IntersectRect(&temp1, &rockdrop[3], &PLAYER->getTool()->getpickaxe()))
+	{
+		count++;
+		if (count == 50)
+		{
+			drop4->startEffect(1000, 1000);
+			count = 0;
+		}
+	}
+
+
+	drop1->update();
+	drop2->update();
+	drop3->update();
+	drop4->update();
 }

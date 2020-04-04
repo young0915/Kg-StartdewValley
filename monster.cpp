@@ -133,8 +133,8 @@ void monster::render()
 {
 	if (KEYMANAGER->isToggleKey('Q'))
 	{
-		Rectangle(getMemDC(), _atkrc.left, _atkrc.top, _atkrc.right, _atkrc.bottom);
 		Rectangle(getMemDC(), _rc.left, _rc.top, _rc.right, _rc.bottom);
+		Rectangle(getMemDC(), _atkrc.left, _atkrc.top, _atkrc.right, _atkrc.bottom);
 	}
 	_img->frameRender(getMemDC(), _rc.left, _rc.top);
 	_item.render();

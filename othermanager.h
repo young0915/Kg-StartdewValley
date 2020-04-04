@@ -6,6 +6,8 @@
 #include "grass.h"
 #include "tree.h"
 #include "item.h"
+#include "effect.h"
+
 class othermanager :public gameNode 
 {
 private:
@@ -19,6 +21,11 @@ private:
 	item _dropitem;									//떨어진 아이템 
 	int atkcount=0;											//맞은 카운트
 	int test =0;										//잠시 테스트용
+	int time;
+
+	effect* grassdrop;
+	effect* rockdrop;
+
 public :
 	othermanager();
 	~othermanager();
@@ -33,6 +40,9 @@ public :
 	void setStone();											//돌
 	void setruby();												//루비
 	void collisionstone();									//충돌 
+
+
+	vstone getvstone() { return _vstone; }
 };
 
 /*

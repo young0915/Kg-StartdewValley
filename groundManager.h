@@ -4,6 +4,7 @@
 #include "hoeground.h"
 #include "watercanground.h"
 #include "item.h"
+#include "effect.h"
 class groundManager :public gameNode
 {
 private :
@@ -16,6 +17,8 @@ private :
 	item _item;
 	image* _img;										//아이템 용 
 	int atkcount = 0;									//공격 힛트
+
+
 public :
 	groundManager();
 	~groundManager();

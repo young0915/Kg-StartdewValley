@@ -18,9 +18,17 @@ private:
 	vector<item> _item;
 
 	bool istwinkle;
-	int   i = -0;
+	int   i = 0;
 
+	RECT rockdrop[4];
 	image* _night; 
+
+	effect* drop1;
+	effect* drop2;
+	effect* drop3;
+	effect* drop4;
+	int count;
+
 public:
 	MineScene();
 	~MineScene();
@@ -29,6 +37,7 @@ public:
 	void release();
 	void update();
 	void render();
+	void mashrock();
 
 };
 

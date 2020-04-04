@@ -21,6 +21,7 @@ private:
 	STONE_STATE _sstate;
 	STONE_TYPE _tone;
 	image* _img;
+	animation* _ani;
 	RECT _rc;
 	item _item;
 	int _atk;

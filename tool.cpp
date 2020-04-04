@@ -15,13 +15,18 @@ HRESULT tool::init()
 	_axe._img = IMAGEMANAGER->findImage("µµ³¢");
 	_axe._tm = TT_NONE;
 
+
 	_pickaxe._type = TOOL_PICKAXE;
 	_pickaxe._img = IMAGEMANAGER->findImage("°î±ªÀÌ");
 	_pickaxe._tm = TT_NONE;
 
+
 	_hoe._type = TOOL_HOE;
 	_hoe._img = IMAGEMANAGER->findImage("È£¹Ì");
 	_hoe._tm = TT_NONE;
+
+
+	
 	return S_OK;
 }
 
@@ -213,6 +218,7 @@ void tool::pickaxemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
 
 	}
 
+
 }
 
 void tool::homemove(int _x, int _y, TOOLTYPE _ttype, TOOLMOVE _move)
@@ -311,6 +317,8 @@ void tool::render()
 		_hoe._img->frameRender(getMemDC(), _hoe._rc.left, _hoe._rc.top);
 		_axe._img->frameRender(getMemDC(), _axe._rc.left, _axe._rc.top);
 		_pickaxe._img->frameRender(getMemDC(), _pickaxe._rc.left, _pickaxe._rc.top);
+		
+
 
 	if (KEYMANAGER->isToggleKey('L'))
 	{

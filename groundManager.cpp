@@ -27,25 +27,10 @@ void groundManager::update()
 		}
 	}
 }
-//
-//void groundManager::update(vector<item>& itme)
-//{
-//	for (_viterground = _vground.begin(); _viterground != _vground.end(); ++_viterground)
-//	{
-//		(*_viterground)->update();
-//	}
-//	for (int i = 0; i < _vground.size(); i++)
-//	{
-//		if (_vground[i]->getsateground() == JUST_GROUND)
-//		{
-//			collision();
-//		}
-//	}
-//}
+
 void groundManager::release(){}
 void groundManager::render()
 {
-
 	for (_viterground = _vground.begin(); _viterground != _vground.end(); ++_viterground)
 	{
 		(*_viterground)->render();
@@ -79,6 +64,7 @@ void groundManager::setjustground()
 			_vground.push_back(_justground);
 		}
 	}
+
 }
 
 void groundManager::sethoeground()
@@ -94,6 +80,7 @@ void groundManager::sethoeground()
 			_vground.push_back(_hoeground);
 		}
 	}
+	
 }
 
 
@@ -122,7 +109,8 @@ void groundManager::collision()
 		{
 			if (_vground[i]->getsateground() == JUST_GROUND)
 			{
-			removetile(i);
+				PLAYER->setEnergy(PLAYER->getEnergy() + 1.f);
+				removetile(i);
 			}
 		}
 		RECT waterTemp;
@@ -143,4 +131,5 @@ void groundManager::collision()
 		//	}
 		//}
 	}
+	
 }

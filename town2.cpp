@@ -11,6 +11,8 @@ town2::~town2()
 
 HRESULT town2::init()
 {
+	//SOUNDMANAGER->stop("마을1");
+	SOUNDMANAGER->play("마을1");
 	_tilem = new tileManager;
 	_tilem->TownTwo();
 
@@ -68,7 +70,7 @@ void town2::release()
 void town2::update()
 {
 	PLAYER->update();
-	if (PLAYER->getclock()->gethour() == 5)
+	if (PLAYER->getclock()->gethour() >= 7)
 	{
 		PLAYER->getclock()->setisturn(true);
 	}

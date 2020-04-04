@@ -11,6 +11,8 @@ Myhouse::~Myhouse()
 
 HRESULT Myhouse::init()
 {
+	SOUNDMANAGER->stop("마을1");
+	SOUNDMANAGER->play("마을1");
 	time = 0;
 	_tilem = new tileManager;
 	_tilem->Myhouse();
@@ -107,13 +109,6 @@ void Myhouse::uirender()
 	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 150, "오늘은 이만 잠들까요?", 30, "경기천년제목L Light", RGB(41, 41, 41));
 	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 200, "네", 30, "경기천년제목L Light", RGB(41, 41, 41));
 	FontTextOut(CAMERA->getCameraDC(), 40, WINSIZEY / 2 + 250, "아니오", 30, "경기천년제목L Light", RGB(41, 41, 41));
-	if (KEYMANAGER->isToggleKey('9'))
-	{
-		for (int i = 0; i < 2; i++)
-		{
-			Rectangle(CAMERA->getCameraDC(), askrect[i].left, askrect[i].top, askrect[i].right, askrect[i].bottom);
-		}
-	}
 	if (isblank)
 	{
 		_bk->alphaRender(CAMERA->getCameraDC(), 0, 0, i++);

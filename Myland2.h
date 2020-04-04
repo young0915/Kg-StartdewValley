@@ -4,6 +4,7 @@
 #include "groundManager.h"
 #include "vegetablemanager.h"
 #include "item.h"
+#include "effect.h"
 
 /*
 ³í¹ç °¥ ¿¹Á¤
@@ -23,6 +24,8 @@ private :
 	image* _twinkle;
 	bool istwinkel;
 	int i;
+	int count;
+
 
 public :
 	Myland2();
@@ -32,5 +35,6 @@ public :
 	void release();
 	void update();
 	void render();
+	void groundmash();
 };
 

@@ -7,6 +7,7 @@ introscene::~introscene(){}
 
 HRESULT introscene::init()
 {
+	SOUNDMANAGER->play("인트로");
 	IMAGEMANAGER->findImage("시작화면");
 	cloudinit();
 	loopX = 0;
@@ -45,6 +46,7 @@ void introscene::release()
 
 void introscene::update()
 {
+
 	introbtnn();
 }
 

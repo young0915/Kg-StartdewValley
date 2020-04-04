@@ -859,6 +859,7 @@ void Player::attackmove()
 	{
 		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
+	
 			if (_player._playerdirection == PLAYER_D_RIGHT)
 			{
 				_can._dir = T_RIGHT;

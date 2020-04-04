@@ -98,13 +98,13 @@ void clock::clockmove()
 	if (hour ==3)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 450, 0);
-		_nightchange = NIGHRT_ONE;
+	
 	}
 	if (hour ==5)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 600, 0);
+		_nightchange = NIGHRT_ONE;
 	}
-
 	if (hour ==7)
 	{
 		_timebar._angle = getAngle(WINSIZEX / 2, WINSIZEY / 2, 750, 0);

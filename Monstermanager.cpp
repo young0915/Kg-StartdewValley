@@ -114,7 +114,7 @@ void Monstermanager::attackmonster()
 	for (int i = 0; i < _vmonster.size(); i++)
 	{
 		RECT temp;
-		if (IntersectRect(&temp, &_vmonster[i]->getRect(), &PLAYER->getweapon()))
+		if (IntersectRect(&temp, &_vmonster[i]->getatckrange(), &PLAYER->getweapon()))
 		{
 			if (_vmonster[i]->getmove() == MONSTER_MOVE);
 			{
@@ -125,8 +125,8 @@ void Monstermanager::attackmonster()
 		RECT playertemp;
 		if (IntersectRect(&playertemp, &_vmonster[i]->getRect(), &PLAYER->getPlayerrect()))
 		{
-			PLAYER->setEnergy(PLAYER->getEnergy() + 0.5f);
-			PLAYER->setHp(PLAYER->getHp() + 0.5);
+			PLAYER->setEnergy(PLAYER->getHp() +1.f);
+			PLAYER->setHp(PLAYER->getEnergy() + 1.);
 			break;
 		}
 	}

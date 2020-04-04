@@ -44,6 +44,7 @@ void mainGame::update()
 {
 	gameNode::update();
 	SCENEMANAGER->update();
+	SOUNDMANAGER->update();
 	ANIMATIONMANAGER->update();
 	CURSOR->update();
 }

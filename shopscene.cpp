@@ -11,6 +11,9 @@ shopscene::~shopscene()
 
 HRESULT shopscene::init()
 {
+	SOUNDMANAGER->stop("마을1");
+	SOUNDMANAGER->play("마을1");
+
 	_tilem = new tileManager;
 	_tilem->shop();
 	PLAYER->setMapMemoryAdress(_tilem);
